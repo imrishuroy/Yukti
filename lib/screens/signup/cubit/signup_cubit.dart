@@ -22,6 +22,11 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(password: value, status: SignUpStatus.initial));
   }
 
+  void showPassword(bool showPassword) {
+    emit(state.copyWith(
+        showPassword: !showPassword, status: SignUpStatus.initial));
+  }
+
   void signUpWithCredentials() async {
     if (!state.isFormValid || state.status == SignUpStatus.submitting) return;
     emit(state.copyWith(status: SignUpStatus.submitting));
@@ -33,6 +38,16 @@ class SignupCubit extends Cubit<SignupState> {
       emit(state.copyWith(status: SignUpStatus.succuss));
     } on Failure catch (error) {
       print('Error: $error');
+      emit(state.copyWith(failure: error, status: SignUpStatus.error));
+    }
+  }
+
+  void signUpWithGoogle() async {
+    emit(state.copyWith(status: SignUpStatus.submitting));
+    try {
+      await _authRepository?.signInWithGoogle();
+      emit(state.copyWith(status: SignUpStatus.succuss));
+    } on Failure catch (error) {
       emit(state.copyWith(failure: error, status: SignUpStatus.error));
     }
   }

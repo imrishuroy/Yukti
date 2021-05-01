@@ -26,9 +26,17 @@ class AuthRepository extends BaseAuthRepository {
   @override
   Future<AppUser?> createUserWithEmailAndPassword(
       {String? email, String? password}) async {
-    final UserCredential userCredential = await _firebaseAuth
-        .createUserWithEmailAndPassword(email: email!, password: password!);
-    return _appUser(userCredential.user);
+    try {
+      final UserCredential userCredential = await _firebaseAuth
+          .createUserWithEmailAndPassword(email: email!, password: password!);
+      return _appUser(userCredential.user);
+    } on FirebaseAuthException catch (error) {
+      throw Failure(message: error.message!, code: error.code);
+    } on PlatformException catch (error) {
+      throw Failure(message: error.message!, code: error.code);
+    } catch (error) {
+      throw Failure(message: error.toString());
+    }
   }
 
   @override
@@ -61,29 +69,37 @@ class AuthRepository extends BaseAuthRepository {
 
   @override
   Future<AppUser?> signInWithGoogle() async {
-    final googleSignIn = GoogleSignIn();
-    final googleUser = await googleSignIn.signIn();
-    if (googleUser != null) {
-      final googleAuth = await googleUser.authentication;
-      if (googleAuth.idToken != null) {
-        final userCredential = await _firebaseAuth
-            .signInWithCredential(GoogleAuthProvider.credential(
-          idToken: googleAuth.idToken,
-          accessToken: googleAuth.accessToken,
-        ));
-        print(userCredential.user?.photoURL);
-        return _appUser(userCredential.user);
+    try {
+      final googleSignIn = GoogleSignIn();
+      final googleUser = await googleSignIn.signIn();
+      if (googleUser != null) {
+        final googleAuth = await googleUser.authentication;
+        if (googleAuth.idToken != null) {
+          final userCredential = await _firebaseAuth
+              .signInWithCredential(GoogleAuthProvider.credential(
+            idToken: googleAuth.idToken,
+            accessToken: googleAuth.accessToken,
+          ));
+          print(userCredential.user?.photoURL);
+          return _appUser(userCredential.user);
+        } else {
+          throw PlatformException(
+            code: 'ERROR_MISSING_GOOGLE_ID_TOKEN',
+            message: 'Missing Google ID Token',
+          );
+        }
       } else {
         throw PlatformException(
-          code: 'ERROR_MISSING_GOOGLE_ID_TOKEN',
-          message: 'Missing Google ID Token',
+          code: 'ERROR_ABORTED_BY_USER',
+          message: 'Sign In aborted',
         );
       }
-    } else {
-      throw PlatformException(
-        code: 'ERROR_ABORTED_BY_USER',
-        message: 'Sign In aborted',
-      );
+    } on PlatformException catch (error) {
+      throw Failure(message: error.message!, code: error.code);
+    } on FirebaseAuthException catch (error) {
+      throw Failure(message: error.message!, code: error.code);
+    } catch (error) {
+      throw Failure(message: 'Something went wrong');
     }
   }
 

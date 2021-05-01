@@ -125,182 +125,185 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: BlocConsumer<SignupCubit, SignupState>(
-          listener: (context, state) {
-            if (state.status == SignUpStatus.error) {
-              showDialog(
-                context: context,
-                builder: (context) => ErrorDialog(
-                  content: state.failure.message,
-                ),
-              );
-            }
-          },
-          builder: (context, state) {
-            return Scaffold(
-              backgroundColor: Color.fromRGBO(29, 38, 40, 1),
-              body: Form(
-                key: _formKey,
-                child: ListView(
-                  children: <Widget>[
-                    greetingWidget(height),
-                    Container(
-                      padding:
-                          EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          TextFormField(
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 16.0),
-                            key: key,
-                            // onSaved: (value) => email = value,
-                            keyboardType: TextInputType.emailAddress,
-                            onChanged: (value) =>
-                                context.read<SignupCubit>().emailChanged(value),
-
-                            validator: (value) =>
-                                !(value!.contains('@gmail.com'))
-                                    ? 'Invalid Email'
-                                    : null,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.green,
-                                  width: 2.0,
-                                ),
-                              ),
-                              prefixIcon: Icon(
-                                Icons.mail,
-                                color: Colors.green,
-                              ),
-                              labelText: 'EMAIL',
-                              labelStyle: TextStyle(
-                                color: Colors.green,
-                                fontFamily: 'Montserrat',
-                              ),
-                              hintText: 'Enter Your Email',
-                              hintStyle: TextStyle(color: Colors.white),
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-
-                          SizedBox(height: 25.0),
-                          TextFormField(
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 16.0),
-
-                            //obscureText: _hidePassword,
-                            onChanged: (value) => context
-                                .read<SignupCubit>()
-                                .passwordChanges(value),
-
-                            validator: (value) =>
-                                value!.length < 6 ? 'Password too short' : null,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.green,
-                                  width: 2.0,
-                                ),
-                              ),
-                              labelStyle: TextStyle(
-                                  color: Colors.green,
-                                  fontFamily: 'Montserrat'),
-                              prefixIcon: Icon(Icons.lock, color: Colors.green),
-                              // suffixIcon: IconButton(
-                              //   color: Colors.green,
-                              //   icon: Icon(
-                              //     _hidePassword ? Icons.visibility : Icons.visibility_off,
-                              //   ),
-                              //   onPressed: () {
-                              //     setState(() {
-                              //       _hidePassword = !_hidePassword;
-                              //     });
-                              //   },
-                              // ),
-                              hintStyle: TextStyle(color: Colors.white),
-                              labelText: 'PASSWORD',
-                              hintText: 'Enter Your Password',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-
-                          SizedBox(height: 35.0),
-                          //
-                          ElevatedButton(
-                            onPressed: () => _submitForm(context,
-                                state.status == SignUpStatus.submitting),
-                            child: Padding(
-                              padding: const EdgeInsets.all(11.5),
-                              child: Text(
-                                'Register',
-                                style: TextStyle(
-                                  fontSize: 16.5,
-                                  letterSpacing: 1.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Montserrat',
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 20.0),
-                    Text(
-                      'OR',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 20.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: GoogleSignInButton(
-                        // onPressed: () => googleSignIn(context),
-                        onPressed: () {},
-                        title: 'Register with Google',
-                      ),
-                    ),
-                    SizedBox(height: 25.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Have an Account?',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.0,
-                          ),
-                        ),
-                        SizedBox(width: 5.0),
-                        GestureDetector(
-                          onTap: () => Navigator.of(context).pop(),
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 16.0,
-                              letterSpacing: 1.0,
-                              fontWeight: FontWeight.w600,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: BlocConsumer<SignupCubit, SignupState>(
+        listener: (context, state) {
+          if (state.status == SignUpStatus.error) {
+            showDialog(
+              context: context,
+              builder: (context) => ErrorDialog(
+                content: state.failure.message,
               ),
             );
-          },
-        ),
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+            body: state.status == SignUpStatus.submitting
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Form(
+                    key: _formKey,
+                    child: ListView(
+                      children: <Widget>[
+                        greetingWidget(height),
+                        Container(
+                          padding: EdgeInsets.only(
+                              top: 35.0, left: 20.0, right: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              TextFormField(
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16.0),
+                                key: key,
+                                keyboardType: TextInputType.emailAddress,
+                                onChanged: (value) => context
+                                    .read<SignupCubit>()
+                                    .emailChanged(value),
+                                validator: (value) =>
+                                    !(value!.contains('@gmail.com'))
+                                        ? 'Invalid Email'
+                                        : null,
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.green,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  prefixIcon: Icon(
+                                    Icons.mail,
+                                    color: Colors.green,
+                                  ),
+                                  labelText: 'EMAIL',
+                                  labelStyle: TextStyle(
+                                    color: Colors.green,
+                                    fontFamily: 'Montserrat',
+                                  ),
+                                  hintText: 'Enter Your Email',
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+
+                              SizedBox(height: 25.0),
+                              TextFormField(
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16.0),
+                                obscureText: !state.showPassword,
+                                onChanged: (value) => context
+                                    .read<SignupCubit>()
+                                    .passwordChanges(value),
+                                validator: (value) => value!.length < 6
+                                    ? 'Password too short'
+                                    : null,
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.green,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  labelStyle: TextStyle(
+                                      color: Colors.green,
+                                      fontFamily: 'Montserrat'),
+                                  prefixIcon:
+                                      Icon(Icons.lock, color: Colors.green),
+                                  suffixIcon: IconButton(
+                                    color: Colors.green,
+                                    icon: Icon(
+                                      state.showPassword
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                    ),
+                                    onPressed: () {
+                                      context
+                                          .read<SignupCubit>()
+                                          .showPassword(state.showPassword);
+                                    },
+                                  ),
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  labelText: 'PASSWORD',
+                                  hintText: 'Enter Your Password',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+
+                              SizedBox(height: 35.0),
+                              //
+                              ElevatedButton(
+                                onPressed: () => _submitForm(context,
+                                    state.status == SignUpStatus.submitting),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(11.5),
+                                  child: Text(
+                                    'Register',
+                                    style: TextStyle(
+                                      fontSize: 16.5,
+                                      letterSpacing: 1.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        Text(
+                          'OR',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 20.0),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: GoogleSignInButton(
+                            // onPressed: () => googleSignIn(context),
+                            onPressed: () =>
+                                context.read<SignupCubit>().signUpWithGoogle(),
+                            title: 'Register with Google',
+                          ),
+                        ),
+                        SizedBox(height: 25.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Have an Account?',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15.0,
+                              ),
+                            ),
+                            SizedBox(width: 5.0),
+                            GestureDetector(
+                              onTap: () => Navigator.of(context).pop(),
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 16.0,
+                                  letterSpacing: 1.0,
+                                  fontWeight: FontWeight.w600,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+          );
+        },
       ),
     );
   }

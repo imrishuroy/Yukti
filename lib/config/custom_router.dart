@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yukti/config/auth_wrapper.dart';
+import 'package:yukti/screens/login/login_screen.dart';
 import 'package:yukti/screens/signup/sign_up_screen.dart';
 
 class CustomRouter {
@@ -13,6 +14,9 @@ class CustomRouter {
 
       case AuthWrapper.routeName:
         return AuthWrapper.route();
+
+      case LoginScreen.routeName:
+        return LoginScreen.route();
 
       case SignUpScreen.routeName:
         return SignUpScreen.route();

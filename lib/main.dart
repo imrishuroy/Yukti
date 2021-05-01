@@ -38,6 +38,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Yukti',
           theme: ThemeData(
+            primaryColor: Colors.green,
+            primarySwatch: Colors.green,
+            buttonColor: Colors.green,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           onGenerateRoute: CustomRouter.onGenerateRoute,
