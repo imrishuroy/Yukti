@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yukti/config/auth_wrapper.dart';
-import 'package:yukti/screens/dashboard_screen.dart';
+import 'package:yukti/screens/dashboard/dashboard_screen.dart';
+
 import 'package:yukti/screens/gallery_screen.dart';
 import 'package:yukti/screens/login/login_screen.dart';
 import 'package:yukti/screens/nav/nav_screen.dart';

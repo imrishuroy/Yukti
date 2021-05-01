@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yukti/blocs/auth/auth_bloc.dart';
+import 'package:yukti/screens/dashboard/dashboard_screen.dart';
+
 import 'package:yukti/screens/login/login_screen.dart';
 import 'package:yukti/screens/nav/nav_screen.dart';
 
@@ -29,6 +31,7 @@ class AuthWrapper extends StatelessWidget {
             // Navigator.of(context)
             //     .push(MaterialPageRoute(builder: (_) => SuccessScreen()));
             Navigator.of(context).pushNamed(NavScreen.routeName);
+            // Navigator.of(context).pushNamed(DashBoard.routeName);
           }
         },
         child: const Scaffold(

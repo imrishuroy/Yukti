@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yukti/config/custom_router.dart';
-import 'package:yukti/screens/dashboard_screen.dart';
+import 'package:yukti/screens/dashboard/dashboard_screen.dart';
+
 import 'package:yukti/screens/gallery_screen.dart';
 import 'package:yukti/screens/nav/bottom_nav_item_enum.dart';
 import 'package:yukti/screens/profile_screen.dart';
