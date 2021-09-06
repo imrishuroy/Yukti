@@ -24,15 +24,16 @@ class AuthRepository extends BaseAuthRepository {
     if (user == null) return null;
     return AppUser(
       uid: user.uid,
-      name: user.displayName ?? '',
-      number: user.phoneNumber ?? '',
-      dob: '',
-      email: user.email ?? '',
-      age: '',
-      gender: '',
-      //    courses: [],
-      city: '',
-      country: '',
+      name: user.displayName,
+      photUrl: user.photoURL,
+      mobileNo: user.phoneNumber ?? '',
+      fatherName: '',
+      motherName: '',
+      enrollNo: '',
+      branch: '',
+      section: '',
+      attendance: 0,
+      sem: '',
     );
   }
 
@@ -69,15 +70,6 @@ class AuthRepository extends BaseAuthRepository {
       // final user = await _userRef.doc(userCredential.user?.uid).get();
 
       // print('User Exists ---- ${user.exists}');
-
-      // if (!user.exists) {
-      //   _userRef.doc(userCredential.user?.uid).set({
-      //     'name': userCredential.user?.displayName ?? '',
-      //     'imageUrl': userCredential.user?.photoURL,
-      //     'about': '',
-      //     'email': userCredential.user?.email ?? ''
-      //   });
-      // }
 
       return _appUser(userCredential.user);
     } on FirebaseAuthException catch (error) {

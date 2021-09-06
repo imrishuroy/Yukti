@@ -1,1 +1,1 @@
-enum AppTab { home, courses, myLearnings, profile }
+enum AppTab { home, happenings, galley, profile }

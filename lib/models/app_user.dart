@@ -3,100 +3,89 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class AppUser extends Equatable {
+  final String? uid;
+  final String? photUrl;
   final String? name;
-  final String uid;
-  final String? dob;
-  final String? number;
-  final String? email;
-  final String? age;
-  final String? gender;
-  // final List? courses;
-  final String? country;
-  final String? city;
-
+  //final bool isVerified;
+  final String? fatherName;
+  final String? motherName;
+  final String? mobileNo;
+  final String? enrollNo;
+  final String? branch;
+  final String? sem;
+  final int? attendance;
+  final String? section;
   AppUser({
-    this.name,
     required this.uid,
-    this.dob,
-    this.number,
-    this.email,
-    this.age,
-    this.gender,
-    // this.courses,
-    this.city,
-    this.country,
+    this.photUrl,
+    this.name,
+    this.fatherName,
+    this.motherName,
+    this.mobileNo,
+    this.enrollNo,
+    this.branch,
+    this.sem,
+    this.attendance,
+    this.section,
   });
 
-  @override
-  List<Object?> get props {
-    return [
-      name,
-      uid,
-      dob,
-      number,
-      email,
-      age,
-      gender,
-
-      /// courses!,
-      city,
-      country
-    ];
-  }
-
   AppUser copyWith({
-    String? name,
     String? uid,
-    String? dob,
-    String? number,
-    String? email,
-    String? age,
-    String? gender,
-    //  List? courses,
-    String? country,
-    String? city,
+    String? photUrl,
+    String? name,
+    String? fatherName,
+    String? motherName,
+    String? mobileNo,
+    String? enrollNo,
+    String? branch,
+    String? sem,
+    int? attendance,
+    String? section,
   }) {
     return AppUser(
-      name: name ?? this.name,
       uid: uid ?? this.uid,
-      dob: dob ?? this.dob,
-      number: number ?? this.number,
-      email: email ?? this.email,
-      age: age ?? this.age,
-      gender: gender ?? this.gender,
-      //  courses: courses ?? this.courses,
-      city: city ?? this.city,
-      country: country ?? this.country,
+      photUrl: photUrl ?? this.photUrl,
+      name: name ?? this.name,
+      fatherName: fatherName ?? this.fatherName,
+      motherName: motherName ?? this.motherName,
+      mobileNo: mobileNo ?? this.mobileNo,
+      enrollNo: enrollNo ?? this.enrollNo,
+      branch: branch ?? this.branch,
+      sem: sem ?? this.sem,
+      attendance: attendance ?? this.attendance,
+      section: section ?? this.section,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
       'uid': uid,
-      'dob': dob,
-      'number': number,
-      'email': email,
-      'age': age,
-      'gender': gender,
-      // 'courses': courses ?? this.courses,
-      'city': city ?? this.city,
-      'country': country ?? this.country,
+      'photUrl': photUrl,
+      'name': name,
+      'fatherName': fatherName,
+      'motherName': motherName,
+      'mobileNo': mobileNo,
+      'enrollNo': enrollNo,
+      'branch': branch,
+      'sem': sem,
+      'attendance': attendance,
+      'section': section,
     };
   }
 
   factory AppUser.fromMap(Map<String, dynamic> map) {
     return AppUser(
-      name: map['name'],
       uid: map['uid'],
-      dob: map['dob'],
-      number: map['number'],
-      email: map['email'],
-      age: map['age'],
-      gender: map['gender'],
-      // courses: map['courses'],
-      city: map['city'],
-      country: map['country'],
+      photUrl: map['photUrl'],
+      name: map['name'],
+      fatherName: map['fatherName'],
+      motherName: map['motherName'],
+      mobileNo: map['mobileNo'],
+      enrollNo: map['enrollNo'],
+      branch: map['branch'],
+      sem: map['sem'],
+      attendance: map['attendance'],
+      section: map['section'],
     );
   }
 
@@ -107,4 +96,21 @@ class AppUser extends Equatable {
 
   @override
   bool get stringify => true;
+
+  @override
+  List<Object?> get props {
+    return [
+      uid,
+      photUrl,
+      name,
+      fatherName,
+      motherName,
+      mobileNo,
+      enrollNo,
+      branch,
+      sem,
+      attendance,
+      section,
+    ];
+  }
 }

@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:yukti/config/paths.dart';
 
 import 'package:yukti/models/failure.dart';
 import 'package:yukti/respositories/auth/auth_repository.dart';
@@ -12,6 +14,9 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit({required AuthRepository authRepository})
       : _authRepository = authRepository,
         super(LoginState.initial());
+
+  final CollectionReference _usersRef =
+      FirebaseFirestore.instance.collection(Paths.users);
 
   void emailChanged(String value) {
     emit(state.copyWith(email: value, status: LoginStatus.initial));
@@ -42,7 +47,14 @@ class LoginCubit extends Cubit<LoginState> {
   void googleSignIn() async {
     emit(state.copyWith(status: LoginStatus.submitting));
     try {
-      await _authRepository.signInWithGoogle();
+      final user = await _authRepository.signInWithGoogle();
+
+      if (user != null) {
+        final doc = await _usersRef.doc(user.uid).get();
+        if (!doc.exists) {
+          _usersRef.doc(user.uid).set(user.toMap());
+        }
+      }
       emit(state.copyWith(status: LoginStatus.succuss));
     } on Failure catch (error) {
       emit(state.copyWith(failure: error, status: LoginStatus.error));
