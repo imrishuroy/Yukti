@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yukti/screens/home/home_screen.dart';
 import 'package:yukti/screens/login/login_screen.dart';
+import 'package:yukti/screens/signup/signup_screen.dart';
 
 import 'auth_wrapper.dart';
 
@@ -18,8 +20,11 @@ class CustomRouter {
       case LoginScreen.routeName:
         return LoginScreen.route();
 
-      // case HomeScreen.routeName:
-      //   return HomeScreen.route();
+      case SignupScreen.routeName:
+        return SignupScreen.route();
+
+      case HomeScreen.routeName:
+        return HomeScreen.route();
 
       default:
         return _errorRoute();

@@ -12,9 +12,9 @@ class SignupCubit extends Cubit<SignupState> {
       : _authRepository = authRepository,
         super(SignupState.initial());
 
-  void usernameChanged(String value) {
-    emit(state.copyWith(username: value, status: SignupStatus.initial));
-  }
+  // void usernameChanged(String value) {
+  //   emit(state.copyWith(username: value, status: SignupStatus.initial));
+  // }
 
   void emailChanged(String value) {
     emit(state.copyWith(email: value, status: SignupStatus.initial));
@@ -24,10 +24,17 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(password: value, status: SignupStatus.initial));
   }
 
+  void showPassword(bool showPassword) {
+    emit(state.copyWith(
+        showPassword: !showPassword, status: SignupStatus.initial));
+  }
+
   void signUpWithCredentials() async {
     if (!state.isFormValid || state.status == SignupStatus.submitting) return;
     emit(state.copyWith(status: SignupStatus.submitting));
     try {
+      print('Email ${state.email}');
+      print('Password ${state.password}');
       await _authRepository.signUpWithEmailAndPassword(
         // username: state.username!,
         email: state.email!,
@@ -36,6 +43,17 @@ class SignupCubit extends Cubit<SignupState> {
       emit(state.copyWith(status: SignupStatus.success));
     } on Failure catch (err) {
       emit(state.copyWith(failure: err, status: SignupStatus.error));
+    }
+  }
+
+  void singupWithGoogle() async {
+    try {
+      emit(state.copyWith(status: SignupStatus.submitting));
+      await _authRepository.signInWithGoogle();
+      emit(state.copyWith(status: SignupStatus.success));
+    } on Failure catch (error) {
+      print('Error sign up google');
+      emit(state.copyWith(failure: error, status: SignupStatus.error));
     }
   }
 }

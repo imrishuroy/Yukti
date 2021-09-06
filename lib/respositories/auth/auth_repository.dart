@@ -158,9 +158,14 @@ class AuthRepository extends BaseAuthRepository {
             email: email, password: password);
         return _appUser(userCredential.user);
       }
+    } on FirebaseAuthException catch (error) {
+      print(error.toString());
+      throw Failure(code: error.code, message: error.message!);
+    } on PlatformException catch (error) {
+      print(error.toString());
+      throw Failure(code: error.code, message: error.message!);
     } catch (error) {
-      print('Error login with email and password ${error.toString()}');
-      throw error;
+      throw Failure(message: 'Something went wrong.Try again');
     }
   }
 
@@ -172,9 +177,14 @@ class AuthRepository extends BaseAuthRepository {
             .createUserWithEmailAndPassword(email: email, password: password);
         return _appUser(userCredentail.user);
       }
+    } on FirebaseAuthException catch (error) {
+      print(error.toString());
+      throw Failure(code: error.code, message: error.message!);
+    } on PlatformException catch (error) {
+      print(error.toString());
+      throw Failure(code: error.code, message: error.message!);
     } catch (error) {
-      print('Error sign in with email and password ${error.toString()}');
-      throw error;
+      throw Failure(message: 'Something went wrong.Try again');
     }
   }
 

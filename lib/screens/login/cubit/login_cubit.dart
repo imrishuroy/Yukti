@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
 import 'package:yukti/models/failure.dart';
 import 'package:yukti/respositories/auth/auth_repository.dart';
 
@@ -20,17 +21,31 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(password: value, status: LoginStatus.initial));
   }
 
-  void logInWithCredentials() async {
-    if (!state.isFormValid || state.status == LoginStatus.submitting) return;
+  void showPassword(bool showPassword) {
+    emit(state.copyWith(
+        showPassword: !showPassword, status: LoginStatus.initial));
+  }
+
+  void signInWithEmail() async {
     emit(state.copyWith(status: LoginStatus.submitting));
     try {
       await _authRepository.loginInWithEmailAndPassword(
         email: state.email,
         password: state.password,
       );
-      emit(state.copyWith(status: LoginStatus.success));
-    } on Failure catch (err) {
-      emit(state.copyWith(failure: err, status: LoginStatus.error));
+      emit(state.copyWith(status: LoginStatus.succuss));
+    } on Failure catch (error) {
+      emit(state.copyWith(failure: error, status: LoginStatus.error));
+    }
+  }
+
+  void googleSignIn() async {
+    emit(state.copyWith(status: LoginStatus.submitting));
+    try {
+      await _authRepository.signInWithGoogle();
+      emit(state.copyWith(status: LoginStatus.succuss));
+    } on Failure catch (error) {
+      emit(state.copyWith(failure: error, status: LoginStatus.error));
     }
   }
 }
