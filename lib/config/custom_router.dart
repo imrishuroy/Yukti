@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yukti/screens/announcements/announcements_screen.dart';
+import 'package:yukti/screens/assignments/assignments_screen.dart';
+import 'package:yukti/screens/lectures/lectures_selection.dart';
 
 import '/screens/login/login_screen.dart';
 import '/screens/nav/nav_screen.dart';
@@ -31,6 +33,12 @@ class CustomRouter {
 
       case AnnouncemetScreen.routeName:
         return AnnouncemetScreen.route();
+
+      case AssignmentsScreen.routeName:
+        return AssignmentsScreen.route();
+
+      case LectureSelection.routeName:
+        return LectureSelection.route();
 
       default:
         return _errorRoute();

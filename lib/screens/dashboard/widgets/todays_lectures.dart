@@ -76,15 +76,17 @@ class _TodaysLecturesState extends State<TodaysLectures> {
                 Expanded(
                   child: FutureBuilder<List<Lecture?>>(
                     future: _lectureRepo.getWeekDayLecture(
-                        branch: _branch,
-                        sem: _sem,
-                        section: _section,
-                        day: day),
+                      branch: _branch,
+                      sem: _sem,
+                      section: _section,
+                      day: day,
+                    ),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(child: CircularProgressIndicator());
                       }
 
+                      print('Lecture ${snapshot.data}');
                       if (snapshot.data?.length == 0) {
                         return Center(
                           child: Text(

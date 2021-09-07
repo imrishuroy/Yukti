@@ -40,4 +40,22 @@ class LecturesRepository {
       throw Failure(message: 'Error getting today lecture');
     }
   }
+
+  Future<DocumentSnapshot> getLectures({
+    required String? branch,
+    required String? sem,
+    required String? section,
+  }) async {
+    try {
+      return await _firestore
+          .collection(Paths.lectures)
+          .doc(branch)
+          .collection(sem!)
+          .doc(section)
+          .get();
+    } catch (error) {
+      print('Error getting lectures ${error.toString()}');
+      throw error;
+    }
+  }
 }

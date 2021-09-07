@@ -7,6 +7,8 @@ class Paths {
 
   static const String announcements = 'announcements';
 
+  static const String assignments = 'assignments';
+
   // sub collection
 
 }

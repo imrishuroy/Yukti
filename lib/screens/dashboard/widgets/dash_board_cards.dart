@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '/screens/assignments/assignments_screen.dart';
+import '/screens/lectures/lectures_selection.dart';
 import '/screens/announcements/announcements_screen.dart';
 
 class DashBoardCards extends StatelessWidget {
@@ -36,18 +38,16 @@ class DashBoardCards extends StatelessWidget {
               title: 'Assignments',
               icon: FontAwesomeIcons.clipboardList,
               onTap: () {
-                // Navigator.pushNamed(context, AssignmentScreen.routeName,
-                //     arguments: database);
+                Navigator.pushNamed(context, AssignmentsScreen.routeName);
               },
             ),
             OneCard(
-              title: 'Lectures',
-              icon: FontAwesomeIcons.book,
-              onTap: () {},
-              // onTap: () => Navigator.pushNamed(
-              //   context,
-              //   LectureSelection.routeName,
-            ),
+                title: 'Lectures',
+                icon: FontAwesomeIcons.book,
+                onTap: () => Navigator.pushNamed(
+                      context,
+                      LectureSelection.routeName,
+                    )),
           ],
         ),
       ),

@@ -6,7 +6,7 @@ class Announcement extends Equatable {
   final String? message;
   final String? date;
   final String? title;
-  Announcement({
+  const Announcement({
     this.message,
     this.date,
     this.title,
