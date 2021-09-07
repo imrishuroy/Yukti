@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yukti/screens/announcements/announcements_screen.dart';
 
 import '/screens/login/login_screen.dart';
 import '/screens/nav/nav_screen.dart';
@@ -27,6 +28,9 @@ class CustomRouter {
 
       case NavScreen.routeName:
         return NavScreen.route();
+
+      case AnnouncemetScreen.routeName:
+        return AnnouncemetScreen.route();
 
       default:
         return _errorRoute();

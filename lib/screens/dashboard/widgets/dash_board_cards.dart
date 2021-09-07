@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '/screens/announcements/announcements_screen.dart';
 
 class DashBoardCards extends StatelessWidget {
   @override
@@ -15,8 +16,7 @@ class DashBoardCards extends StatelessWidget {
               title: 'Announcements',
               icon: FontAwesomeIcons.bell,
               onTap: () {
-                // Navigator.pushNamed(context, AnnouncemetScreen.routeName,
-                //     arguments: database);
+                Navigator.pushNamed(context, AnnouncemetScreen.routeName);
               },
             ),
             OneCard(

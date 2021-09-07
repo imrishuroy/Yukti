@@ -53,7 +53,10 @@ class MyApp extends StatelessWidget {
           )
         ],
         child: MaterialApp(
-          theme: ThemeData(primarySwatch: Colors.green),
+          theme: ThemeData(
+            primarySwatch: Colors.green,
+            scaffoldBackgroundColor: Color.fromRGBO(29, 38, 40, 1),
+          ),
           debugShowCheckedModeBanner: false,
           onGenerateRoute: CustomRouter.onGenerateRoute,
           initialRoute: AuthWrapper.routeName,

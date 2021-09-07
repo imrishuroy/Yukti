@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:yukti/models/announcement.dart';
 import '/config/paths.dart';
 
 import '/models/gallery.dart';
@@ -22,6 +23,23 @@ class FirebaseRepositroy extends BaseFirebaseRepositroy {
     } catch (e) {
       print('Error getting gallery images ${e.toString()}');
       throw e;
+    }
+  }
+
+  Future<List<Announcement?>> getAnnoucnements() async {
+    try {
+      final snaps = await _firestore
+          .collection(Paths.announcements)
+          .withConverter<Announcement>(
+              fromFirestore: (snapshot, _) =>
+                  Announcement.fromMap(snapshot.data()!),
+              toFirestore: (annoucement, _) => annoucement.toMap())
+          .get();
+
+      return snaps.docs.map((doc) => doc.data()).toList();
+    } catch (error) {
+      print('Error getting annoucements ${error.toString()}');
+      throw error;
     }
   }
 }

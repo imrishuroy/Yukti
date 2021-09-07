@@ -5,6 +5,8 @@ class Paths {
 
   static const String gallery = 'gallery';
 
+  static const String announcements = 'announcements';
+
   // sub collection
 
 }
