@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:yukti/screens/attendance/attendance_screen.dart';
 import '/screens/assignments/assignments_screen.dart';
 import '/screens/lectures/lectures_selection.dart';
 import '/screens/announcements/announcements_screen.dart';
@@ -25,13 +26,7 @@ class DashBoardCards extends StatelessWidget {
               title: 'Attendence',
               icon: FontAwesomeIcons.calendarCheck,
               onTap: () {
-                // Navigator.pushNamed(context, AttendanceScreen.routeName,
-                //     arguments: database);
-                // Navigator.pushNamed(
-                //   context,
-                //   NewAttendanceScreen.routeName,
-                //   arguments: database,
-                // );
+                Navigator.pushNamed(context, AttendanceScreen.routeName);
               },
             ),
             OneCard(

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:yukti/models/announcement.dart';
 import 'package:yukti/models/assignment.dart';
@@ -64,6 +66,24 @@ class FirebaseRepositroy extends BaseFirebaseRepositroy {
       return snaps.docs.map((doc) => doc.data()).toList();
     } catch (error) {
       print('Error getting user assignments ${error.toString()}');
+      throw error;
+    }
+  }
+
+  Stream<DocumentSnapshot?> attendaceStream({
+    String? branch,
+    String? sem,
+    String? enrollNo,
+  }) {
+    try {
+      return _firestore
+          .collection(Paths.attendance)
+          .doc(branch)
+          .collection(sem!)
+          .doc(enrollNo)
+          .snapshots();
+    } catch (error) {
+      print('Error getting attendance ${error.toString()}');
       throw error;
     }
   }

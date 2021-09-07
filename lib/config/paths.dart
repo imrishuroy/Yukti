@@ -9,6 +9,8 @@ class Paths {
 
   static const String assignments = 'assignments';
 
+  static const String attendance = 'attendance';
+
   // sub collection
 
 }
