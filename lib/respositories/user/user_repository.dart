@@ -25,4 +25,16 @@ class UserRepository extends BaseUserRepository {
       throw Failure(message: 'Error getting current user');
     }
   }
+
+  Future<void> addUserProfile({required AppUser user}) async {
+    try {
+      await _firestore
+          .collection(Paths.users)
+          .doc(user.uid)
+          .update(user.toMap());
+    } catch (error) {
+      print('Error adding user profile ${error.toString()}');
+      throw error;
+    }
+  }
 }

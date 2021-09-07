@@ -4,6 +4,9 @@ import 'package:yukti/models/app_user.dart';
 import 'package:yukti/respositories/user/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'add_profile_screen.dart';
+import 'edit_profile_screen.dart';
+
 class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,9 +20,7 @@ class UserProfile extends StatelessWidget {
           return Text('Some thing went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return Center(child: CircularProgressIndicator());
         }
         if (snapshot.data == null) {
           return Center(
@@ -29,12 +30,12 @@ class UserProfile extends StatelessWidget {
                 // onPrimary: Colors.white, // foreground
               ),
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => AddProfileScreen(database: database),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddProfileScreen(),
+                  ),
+                );
               },
               child: Text(
                 'Add Your Profile',
@@ -121,15 +122,12 @@ class UserProfile extends StatelessWidget {
                 SizedBox(height: 30.0),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {},
-                    // onPressed: () => Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => EditProfileScreen(
-                    //       database: database,
-                    //     ),
-                    //   ),
-                    // ),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfileScreen(),
+                      ),
+                    ),
                     child: Text('Edit Your Profile'),
                   ),
                 )

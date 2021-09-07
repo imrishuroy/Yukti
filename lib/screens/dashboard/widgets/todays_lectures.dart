@@ -55,9 +55,7 @@ class _TodaysLecturesState extends State<TodaysLectures> {
 
     return Expanded(
       child: _isLoading == true
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? Center(child: CircularProgressIndicator())
           : Column(
               children: [
                 Padding(
@@ -76,99 +74,98 @@ class _TodaysLecturesState extends State<TodaysLectures> {
                 ),
                 SizedBox(height: 10.0),
                 Expanded(
-                    child: FutureBuilder<List<Lecture?>>(
-                        future: _lectureRepo.getWeekDayLecture(
-                            branch: _branch,
-                            sem: _sem,
-                            section: _section,
-                            day: day),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Center(child: CircularProgressIndicator());
-                          }
+                  child: FutureBuilder<List<Lecture?>>(
+                    future: _lectureRepo.getWeekDayLecture(
+                        branch: _branch,
+                        sem: _sem,
+                        section: _section,
+                        day: day),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      }
 
-                          if (snapshot.data?.length == 0) {
-                            return Center(
-                              child: Text(
-                                'Nothing Here :)',
-                                style: TextStyle(fontSize: 20.0),
+                      if (snapshot.data?.length == 0) {
+                        return Center(
+                          child: Text(
+                            'Nothing Here :)',
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+                        );
+                      }
+                      return ListView.builder(
+                          itemCount: snapshot.data?.length,
+                          itemBuilder: (context, index) {
+                            final lecture = snapshot.data?[index];
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0,
+                                vertical: 7.0,
                               ),
-                            );
-                          }
-                          return ListView.builder(
-                              itemCount: snapshot.data?.length,
-                              itemBuilder: (context, index) {
-                                final lecture = snapshot.data?[index];
-                                return Padding(
+                              child: Card(
+                                color: Color.fromRGBO(255, 255, 250, 1),
+                                child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 20.0,
-                                    vertical: 7.0,
+                                    vertical: 10.0,
                                   ),
-                                  child: Card(
-                                    color: Color.fromRGBO(255, 255, 250, 1),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0,
-                                        vertical: 10.0,
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          //  Text('${lectures[index]['sub-code']}'),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      //  Text('${lectures[index]['sub-code']}'),
 
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                '${lecture?.subCode}',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                              Container(
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    // utility.launchInBrowser(
-                                                    //     '${today[index]['link']}');
-                                                  },
-                                                  child: Text(
-                                                    'Join',
-                                                    style: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontSize: 18.0,
-                                                      letterSpacing: 1.0,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(height: 2.0),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
                                           Text(
-                                            '${lecture?.subName}',
-                                            style: TextStyle(fontSize: 17.5),
-                                          ),
-                                          SizedBox(height: 2.0),
-                                          Text(
-                                            '${lecture?.time}',
+                                            '${lecture?.subCode ?? ''}',
                                             style: TextStyle(
-                                              color: Colors.grey[800],
+                                              fontWeight: FontWeight.w600,
                                             ),
-                                          )
+                                          ),
+                                          Container(
+                                            alignment: Alignment.bottomCenter,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                // utility.launchInBrowser(
+                                                //     '${today[index]['link']}');
+                                              },
+                                              child: Text(
+                                                'Join',
+                                                style: TextStyle(
+                                                  color: Colors.blue,
+                                                  fontSize: 18.0,
+                                                  letterSpacing: 1.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                    ),
+                                      SizedBox(height: 2.0),
+                                      Text(
+                                        '${lecture?.subName ?? 'N/A'}',
+                                        style: TextStyle(fontSize: 17.5),
+                                      ),
+                                      SizedBox(height: 2.0),
+                                      Text(
+                                        '${lecture?.time ?? ''}',
+                                        style: TextStyle(
+                                          color: Colors.grey[800],
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                );
-                              });
-                        })),
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                  ),
+                ),
                 // Expanded(
                 //   child: FutureBuilder<DocumentSnapshot>(
                 //     future: appDataBase.getLecturesData(
