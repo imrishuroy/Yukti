@@ -4,15 +4,13 @@ import 'package:yukti/blocs/bloc/auth_bloc.dart';
 import 'package:yukti/models/app_user.dart';
 import 'package:yukti/respositories/firebase/firebase_repositroy.dart';
 import 'package:yukti/respositories/user/user_repository.dart';
-import 'package:yukti/screens/attendance/pie_chat2.dart';
+
 import 'package:yukti/screens/attendance/sub_attendance_tile.dart';
 import 'package:yukti/widgets/nothing_here.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'attendance_pie_chart.dart';
 import 'attendance_tile.dart';
-import 'pie_char_sample_1.dart';
-import 'pie_chat3.dart';
 
 const List<Color> color = [
   Color(0xff845bef),

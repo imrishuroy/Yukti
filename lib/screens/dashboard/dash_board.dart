@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yukti/widgets/app_drawer.dart';
 import 'widgets/dash_board_cards.dart';
 import 'widgets/todays_lectures.dart';
 
@@ -6,8 +7,8 @@ class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
-      //  drawer: AppDrawer(),
+      //  drawer: Drawer(),
+      drawer: AppDrawer(),
       backgroundColor: Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
         //automaticallyImplyLeading: false,
@@ -16,9 +17,7 @@ class DashBoard extends StatelessWidget {
         title: Text('DashBoard'),
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.message,
-            ),
+            icon: Icon(Icons.message),
             onPressed: () {
               // Navigator.pushNamed(
               //   context,

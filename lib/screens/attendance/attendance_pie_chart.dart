@@ -19,7 +19,8 @@ class AttendancePieChartOld extends StatefulWidget {
 }
 
 class _AttendancePieChartOldState extends State<AttendancePieChartOld> {
-  int? touchedIndex = 0;
+  // int? touchedIndex = 0;
+  int? touchedIndex = -1;
 
   // List<PieChartSectionData> showSections(int touchIndex) {
   //   //return PieData.data
@@ -105,7 +106,7 @@ class _AttendancePieChartOldState extends State<AttendancePieChartOld> {
     //  print(allAttendance);
 
     return AspectRatio(
-      aspectRatio: 5,
+      aspectRatio: 17,
       child: PieChart(PieChartData(
           pieTouchData: PieTouchData(
               touchCallback: (FlTouchEvent event, pieTouchResponse) {
@@ -124,8 +125,11 @@ class _AttendancePieChartOldState extends State<AttendancePieChartOld> {
           borderData: FlBorderData(
             show: false,
           ),
-          sectionsSpace: 1,
-          centerSpaceRadius: 0,
+          // sectionsSpace: 1,
+          // centerSpaceRadius: 0,
+
+          sectionsSpace: 0,
+          centerSpaceRadius: 40,
           sections: showSections(reqData))),
     );
 
