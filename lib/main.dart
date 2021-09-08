@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
           )
         ],
         child: MaterialApp(
+          title: 'Yukti',
           theme: ThemeData(
             primarySwatch: Colors.green,
             scaffoldBackgroundColor: Color.fromRGBO(29, 38, 40, 1),

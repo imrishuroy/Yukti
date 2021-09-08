@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yukti/respositories/auth/auth_repository.dart';
 import 'package:yukti/screens/signup/cubit/signup_cubit.dart';
 import 'package:yukti/widgets/error_dialog.dart';
-import '/widgets/google_button.dart';
 import '/widgets/greetings_widget.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -181,23 +180,23 @@ class SignupScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 20.0),
-                      Text(
-                        'OR',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 20.0),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: GoogleSignInButton(
-                          onPressed: () =>
-                              context.read<SignupCubit>().singupWithGoogle(),
-                          //  onPressed: () => googleSignIn(context),
-                          title: 'Register with Google',
-                        ),
-                      ),
+                      // Text(
+                      //   'OR',
+                      //   style: TextStyle(
+                      //     color: Colors.white,
+                      //   ),
+                      //   textAlign: TextAlign.center,
+                      // ),
+                      // SizedBox(height: 20.0),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      //   child: GoogleSignInButton(
+                      //     onPressed: () =>
+                      //         context.read<SignupCubit>().singupWithGoogle(),
+                      //     //  onPressed: () => googleSignIn(context),
+                      //     title: 'Register with Google',
+                      //   ),
+                      // ),
                       SizedBox(height: 25.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

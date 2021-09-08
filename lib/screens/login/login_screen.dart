@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+
 import 'package:yukti/respositories/auth/auth_repository.dart';
 
 import 'package:yukti/screens/login/cubit/login_cubit.dart';
@@ -9,6 +11,8 @@ import 'package:yukti/screens/signup/signup_screen.dart';
 import 'package:yukti/widgets/error_dialog.dart';
 import 'package:yukti/widgets/google_button.dart';
 import 'package:yukti/widgets/greetings_widget.dart';
+
+import 'forget_password.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = '/login';
@@ -62,7 +66,7 @@ class LoginScreen extends StatelessWidget {
               backgroundColor: Color.fromRGBO(29, 38, 40, 1),
               body: state.status == LoginStatus.submitting
                   ? Padding(
-                      padding: const EdgeInsets.only(top: 25.0),
+                      padding: const EdgeInsets.only(top: 20.0),
                       child: Center(
                         child: CircularProgressIndicator(),
                       ),
@@ -72,10 +76,11 @@ class LoginScreen extends StatelessWidget {
                       child: ListView(
                         children: <Widget>[
                           GreetingsWidget(height: height),
-                          SizedBox(height: height < 750 ? 15.0 : 25.0),
+
+                          ///  SizedBox(height: height < 750 ? 7.0 : 7.0),
                           Container(
                             padding: EdgeInsets.only(
-                                top: 35.0, left: 20.0, right: 20.0),
+                                top: 15.0, left: 20.0, right: 20.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
@@ -159,11 +164,8 @@ class LoginScreen extends StatelessWidget {
                                   padding:
                                       EdgeInsets.only(top: 15.0, left: 20.0),
                                   child: InkWell(
-                                    onTap: () {},
-                                    // onTap: () => Navigator.pushNamed(
-                                    //   context,
-                                    //   ForgotPaswordScreen.routeName,
-                                    //  ),
+                                    onTap: () => Navigator.pushNamed(
+                                        context, ForgotPaswordScreen.routeName),
                                     child: Text(
                                       'Forgot Password',
                                       style: TextStyle(
@@ -202,6 +204,17 @@ class LoginScreen extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
                                 SizedBox(height: 20.0),
+                                //if (UniversalPlatform.isIOS)
+                                SizedBox(
+                                  width: 250.0,
+                                  child: SignInWithAppleButton(
+                                    onPressed: () {
+                                      context.read<LoginCubit>().appleLogin();
+                                    },
+                                    style: SignInWithAppleButtonStyle.black,
+                                  ),
+                                ),
+                                SizedBox(height: 20.0),
                                 GoogleSignInButton(
                                   onPressed: () =>
                                       context.read<LoginCubit>().googleSignIn(),
@@ -210,7 +223,7 @@ class LoginScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(height: 22.0),
+                          SizedBox(height: 25.0),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[

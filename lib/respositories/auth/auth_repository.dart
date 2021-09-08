@@ -79,6 +79,7 @@ class AuthRepository extends BaseAuthRepository {
       print(error.toString());
       throw Failure(code: error.code, message: error.message!);
     } catch (error) {
+      print('Error ${error.toString()}');
       throw Failure(message: 'Something went wrong.Try again');
     }
   }
@@ -177,6 +178,18 @@ class AuthRepository extends BaseAuthRepository {
       throw Failure(code: error.code, message: error.message!);
     } catch (error) {
       throw Failure(message: 'Something went wrong.Try again');
+    }
+  }
+
+  @override
+  Future<void>? forgotPassword({String? email}) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email!);
+    } catch (error) {
+      throw FirebaseAuthException(
+        code: 'user-not-found',
+        message: 'User not found',
+      );
     }
   }
 

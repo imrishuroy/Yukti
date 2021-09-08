@@ -3,6 +3,7 @@ import 'package:yukti/screens/announcements/announcements_screen.dart';
 import 'package:yukti/screens/assignments/assignments_screen.dart';
 import 'package:yukti/screens/attendance/attendance_screen.dart';
 import 'package:yukti/screens/lectures/lectures_selection.dart';
+import 'package:yukti/screens/login/forget_password.dart';
 
 import '/screens/login/login_screen.dart';
 import '/screens/nav/nav_screen.dart';
@@ -43,6 +44,9 @@ class CustomRouter {
 
       case AttendanceScreen.routeName:
         return AttendanceScreen.route();
+
+      case ForgotPaswordScreen.routeName:
+        return ForgotPaswordScreen.route();
 
       default:
         return _errorRoute();

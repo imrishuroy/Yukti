@@ -60,4 +60,26 @@ class LoginCubit extends Cubit<LoginState> {
       emit(state.copyWith(failure: error, status: LoginStatus.error));
     }
   }
+
+  void appleLogin() async {
+    if (state.status == LoginStatus.submitting) return;
+    emit(state.copyWith(status: LoginStatus.submitting));
+    try {
+      final user = await _authRepository.signInWithApple();
+      if (user != null) {
+        final doc = await _usersRef.doc(user.uid).get();
+        if (!doc.exists) {
+          _usersRef.doc(user.uid).set(user.toMap());
+        }
+      }
+      emit(state.copyWith(status: LoginStatus.succuss));
+    } on Failure catch (error) {
+      emit(
+        state.copyWith(
+          status: LoginStatus.error,
+          failure: Failure(message: error.message),
+        ),
+      );
+    }
+  }
 }

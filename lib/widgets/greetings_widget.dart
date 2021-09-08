@@ -11,13 +11,13 @@ class GreetingsWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 60.0),
+          const SizedBox(height: 50.0),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
               'Hello',
               style: TextStyle(
-                fontSize: height < 750 ? 50.0 : 80.0,
+                fontSize: height < 750 ? 40.0 : 60.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -31,7 +31,7 @@ class GreetingsWidget extends StatelessWidget {
                 Text(
                   'There',
                   style: TextStyle(
-                    fontSize: height < 750 ? 50.0 : 80.0,
+                    fontSize: height < 750 ? 47.0 : 67.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),

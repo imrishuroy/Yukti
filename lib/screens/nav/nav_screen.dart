@@ -27,12 +27,6 @@ class NavScreen extends StatelessWidget {
       child: BlocBuilder<NavBloc, NavItem>(
         builder: (context, activeNavItem) {
           return Scaffold(
-            // floatingActionButton: FloatingActionButton(
-            //   onPressed: () async {
-            //     await FirebaseAuth.instance.signOut();
-            //   },
-            //   child: Icon(Icons.logout),
-            // ),
             body: SwitchScreen(navItem: activeNavItem),
             bottomNavigationBar: BottomNavBar(
               navItem: activeNavItem,
