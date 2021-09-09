@@ -1,3 +1,7 @@
+import 'package:admin_yukti/screens/assignments/assignment_selection.dart';
+import 'package:admin_yukti/screens/attendance/attendance_selection.dart';
+import 'package:admin_yukti/screens/lectures/lectures_selection.dart';
+
 import '/screens/home/home_screen.dart';
 import '/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +26,15 @@ class CustomRouter {
 
       case HomeScreen.routeName:
         return HomeScreen.route();
+
+      case LectureSelection.routeName:
+        return LectureSelection.route();
+
+      case AttendanceSelection.routeName:
+        return AttendanceSelection.route();
+
+      case AssignmentSelection.routeName:
+        return AssignmentSelection.route();
 
       default:
         return ErrorRoute.route();

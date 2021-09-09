@@ -2,6 +2,7 @@ import 'package:admin_yukti/blocs/auth/auth_bloc.dart';
 import 'package:admin_yukti/config/auth_wrapper.dart';
 import 'package:admin_yukti/config/custom_router.dart';
 import 'package:admin_yukti/repositories/auth/auth_repo.dart';
+import 'package:admin_yukti/repositories/lecture/lecture_repositoy.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider<AuthRepository>(
           create: (_) => AuthRepository(),
+        ),
+        RepositoryProvider<LectureRepository>(
+          create: (_) => LectureRepository(),
         )
       ],
       child: MultiBlocProvider(
