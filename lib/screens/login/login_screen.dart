@@ -42,7 +42,9 @@ class LoginScreen extends StatelessWidget {
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: Color.fromRGBO(0, 141, 82, 1),
+        statusBarColor: Color.fromRGBO(25, 23, 37, 1),
+        // statusBarColor: Color(0XFF00286E),
+        //  statusBarColor: Color.fromRGBO(0, 141, 82, 1),
         statusBarIconBrightness: Brightness.dark,
       ),
     );

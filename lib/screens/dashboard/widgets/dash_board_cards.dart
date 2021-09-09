@@ -12,7 +12,7 @@ class DashBoardCards extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GridView.count(
-          childAspectRatio: 1.2,
+          childAspectRatio: 1.3,
           crossAxisCount: 2,
           children: [
             OneCard(
@@ -37,12 +37,13 @@ class DashBoardCards extends StatelessWidget {
               },
             ),
             OneCard(
-                title: 'Lectures',
-                icon: FontAwesomeIcons.book,
-                onTap: () => Navigator.pushNamed(
-                      context,
-                      LectureSelection.routeName,
-                    )),
+              title: 'Lectures',
+              icon: FontAwesomeIcons.book,
+              onTap: () => Navigator.pushNamed(
+                context,
+                LectureSelection.routeName,
+              ),
+            ),
           ],
         ),
       ),
@@ -65,28 +66,55 @@ class OneCard extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    //  final height = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: onTap as void Function()?,
       child: Card(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
+        // color: Color.fromRGBO(40, 200, 253, 1),
         // color: Color.fromRGBO(255, 255, 250, 1),
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(height: height < 750 ? 20.0 : 30.0),
-            Icon(icon, size: height < 750 ? 30.0 : 40),
-            SizedBox(height: 12.0),
-            Text(
-              title!,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18.0,
-              ),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(17.0),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromRGBO(40, 200, 253, 1),
+                Colors.white,
+
+                // Colors.blue,
+              ],
             ),
-            SizedBox(height: height < 750 ? 15.0 : 30.0),
-          ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              //  SizedBox(height: height < 750 ? 10.0 : 20.0),
+              Column(
+                children: [
+                  Icon(icon, size: 35),
+                  const SizedBox(height: 13.0),
+                  Text(
+                    '$title',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                ],
+              ),
+              //SizedBox(height: 12.0),
+
+              //  SizedBox(height: height < 750 ? 10.0 : 20.0),
+            ],
+          ),
         ),
       ),
     );

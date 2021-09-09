@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yukti/widgets/app_drawer.dart';
 import 'widgets/dash_board_cards.dart';
 import 'widgets/todays_lectures.dart';
@@ -9,32 +10,86 @@ class DashBoard extends StatelessWidget {
     return Scaffold(
       //  drawer: Drawer(),
       drawer: AppDrawer(),
-      backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+
+      backgroundColor: Color.fromRGBO(25, 23, 37, 1),
+
+      //backgroundColor: Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
+        // leading: SizedBox(
+        //   height: 10.0,
+        //   width: 10.0,
+        //   child: Image.network(
+        //       'https://cdn-icons-png.flaticon.com/512/812/812847.png'),
+        // ),
+        leading: Icon(
+          FontAwesomeIcons.alignLeft,
+          size: 27.0,
+        ),
+        elevation: 0.0,
+        // backgroundColor: Color.fromRGBO(40, 200, 253, 1),
+        // backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+        backgroundColor: Color.fromRGBO(25, 23, 37, 1),
+
         //automaticallyImplyLeading: false,
-        backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+        //   backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+        // backgroundColor: Color(0XFF00286E),
         centerTitle: true,
-        title: Text('DashBoard'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.message),
-            onPressed: () {
-              // Navigator.pushNamed(
-              //   context,
-              //   AttendanceScreen3.routeName,
-              //   // NewAttendanceScreen.routeName,
-              //   // arguments: database,
-              // );
-            },
+        title: Text(
+          'DashBoard',
+          style: TextStyle(
+            letterSpacing: 1.2,
+            fontSize: 20.0,
+            fontWeight: FontWeight.w600,
           ),
-          SizedBox(width: 7.0),
+        ),
+        actions: [
+          CircleAvatar(
+            radius: 22.3,
+            backgroundColor: Colors.deepOrange,
+            child: CircleAvatar(
+              radius: 19.5,
+              backgroundColor: Colors.white,
+              backgroundImage: NetworkImage(
+                  'https://raw.githubusercontent.com/imrishuroy/Rishu-Portfolio/master/assets/avtar.png'),
+            ),
+          ),
+          // IconButton(
+          //   icon: Icon(Icons.message),
+          //   onPressed: () {
+          //     // Navigator.pushNamed(
+          //     //   context,
+          //     //   AttendanceScreen3.routeName,
+          //     //   // NewAttendanceScreen.routeName,
+          //     //   // arguments: database,
+          //     // );
+          //   },
+          // ),
+          SizedBox(width: 17.0),
         ],
       ),
       body: Column(
         children: [
           DashBoardCards(),
           // SizedBox(height: 10.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+            ),
+            child: Text(
+              'Today\'s Lectures',
+              style: TextStyle(
+                fontSize: 19.9,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
+                //color: Colors.white,
+                color: Color(0xff51DACF),
+                //color: Color.fromRGBO(255, 203, 0, 1),
+              ),
+            ),
+          ),
+
           TodaysLectures(),
+          const SizedBox(height: 17.0)
         ],
       ),
     );

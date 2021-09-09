@@ -24,13 +24,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(onPressed: _logout, icon: Icon(Icons.logout_rounded)),
           SizedBox(width: 10.0),
         ],
         centerTitle: true,
-        title: Text('Your Profile'),
-        backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+        title: Text(
+          'Your Profile',
+          style: TextStyle(color: Colors.black),
+        ),
+        // backgroundColor: Color(0XFF00286E),
+        backgroundColor: Color.fromRGBO(40, 200, 253, 1),
+        //  backgroundColor: Color.fromRGBO(0, 141, 82, 1),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(150.0),
           child: Column(

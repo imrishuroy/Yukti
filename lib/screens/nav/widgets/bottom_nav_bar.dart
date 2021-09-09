@@ -17,23 +17,44 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      elevation: 20.0,
-      type: BottomNavigationBarType.shifting,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+          bottomLeft: Radius.circular(20.0),
+          bottomRight: Radius.circular(20.0),
+        ),
+        // borderRadius: BorderRadius.only(
+        //   topLeft: Radius.circular(20.0),
+        //   topRight: Radius.circular(20.0),
+        // ),
+        child: BottomNavigationBar(
+          elevation: 20.0,
+          //landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+          // type: BottomNavigationBarType.shifting,
 
-      //   type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      iconSize: 20,
-      selectedFontSize: 12,
-      unselectedFontSize: 10,
-      selectedItemColor: Colors.green,
-      unselectedItemColor: Colors.grey,
-      currentIndex: NavItem.values.indexOf(navItem!),
-      onTap: (index) => onitemSelected!(NavItem.values[index]),
-      items: NavItem.values.map((item) {
-        return BottomNavigationBarItem(
-            icon: _itemIcon(item), label: _label(item));
-      }).toList(),
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          iconSize: 20,
+          selectedFontSize: 12,
+          unselectedFontSize: 13,
+          selectedItemColor: Color(0XFF00286E),
+          //selectedItemColor: Colors.green,
+          unselectedItemColor: Colors.grey,
+          currentIndex: NavItem.values.indexOf(navItem!),
+          onTap: (index) => onitemSelected!(NavItem.values[index]),
+          items: NavItem.values.map((item) {
+            return BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.all(6.0),
+                  child: _itemIcon(item),
+                ),
+                label: _label(item));
+          }).toList(),
+        ),
+      ),
     );
   }
 }
@@ -46,7 +67,10 @@ Widget _itemIcon(NavItem item) {
   } else if (item == NavItem.happenings) {
     return Icon(FontAwesomeIcons.calendarAlt);
   } else if (item == NavItem.profile) {
-    return Icon(Icons.person);
+    return Icon(
+      Icons.feed,
+      size: 24.0,
+    );
   }
 
   return Icon(Icons.person);
@@ -60,7 +84,7 @@ String _label(NavItem item) {
   } else if (item == NavItem.happenings) {
     return 'Happenings';
   } else if (item == NavItem.profile) {
-    return 'Profile';
+    return 'Forms';
   }
 
   return '';

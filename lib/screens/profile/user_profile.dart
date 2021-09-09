@@ -122,6 +122,7 @@ class UserProfile extends StatelessWidget {
                 SizedBox(height: 30.0),
                 Center(
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Color(0XFF00286E)),
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
