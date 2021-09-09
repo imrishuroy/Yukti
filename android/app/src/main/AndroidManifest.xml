@@ -1,8 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sixteenbrains.yukti">
-    <uses-permission android:name="android.permission.INTERNET"/>
+    package="com.example.admin_yukti">
    <application
-        android:label="Yukti"
+        android:label="admin_yukti"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

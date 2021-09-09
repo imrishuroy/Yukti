@@ -1,16 +1,19 @@
 class Paths {
-  static const String users = 'users';
+  // Top level collections.
+  // static const String car_brands = 'car-brands';
 
-  static const String lectures = 'lectures';
+  static const String vehicle_brands = 'vehicle-brands';
 
-  static const String gallery = 'gallery';
+  static const String battery = 'battery';
 
-  static const String announcements = 'announcements';
+  static const amaron = 'amaron';
 
-  static const String assignments = 'assignments';
+  static const exide = 'exide';
 
-  static const String attendance = 'attendance';
+  static const sky = 'sky';
 
-  // sub collection
+  // Subcollections
 
+  static const String vehicles = 'vehicles';
+  static const String batteries = 'batteries';
 }

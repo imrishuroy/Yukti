@@ -4,14 +4,11 @@ class Failure extends Equatable {
   final String code;
   final String message;
 
-  Failure({
-    this.code = '',
-    this.message = '',
-  });
+  const Failure({this.code = '', this.message = ''});
 
   @override
-  bool? get stringify => true;
+  bool get stringify => true;
 
   @override
-  List<Object?> get props => [code, message];
+  List<Object> get props => [code, message];
 }

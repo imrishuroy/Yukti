@@ -1,14 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:yukti/screens/announcements/announcements_screen.dart';
-import 'package:yukti/screens/assignments/assignments_screen.dart';
-import 'package:yukti/screens/attendance/attendance_screen.dart';
-import 'package:yukti/screens/lectures/lectures_selection.dart';
-import 'package:yukti/screens/login/forget_password.dart';
-
+import '/screens/home/home_screen.dart';
 import '/screens/login/login_screen.dart';
-import '/screens/nav/nav_screen.dart';
-
-import '/screens/signup/signup_screen.dart';
+import 'package:flutter/material.dart';
 
 import 'auth_wrapper.dart';
 
@@ -18,8 +10,9 @@ class CustomRouter {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(
-            settings: const RouteSettings(name: '/'),
-            builder: (_) => Scaffold());
+          settings: const RouteSettings(name: '/'),
+          builder: (_) => const Scaffold(),
+        );
 
       case AuthWrapper.routeName:
         return AuthWrapper.route();
@@ -27,64 +20,48 @@ class CustomRouter {
       case LoginScreen.routeName:
         return LoginScreen.route();
 
-      case SignupScreen.routeName:
-        return SignupScreen.route();
-
-      case NavScreen.routeName:
-        return NavScreen.route();
-
-      case AnnouncemetScreen.routeName:
-        return AnnouncemetScreen.route();
-
-      case AssignmentsScreen.routeName:
-        return AssignmentsScreen.route();
-
-      case LectureSelection.routeName:
-        return LectureSelection.route();
-
-      case AttendanceScreen.routeName:
-        return AttendanceScreen.route();
-
-      case ForgotPaswordScreen.routeName:
-        return ForgotPaswordScreen.route();
+      case HomeScreen.routeName:
+        return HomeScreen.route();
 
       default:
-        return _errorRoute();
+        return ErrorRoute.route();
     }
   }
+}
 
-  static Route onGenerateNestedRouter(RouteSettings settings) {
-    print('NestedRoute: ${settings.name}');
-    switch (settings.name) {
-      // case ProfileScreen.routeName:
-      //   return ProfileScreen.route();
-      // args: settings.arguments as ProfileScreenArgs);
-      // case GalleryScreen.routeName:
-      //   return GalleryScreen.route();
-      // case DashBoard.routeName:
-      // return DashBoard.route();
-      default:
-        return _errorRoute();
-    }
-  }
+class ErrorRoute extends StatelessWidget {
+  const ErrorRoute({Key? key}) : super(key: key);
 
-  static Route _errorRoute() {
+  static const String routeNmae = '/error';
+
+  static Route route() {
     return MaterialPageRoute(
-      settings: const RouteSettings(name: '/error'),
-      builder: (_) => Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Error',
-          ),
-        ),
-        body: const Center(
-          child: Text(
+      settings: const RouteSettings(name: routeNmae),
+      builder: (_) => const ErrorRoute(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(AuthWrapper.routeName, (route) => false);
+    return Center(
+      child: Column(
+        children: [
+          const Text(
             'Something went wrong',
             style: TextStyle(
               color: Colors.black,
             ),
           ),
-        ),
+          const SizedBox(height: 6.0),
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    AuthWrapper.routeName, (route) => false);
+              },
+              child: const Text('Re Try'))
+        ],
       ),
     );
   }

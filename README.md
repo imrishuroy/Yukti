@@ -1,4 +1,4 @@
-# yukti
+# admin_yukti
 
 A new Flutter project.
 
