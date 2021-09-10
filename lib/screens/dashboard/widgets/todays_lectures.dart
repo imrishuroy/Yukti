@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import 'package:provider/provider.dart';
 import 'package:yukti/blocs/bloc/auth_bloc.dart';
@@ -83,208 +84,219 @@ class _TodaysLecturesState extends State<TodaysLectures> {
                           ),
                         );
                       }
-                      return ListView.builder(
-                        itemCount: snapshot.data?.length,
-                        itemBuilder: (context, index) {
-                          final lecture = snapshot.data?[index];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0,
-                              vertical: 10.0,
-                            ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                      return AnimationLimiter(
+                        child: ListView.builder(
+                          itemCount: snapshot.data?.length,
+                          itemBuilder: (context, index) {
+                            final lecture = snapshot.data?[index];
+                            return AnimationConfiguration.staggeredList(
+                              position: index,
+                              duration: const Duration(milliseconds: 375),
+                              child: SlideAnimation(
+                                verticalOffset: 50.0,
+                                child: FadeInAnimation(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0,
+                                      vertical: 10.0,
+                                    ),
+                                    child: Column(
                                       children: [
-                                        Text(
-                                          '${lecture?.subName} - ${lecture?.subCode}',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 17.0,
-                                            letterSpacing: 1.2,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  '${lecture?.subName} - ${lecture?.subCode}',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 17.0,
+                                                    letterSpacing: 1.2,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 3),
+                                                Text(
+                                                  'Prof. ${lecture?.profName}',
+                                                  style: TextStyle(
+                                                    color: Colors.grey.shade300,
+                                                    letterSpacing: 1.2,
+                                                    fontSize: 16.0,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 8.0),
+                                                Text(
+                                                  '⏰ ${lecture?.time}',
+                                                  style: TextStyle(
+                                                    color: Colors.grey.shade400,
+                                                    fontSize: 16.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            // Container(
+                                            //   height: 30.0,
+                                            //   width: 60.0,
+                                            //   decoration: BoxDecoration(
+                                            //     borderRadius: BorderRadius.circular(10.0),
+                                            //     gradient: LinearGradient(
+                                            //       begin: Alignment.topLeft,
+                                            //       end: Alignment.bottomRight,
+                                            //       colors: [
+                                            //         Color.fromRGBO(40, 200, 253, 1),
+                                            //         Colors.white,
+
+                                            //         // Colors.blue,
+                                            //       ],
+                                            //     ),
+                                            //   ),
+                                            //   child: Text(
+                                            //     'Join',
+                                            //     style: TextStyle(
+                                            //       color: Colors.white,
+                                            //       fontSize: 15.0,
+                                            //       letterSpacing: 1.0,
+                                            //       fontWeight: FontWeight.w600,
+                                            //     ),
+                                            //   ),
+                                            // ),
+
+                                            Chip(
+                                              backgroundColor: Color.fromRGBO(
+                                                  40, 200, 253, 1),
+                                              label: Text(
+                                                'Join',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16.0,
+                                                  letterSpacing: 1.2,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        const SizedBox(height: 3),
-                                        Text(
-                                          'Prof. ${lecture?.profName}',
-                                          style: TextStyle(
-                                            color: Colors.grey.shade300,
-                                            letterSpacing: 1.2,
-                                            fontSize: 16.0,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8.0),
-                                        Text(
-                                          '⏰ ${lecture?.time}',
-                                          style: TextStyle(
+                                        const SizedBox(height: 9.0),
+                                        SizedBox(
+                                          width: 400.0,
+                                          height: 1.0,
+                                          child: Divider(
                                             color: Colors.grey.shade400,
-                                            fontSize: 16.0,
                                           ),
-                                        ),
+                                        )
                                       ],
                                     ),
-                                    // Container(
-                                    //   height: 30.0,
-                                    //   width: 60.0,
-                                    //   decoration: BoxDecoration(
-                                    //     borderRadius: BorderRadius.circular(10.0),
-                                    //     gradient: LinearGradient(
-                                    //       begin: Alignment.topLeft,
-                                    //       end: Alignment.bottomRight,
-                                    //       colors: [
-                                    //         Color.fromRGBO(40, 200, 253, 1),
-                                    //         Colors.white,
 
-                                    //         // Colors.blue,
-                                    //       ],
-                                    //     ),
-                                    //   ),
-                                    //   child: Text(
-                                    //     'Join',
+                                    // ListTile(
+                                    //   title: Text(
+                                    //     '${lecture?.subName} - ${lecture?.subCode}',
                                     //     style: TextStyle(
                                     //       color: Colors.white,
-                                    //       fontSize: 15.0,
-                                    //       letterSpacing: 1.0,
-                                    //       fontWeight: FontWeight.w600,
+                                    //       fontSize: 16.0,
+                                    //     ),
+                                    //   ),
+                                    //   subtitle: Column(
+                                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                                    //     children: [
+                                    //       Text(
+                                    //         '${lecture?.profName}',
+                                    //         style: TextStyle(
+                                    //           color: Colors.grey,
+                                    //           fontSize: 16.0,
+                                    //         ),
+                                    //       ),
+                                    //       Text(
+                                    //         '${lecture?.time}',
+                                    //         style: TextStyle(
+                                    //           color: Colors.grey,
+                                    //           fontSize: 16.0,
+                                    //         ),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    //   trailing: Chip(
+                                    //     backgroundColor: Colors.blue,
+                                    //     label: Text(
+                                    //       'Join',
+                                    //       style: TextStyle(
+                                    //         color: Colors.white,
+                                    //         fontSize: 15.0,
+                                    //         letterSpacing: 1.0,
+                                    //         fontWeight: FontWeight.w600,
+                                    //       ),
                                     //     ),
                                     //   ),
                                     // ),
 
-                                    Chip(
-                                      backgroundColor:
-                                          Color.fromRGBO(40, 200, 253, 1),
-                                      label: Text(
-                                        'Join',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16.0,
-                                          letterSpacing: 1.2,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 9.0),
-                                SizedBox(
-                                  width: 400.0,
-                                  height: 1.0,
-                                  child: Divider(
-                                    color: Colors.grey.shade400,
+                                    //  Card(
+                                    //   color: Color.fromRGBO(255, 255, 250, 1),
+                                    //   child: Padding(
+                                    //     padding: const EdgeInsets.symmetric(
+                                    //       horizontal: 20.0,
+                                    //       vertical: 10.0,
+                                    //     ),
+                                    //     child: Column(
+                                    //       crossAxisAlignment:
+                                    //           CrossAxisAlignment.start,
+                                    //       children: [
+                                    //         //  Text('${lectures[index]['sub-code']}'),
+
+                                    //         Row(
+                                    //           mainAxisAlignment:
+                                    //               MainAxisAlignment.spaceBetween,
+                                    //           children: [
+                                    //             Text(
+                                    //               '${lecture?.subCode ?? ''}',
+                                    //               style: TextStyle(
+                                    //                 fontWeight: FontWeight.w600,
+                                    //               ),
+                                    //             ),
+                                    //             Container(
+                                    //               alignment: Alignment.bottomCenter,
+                                    //               child: GestureDetector(
+                                    //                 onTap: () {
+                                    //                   // utility.launchInBrowser(
+                                    //                   //     '${today[index]['link']}');
+                                    //                 },
+                                    //                 child: Text(
+                                    //                   'Join',
+                                    //                   style: TextStyle(
+                                    //                     color: Colors.blue,
+                                    //                     fontSize: 18.0,
+                                    //                     letterSpacing: 1.0,
+                                    //                     fontWeight: FontWeight.bold,
+                                    //                   ),
+                                    //                 ),
+                                    //               ),
+                                    //             ),
+                                    //           ],
+                                    //         ),
+                                    //         SizedBox(height: 2.0),
+                                    //         Text(
+                                    //           '${lecture?.subName ?? 'N/A'}',
+                                    //           style: TextStyle(fontSize: 17.5),
+                                    //         ),
+                                    //         SizedBox(height: 2.0),
+                                    //         Text(
+                                    //           '${lecture?.time ?? ''}',
+                                    //           style: TextStyle(
+                                    //             color: Colors.grey[800],
+                                    //           ),
+                                    //         )
+                                    //       ],
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ),
-                                )
-                              ],
-                            ),
-
-                            // ListTile(
-                            //   title: Text(
-                            //     '${lecture?.subName} - ${lecture?.subCode}',
-                            //     style: TextStyle(
-                            //       color: Colors.white,
-                            //       fontSize: 16.0,
-                            //     ),
-                            //   ),
-                            //   subtitle: Column(
-                            //     crossAxisAlignment: CrossAxisAlignment.start,
-                            //     children: [
-                            //       Text(
-                            //         '${lecture?.profName}',
-                            //         style: TextStyle(
-                            //           color: Colors.grey,
-                            //           fontSize: 16.0,
-                            //         ),
-                            //       ),
-                            //       Text(
-                            //         '${lecture?.time}',
-                            //         style: TextStyle(
-                            //           color: Colors.grey,
-                            //           fontSize: 16.0,
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            //   trailing: Chip(
-                            //     backgroundColor: Colors.blue,
-                            //     label: Text(
-                            //       'Join',
-                            //       style: TextStyle(
-                            //         color: Colors.white,
-                            //         fontSize: 15.0,
-                            //         letterSpacing: 1.0,
-                            //         fontWeight: FontWeight.w600,
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-
-                            //  Card(
-                            //   color: Color.fromRGBO(255, 255, 250, 1),
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.symmetric(
-                            //       horizontal: 20.0,
-                            //       vertical: 10.0,
-                            //     ),
-                            //     child: Column(
-                            //       crossAxisAlignment:
-                            //           CrossAxisAlignment.start,
-                            //       children: [
-                            //         //  Text('${lectures[index]['sub-code']}'),
-
-                            //         Row(
-                            //           mainAxisAlignment:
-                            //               MainAxisAlignment.spaceBetween,
-                            //           children: [
-                            //             Text(
-                            //               '${lecture?.subCode ?? ''}',
-                            //               style: TextStyle(
-                            //                 fontWeight: FontWeight.w600,
-                            //               ),
-                            //             ),
-                            //             Container(
-                            //               alignment: Alignment.bottomCenter,
-                            //               child: GestureDetector(
-                            //                 onTap: () {
-                            //                   // utility.launchInBrowser(
-                            //                   //     '${today[index]['link']}');
-                            //                 },
-                            //                 child: Text(
-                            //                   'Join',
-                            //                   style: TextStyle(
-                            //                     color: Colors.blue,
-                            //                     fontSize: 18.0,
-                            //                     letterSpacing: 1.0,
-                            //                     fontWeight: FontWeight.bold,
-                            //                   ),
-                            //                 ),
-                            //               ),
-                            //             ),
-                            //           ],
-                            //         ),
-                            //         SizedBox(height: 2.0),
-                            //         Text(
-                            //           '${lecture?.subName ?? 'N/A'}',
-                            //           style: TextStyle(fontSize: 17.5),
-                            //         ),
-                            //         SizedBox(height: 2.0),
-                            //         Text(
-                            //           '${lecture?.time ?? ''}',
-                            //           style: TextStyle(
-                            //             color: Colors.grey[800],
-                            //           ),
-                            //         )
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-                          );
-                        },
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       );
                     },
                   ),

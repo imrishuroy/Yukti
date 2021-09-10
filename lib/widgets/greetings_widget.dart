@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+final Shader linearGradient = LinearGradient(
+  colors: <Color>[
+    Color.fromRGBO(40, 200, 253, 1),
+    Colors.white,
+  ],
+).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
 class GreetingsWidget extends StatelessWidget {
   final double height;
 
@@ -19,7 +26,8 @@ class GreetingsWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: height < 750 ? 40.0 : 60.0,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                // color: Colors.white,
+                foreground: Paint()..shader = linearGradient,
               ),
               textAlign: TextAlign.start,
             ),
@@ -33,15 +41,18 @@ class GreetingsWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: height < 750 ? 47.0 : 67.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    // color: Colors.white,
+                    foreground: Paint()..shader = linearGradient,
                   ),
                 ),
-                const Text(
+                Text(
                   ' !',
                   style: TextStyle(
                     fontSize: 50.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    foreground: Paint()..shader = linearGradient,
+                    //color: Colors.green,
+                    // foreground: Paint()..shader = linearGradient,
                   ),
                 ),
               ],

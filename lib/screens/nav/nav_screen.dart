@@ -27,6 +27,8 @@ class NavScreen extends StatelessWidget {
       child: BlocBuilder<NavBloc, NavItem>(
         builder: (context, activeNavItem) {
           return Scaffold(
+            backgroundColor: Colors.black45,
+            //  backgroundColor: Color.fromRGBO(25, 23, 37, 1),
             body: SwitchScreen(navItem: activeNavItem),
             bottomNavigationBar: BottomNavBar(
               navItem: activeNavItem,

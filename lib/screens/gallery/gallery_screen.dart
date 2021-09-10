@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
 
 import 'package:yukti/constants/constants.dart';
 import 'package:yukti/models/gallery.dart';
 import 'package:yukti/respositories/firebase/firebase_repositroy.dart';
+import 'package:yukti/widgets/app_drawer.dart';
 
 import 'image_carousel.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,86 +23,131 @@ class GalleryScreen extends StatelessWidget {
     // final AppDataBase database =
     //     Provider.of<AppDataBase>(context, listen: false);
     return Scaffold(
-        backgroundColor: Color.fromRGBO(29, 38, 40, 1),
-        //  backgroundColor: Color.fromRGBO(29, 38, 40, 1),
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Color.fromRGBO(0, 141, 82, 1),
-          centerTitle: true,
-          title: Text('Gallery'),
+      drawer: AppDrawer(),
+      // backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+      //  backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+      appBar: AppBar(
+        leading: Builder(builder: (context) {
+          return IconButton(
+            icon: Icon(
+              FontAwesomeIcons.alignLeft,
+              size: 27.0,
+            ),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          );
+        }),
+        // automaticallyImplyLeading: false,
+        // backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+        centerTitle: true,
+        title: Text(
+          'Gallery',
+          style: TextStyle(
+            fontSize: 21,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 1.2,
+          ),
         ),
-        body: Column(
-          children: [
-            SizedBox(height: 18.0),
-            ImageCarousel(),
-            SizedBox(height: 20.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    '${quote['quote']}',
+        actions: [
+          CircleAvatar(
+            radius: 22.3,
+            backgroundColor: Colors.deepOrange,
+            child: CircleAvatar(
+              radius: 19.5,
+              backgroundColor: Colors.white,
+              backgroundImage: NetworkImage(
+                  'https://raw.githubusercontent.com/imrishuroy/Rishu-Portfolio/master/assets/avtar.png'),
+            ),
+          ),
+          // IconButton(
+          //   icon: Icon(Icons.message),
+          //   onPressed: () {
+          //     // Navigator.pushNamed(
+          //     //   context,
+          //     //   AttendanceScreen3.routeName,
+          //     //   // NewAttendanceScreen.routeName,
+          //     //   // arguments: database,
+          //     // );
+          //   },
+          // ),
+          SizedBox(width: 17.0),
+        ],
+      ),
+      body: Column(
+        children: [
+          SizedBox(height: 18.0),
+          ImageCarousel(),
+          SizedBox(height: 20.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  '${quote['quote']}',
+                  style: TextStyle(
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                    vertical: 8.0,
+                  ),
+                  child: Text(
+                    '${quote['author']}',
                     style: TextStyle(
-                      fontSize: 17.0,
+                      color: Color.fromRGBO(255, 203, 0, 1),
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      fontSize: 16.0,
+                      letterSpacing: 1.1,
                     ),
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.end,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0,
-                      vertical: 8.0,
-                    ),
-                    child: Text(
-                      '${quote['author']}',
-                      style: TextStyle(
-                        color: Color.fromRGBO(255, 203, 0, 1),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16.0,
-                        letterSpacing: 1.1,
-                      ),
-                      textAlign: TextAlign.end,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Expanded(
-              child: FutureBuilder<List<Gallery?>>(
-                future: _firebaseRepo.getGalleryImages(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  return GridView.builder(
-                    padding: EdgeInsets.all(10.0),
-                    itemCount: snapshot.data?.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    itemBuilder: (context, index) {
-                      final gallery = snapshot.data?[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            '${gallery?.imageUrl}',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                    },
+          ),
+          Expanded(
+            child: FutureBuilder<List<Gallery?>>(
+              future: _firebaseRepo.getGalleryImages(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
                   );
-                },
-              ),
+                }
+                return GridView.builder(
+                  padding: EdgeInsets.all(10.0),
+                  itemCount: snapshot.data?.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemBuilder: (context, index) {
+                    final gallery = snapshot.data?[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.network(
+                          '${gallery?.imageUrl}',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
             ),
-          ],
-        ));
+          ),
+          const SizedBox(height: 10.0),
+        ],
+      ),
+    );
   }
 }
 

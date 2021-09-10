@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yukti/screens/attendance/attendance_screen.dart';
 import '/screens/assignments/assignments_screen.dart';
@@ -8,44 +9,69 @@ import '/screens/announcements/announcements_screen.dart';
 class DashBoardCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<Widget> _dashBoardCards = [
+      OneCard(
+        title: 'Announcements',
+        icon: FontAwesomeIcons.bell,
+        onTap: () {
+          Navigator.pushNamed(context, AnnouncemetScreen.routeName);
+        },
+      ),
+      OneCard(
+        title: 'Attendence',
+        icon: FontAwesomeIcons.calendarCheck,
+        onTap: () {
+          Navigator.pushNamed(context, AttendanceScreen.routeName);
+        },
+      ),
+      OneCard(
+        title: 'Assignments',
+        icon: FontAwesomeIcons.clipboardList,
+        onTap: () {
+          Navigator.pushNamed(context, AssignmentsScreen.routeName);
+        },
+      ),
+      OneCard(
+        title: 'Lectures',
+        icon: FontAwesomeIcons.book,
+        onTap: () => Navigator.pushNamed(
+          context,
+          LectureSelection.routeName,
+        ),
+      ),
+    ];
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GridView.count(
-          childAspectRatio: 1.3,
-          crossAxisCount: 2,
-          children: [
-            OneCard(
-              title: 'Announcements',
-              icon: FontAwesomeIcons.bell,
-              onTap: () {
-                Navigator.pushNamed(context, AnnouncemetScreen.routeName);
-              },
-            ),
-            OneCard(
-              title: 'Attendence',
-              icon: FontAwesomeIcons.calendarCheck,
-              onTap: () {
-                Navigator.pushNamed(context, AttendanceScreen.routeName);
-              },
-            ),
-            OneCard(
-              title: 'Assignments',
-              icon: FontAwesomeIcons.clipboardList,
-              onTap: () {
-                Navigator.pushNamed(context, AssignmentsScreen.routeName);
-              },
-            ),
-            OneCard(
-              title: 'Lectures',
-              icon: FontAwesomeIcons.book,
-              onTap: () => Navigator.pushNamed(
-                context,
-                LectureSelection.routeName,
+        child: AnimationLimiter(
+            child: GridView.builder(
+          itemCount: _dashBoardCards.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 1.3,
+          ),
+          itemBuilder: (context, index) {
+            return AnimationConfiguration.staggeredGrid(
+              columnCount: _dashBoardCards.length,
+              position: index,
+              duration: const Duration(milliseconds: 375),
+              child: ScaleAnimation(
+                child: FadeInAnimation(
+                  child: _dashBoardCards[index],
+                ),
               ),
+            );
+          },
+        )
+
+            // GridView.count(
+            //   childAspectRatio: 1.3,
+            //   crossAxisCount: 2,
+            //   children: [
+
+            //   ],
+            // ),
             ),
-          ],
-        ),
       ),
     );
   }

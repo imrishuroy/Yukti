@@ -42,10 +42,11 @@ class LoginScreen extends StatelessWidget {
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: Color.fromRGBO(25, 23, 37, 1),
+        statusBarColor: Colors.black54,
+        //statusBarColor: Color.fromRGBO(25, 23, 37, 1),
         // statusBarColor: Color(0XFF00286E),
         //  statusBarColor: Color.fromRGBO(0, 141, 82, 1),
-        statusBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.light,
       ),
     );
     return WillPopScope(
@@ -65,7 +66,8 @@ class LoginScreen extends StatelessWidget {
           },
           builder: (context, state) {
             return Scaffold(
-              backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+              backgroundColor: Colors.black54,
+              //   backgroundColor: Color.fromRGBO(29, 38, 40, 1),
               body: state.status == LoginStatus.submitting
                   ? Padding(
                       padding: const EdgeInsets.only(top: 20.0),
@@ -78,11 +80,10 @@ class LoginScreen extends StatelessWidget {
                       child: ListView(
                         children: <Widget>[
                           GreetingsWidget(height: height),
-
-                          ///  SizedBox(height: height < 750 ? 7.0 : 7.0),
+                          SizedBox(height: height < 750 ? 15.0 : 12.0),
                           Container(
                             padding: EdgeInsets.only(
-                                top: 15.0, left: 20.0, right: 20.0),
+                                top: 22.0, left: 20.0, right: 20.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
@@ -100,17 +101,17 @@ class LoginScreen extends StatelessWidget {
                                   decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Colors.green,
+                                        color: Colors.white,
                                         width: 2.0,
                                       ),
                                     ),
                                     prefixIcon: Icon(
                                       Icons.mail,
-                                      color: Colors.green,
+                                      color: Colors.white,
                                     ),
                                     labelText: 'EMAIL',
                                     labelStyle: TextStyle(
-                                      color: Colors.green,
+                                      color: Colors.white,
                                       fontFamily: 'Montserrat',
                                     ),
                                     hintText: 'Enter Your Email',
@@ -132,17 +133,17 @@ class LoginScreen extends StatelessWidget {
                                   decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Colors.green,
+                                        color: Colors.white,
                                         width: 2.0,
                                       ),
                                     ),
                                     labelStyle: TextStyle(
-                                        color: Colors.green,
+                                        color: Colors.white,
                                         fontFamily: 'Montserrat'),
                                     prefixIcon:
-                                        Icon(Icons.lock, color: Colors.green),
+                                        Icon(Icons.lock, color: Colors.white),
                                     suffixIcon: IconButton(
-                                      color: Colors.green,
+                                      color: Colors.white,
                                       icon: Icon(
                                         state.showPassword
                                             ? Icons.visibility_off
@@ -171,7 +172,7 @@ class LoginScreen extends StatelessWidget {
                                     child: Text(
                                       'Forgot Password',
                                       style: TextStyle(
-                                        color: Colors.green,
+                                        color: Color.fromRGBO(40, 200, 253, 1),
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'Montserrat',
                                         letterSpacing: 0.9,
@@ -182,16 +183,20 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 SizedBox(height: 40.0),
                                 ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color.fromRGBO(40, 200, 253, 1),
+                                  ),
                                   onPressed: () => _submitForm(context,
                                       state.status == LoginStatus.submitting),
                                   child: Padding(
                                     padding: const EdgeInsets.all(11.5),
                                     child: Text(
-                                      'Login',
+                                      'Sign In',
                                       style: TextStyle(
-                                        fontSize: 17.0,
+                                        fontSize: 17.5,
+                                        color: Colors.black,
                                         letterSpacing: 1.0,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w600,
                                         fontFamily: 'Montserrat',
                                       ),
                                     ),
@@ -213,14 +218,14 @@ class LoginScreen extends StatelessWidget {
                                     onPressed: () {
                                       context.read<LoginCubit>().appleLogin();
                                     },
-                                    style: SignInWithAppleButtonStyle.black,
+                                    style: SignInWithAppleButtonStyle.white,
                                   ),
                                 ),
                                 SizedBox(height: 20.0),
                                 GoogleSignInButton(
                                   onPressed: () =>
                                       context.read<LoginCubit>().googleSignIn(),
-                                  title: 'Log In with Google',
+                                  title: 'Sign in with Google',
                                 ),
                               ],
                             ),
@@ -246,7 +251,7 @@ class LoginScreen extends StatelessWidget {
                                 child: Text(
                                   'Register',
                                   style: TextStyle(
-                                    color: Colors.green,
+                                    color: Color.fromRGBO(40, 200, 253, 1),
                                     fontFamily: 'Montserrat',
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'happenings_details.dart';
 
@@ -29,12 +30,23 @@ class HappeningsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+      //  backgroundColor: Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+        // backgroundColor: Color.fromRGBO(0, 141, 82, 1),
         centerTitle: true,
         title: Text('Happenings'),
+        leading: Builder(builder: (context) {
+          return IconButton(
+            icon: Icon(
+              FontAwesomeIcons.alignLeft,
+              size: 27.0,
+            ),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          );
+        }),
         actions: [
           CircleAvatar(
             radius: 14.0,

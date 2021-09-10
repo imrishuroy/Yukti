@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yukti/constants/constants.dart';
 
-import 'user_profile_image.dart';
+// import 'user_profile_image.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -48,59 +48,90 @@ class _AppDrawerState extends State<AppDrawer> {
     //     }
 
     return Drawer(
+        child: Container(
+      color: Colors.black,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           Container(
-            color: Color.fromRGBO(0, 141, 82, 1),
+            //  color: Color.fromRGBO(0, 141, 82, 1),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 50.0),
-                UserProfileImage(),
+                SizedBox(height: 55.0),
+                CircleAvatar(
+                  radius: 53.3,
+                  backgroundColor: Colors.deepOrange,
+                  child: CircleAvatar(
+                    radius: 50.5,
+                    backgroundColor: Colors.white,
+                    backgroundImage: NetworkImage(
+                        'https://raw.githubusercontent.com/imrishuroy/Rishu-Portfolio/master/assets/avtar.png'),
+                  ),
+                ),
                 SizedBox(height: 17.0),
-                SizedBox(height: 20.0),
+                // SizedBox(height: 20.0),
               ],
             ),
           ),
           _buildDrawerContents(context),
-          //
-          // Column(
-          //   children: [
-          //     for (int index = 0; index < externalLink.length; index++)
-          //       Center(
-          //         child: ListTile(
-          //           leading: Icon(
-          //             externalLink[index]['icon'],
-          //             color: Color.fromRGBO(0, 141, 82, 1),
-          //           ),
-          //           title: Text(
-          //             '${externalLink[index]['title']}',
-          //             style: TextStyle(
-          //               color: Colors.black,
-          //               fontSize: 16.0,
-          //             ),
-          //           ),
-          //           trailing: IconButton(
-          //             onPressed: () {
-          //               externalLink[index]['navigateToScreen'] == true
-          //                   ? Navigator.pushNamed(
-          //                       context, externalLink[index]['link'])
-          //                   : _launchInBrowser(
-          //                       '${externalLink[index]['link']}');
-          //             },
-          //             icon: Icon(
-          //               Icons.open_in_new_rounded,
-          //               color: Color.fromRGBO(0, 141, 82, 1),
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //   ],
-          // )
         ],
       ),
-    );
+    )
+
+        // ListView(
+        //   padding: EdgeInsets.zero,
+        //   children: [
+        //     Container(
+        //       color: Color.fromRGBO(0, 141, 82, 1),
+        //       child: Column(
+        //         mainAxisSize: MainAxisSize.min,
+        //         children: [
+        //           SizedBox(height: 50.0),
+        //           UserProfileImage(),
+        //           SizedBox(height: 17.0),
+        //           SizedBox(height: 20.0),
+        //         ],
+        //       ),
+        //     ),
+        //     _buildDrawerContents(context),
+        //
+        // Column(
+        //   children: [
+        //     for (int index = 0; index < externalLink.length; index++)
+        //       Center(
+        //         child: ListTile(
+        //           leading: Icon(
+        //             externalLink[index]['icon'],
+        //             color: Color.fromRGBO(0, 141, 82, 1),
+        //           ),
+        //           title: Text(
+        //             '${externalLink[index]['title']}',
+        //             style: TextStyle(
+        //               color: Colors.black,
+        //               fontSize: 16.0,
+        //             ),
+        //           ),
+        //           trailing: IconButton(
+        //             onPressed: () {
+        //               externalLink[index]['navigateToScreen'] == true
+        //                   ? Navigator.pushNamed(
+        //                       context, externalLink[index]['link'])
+        //                   : _launchInBrowser(
+        //                       '${externalLink[index]['link']}');
+        //             },
+        //             icon: Icon(
+        //               Icons.open_in_new_rounded,
+        //               color: Color.fromRGBO(0, 141, 82, 1),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //   ],
+        // )
+        //   ],
+        // ),
+        );
   }
 
   SizedBox _buildDrawerContents(BuildContext context) {
@@ -119,7 +150,7 @@ class _AppDrawerState extends State<AppDrawer> {
               title: Text(
                 '${externalLink[index]['title']}',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 16.0,
                 ),
               ),
@@ -133,6 +164,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 icon: Icon(
                   Icons.open_in_new_rounded,
                   color: Color.fromRGBO(0, 141, 82, 1),
+                  //color: Color.fromRGBO(40, 200, 253, 1),
                 ),
               ),
             ),

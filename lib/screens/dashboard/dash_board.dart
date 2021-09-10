@@ -10,8 +10,12 @@ class DashBoard extends StatelessWidget {
     return Scaffold(
       //  drawer: Drawer(),
       drawer: AppDrawer(),
+      backgroundColor: Colors.black45,
+      //backgroundColor: Color.fromRGBO(25, 23, 37, 1),
+      // backgroundColor: Colors.grey.shade900,
+      //backgroundColor: Color(0xff082032),
 
-      backgroundColor: Color.fromRGBO(25, 23, 37, 1),
+      //  backgroundColor: Color.fromRGBO(25, 23, 37, 1),
 
       //backgroundColor: Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
@@ -21,14 +25,22 @@ class DashBoard extends StatelessWidget {
         //   child: Image.network(
         //       'https://cdn-icons-png.flaticon.com/512/812/812847.png'),
         // ),
-        leading: Icon(
-          FontAwesomeIcons.alignLeft,
-          size: 27.0,
-        ),
+        leading: Builder(builder: (context) {
+          return IconButton(
+            icon: Icon(
+              FontAwesomeIcons.alignLeft,
+              size: 27.0,
+            ),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          );
+        }),
         elevation: 0.0,
         // backgroundColor: Color.fromRGBO(40, 200, 253, 1),
         // backgroundColor: Color.fromRGBO(29, 38, 40, 1),
-        backgroundColor: Color.fromRGBO(25, 23, 37, 1),
+        //  backgroundColor: Color.fromRGBO(25, 23, 37, 1),
+        backgroundColor: Colors.black45,
 
         //automaticallyImplyLeading: false,
         //   backgroundColor: Color.fromRGBO(0, 141, 82, 1),

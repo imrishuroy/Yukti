@@ -6,7 +6,13 @@ import 'user_profile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
-  static String routeName = '/profile-screen';
+  static const String routeName = '/profile-screen';
+
+  static Route route() {
+    return PageRouteBuilder(
+        settings: RouteSettings(name: routeName),
+        pageBuilder: (context, _, __) => ProfileScreen());
+  }
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -22,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+      //  backgroundColor: Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
@@ -35,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(color: Colors.black),
         ),
         // backgroundColor: Color(0XFF00286E),
-        backgroundColor: Color.fromRGBO(40, 200, 253, 1),
+        //   backgroundColor: Color.fromRGBO(40, 200, 253, 1),
         //  backgroundColor: Color.fromRGBO(0, 141, 82, 1),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(150.0),

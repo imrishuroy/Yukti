@@ -55,9 +55,22 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Yukti',
           theme: ThemeData(
+            scaffoldBackgroundColor: Colors.black54,
+
+            // primaryColor: ,
             //   primarySwatch: Colors.green,
-            primaryColor: Color(0XFF00286E),
-            scaffoldBackgroundColor: Color.fromRGBO(29, 38, 40, 1),
+            // primaryColor: Color.fromRGBO(25, 23, 37, 1),
+            //scaffoldBackgroundColor: Color.fromRGBO(25, 23, 37, 1),
+            appBarTheme: AppBarTheme(
+              elevation: 0.0,
+              titleTextStyle: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2,
+              ),
+              color: Colors.black54,
+              //backgroundColor: Color.fromRGBO(25, 23, 37, 1),
+            ),
           ),
           debugShowCheckedModeBanner: false,
           onGenerateRoute: CustomRouter.onGenerateRoute,

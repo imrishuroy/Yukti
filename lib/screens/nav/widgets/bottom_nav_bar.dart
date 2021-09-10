@@ -18,7 +18,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0),
+      padding: const EdgeInsets.only(bottom: 10.0, right: 12.0, left: 12.0),
       child: ClipRRect(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20.0),
@@ -66,7 +66,7 @@ Widget _itemIcon(NavItem item) {
     return Icon(FontAwesomeIcons.images);
   } else if (item == NavItem.happenings) {
     return Icon(FontAwesomeIcons.calendarAlt);
-  } else if (item == NavItem.profile) {
+  } else if (item == NavItem.forms) {
     return Icon(
       Icons.feed,
       size: 24.0,
@@ -83,7 +83,7 @@ String _label(NavItem item) {
     return 'Gallery';
   } else if (item == NavItem.happenings) {
     return 'Happenings';
-  } else if (item == NavItem.profile) {
+  } else if (item == NavItem.forms) {
     return 'Forms';
   }
 
