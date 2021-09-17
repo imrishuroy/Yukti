@@ -12,11 +12,13 @@ import 'assignment_tile.dart';
 class AssignmentsScreen extends StatefulWidget {
   static const String routeName = '/assignments';
 
+  const AssignmentsScreen({Key? key}) : super(key: key);
+
   static Route route() {
     return PageRouteBuilder(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       pageBuilder: (context, _, __) {
-        return AssignmentsScreen();
+        return const AssignmentsScreen();
       },
     );
   }
@@ -52,7 +54,7 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
     final _firebaseRepo = context.read<FirebaseRepositroy>();
 
     return _user == null
-        ? Scaffold(body: Center(child: CircularProgressIndicator()))
+        ? const Scaffold(body: Center(child: CircularProgressIndicator()))
         : FutureBuilder<List<Assignment?>>(
             future: _firebaseRepo.getUserAssignments(
                 branch: _user?.branch,
@@ -60,10 +62,10 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
                 section: _user?.section),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return NothingHere(appBarTitle: 'Assignments');
+                return const NothingHere(appBarTitle: 'Assignments');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Scaffold(
+                return const Scaffold(
                     body: Center(child: CircularProgressIndicator()));
               }
 
@@ -77,16 +79,16 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
                       backgroundColor: Colors.white,
                       child: Text(
                         '${assignments?.length}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    SizedBox(width: 20.0),
+                    const SizedBox(width: 20.0),
                   ],
                   centerTitle: true,
-                  backgroundColor: Color.fromRGBO(0, 141, 82, 1),
-                  title: Text('Assignments'),
+                  backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
+                  title: const Text('Assignments'),
                 ),
                 body: Column(
                   children: [

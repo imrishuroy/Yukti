@@ -32,12 +32,12 @@ class LecturesRepository {
       print('Snap $snap');
       final List data = snap.data()?['$day'];
       print('Data $data');
-      data.forEach((element) {
+      for (var element in data) {
         lectures.add(Lecture.fromMap(element));
-      });
+      }
       return lectures;
     } catch (error) {
-      throw Failure(message: 'Error getting today lecture');
+      throw const Failure(message: 'Error getting today lecture');
     }
   }
 
@@ -55,7 +55,7 @@ class LecturesRepository {
           .get();
     } catch (error) {
       print('Error getting lectures ${error.toString()}');
-      throw error;
+      rethrow;
     }
   }
 }

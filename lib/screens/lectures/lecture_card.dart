@@ -30,15 +30,15 @@ class LectureCard extends StatelessWidget {
               day != null
                   ? Text(
                       '$day',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 25.0,
                         color: Colors.white,
                         // color: Color.fromRGBO(255, 203, 0, 1),
                       ),
                       textAlign: TextAlign.start,
                     )
-                  : Text('-'),
-              SizedBox(width: 4.0),
+                  : const Text('-'),
+              const SizedBox(width: 4.0),
               // date != null
               //     ? Text(
               //         '$date',
@@ -51,7 +51,7 @@ class LectureCard extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         SizedBox(
           height: 130,
           child: ListView.builder(
@@ -99,34 +99,34 @@ class OneLeactureCard extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 8.0,
                     vertical: 4.0,
                   ),
-                  color: Color.fromRGBO(0, 141, 82, 1),
+                  color: const Color.fromRGBO(0, 141, 82, 1),
                   child: Text(
                     '$time',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Text(
                   '$subCode',
-                  style: TextStyle(fontSize: 16.0),
+                  style: const TextStyle(fontSize: 16.0),
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 5.0),
+                const SizedBox(height: 5.0),
                 Text(
                   '$subName',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 Text(
                   '$profName',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.orange,
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,

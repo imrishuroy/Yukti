@@ -1,11 +1,13 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yukti/models/google_form.dart';
+import 'package:yukti/extensions/extensions.dart';
 
 class FormExpansionTile extends StatefulWidget {
   final GlobalObjectKey<ExpansionTileCardState> cardKey;
 
-  final GoogleForms? form;
+  final GoogleForm? form;
 
   const FormExpansionTile({Key? key, required this.cardKey, required this.form})
       : super(key: key);
@@ -16,6 +18,18 @@ class FormExpansionTile extends StatefulWidget {
 
 class _FormExpansionTileState extends State<FormExpansionTile> {
   bool _isExpanded = false;
+
+  Future<void> _launchUrl({required String? url}) async {
+    try {
+      if (url == null) {
+        throw 'Could not launch';
+      }
+
+      await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+    } catch (error) {
+      print('Error launching url ${error.toString()}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +45,8 @@ class _FormExpansionTileState extends State<FormExpansionTile> {
         key: widget.cardKey,
         // leading: CircleAvatar(child: Text('A')),
         title: Text(
-          '${widget.form?.title ?? 'N/A'}',
-          style: TextStyle(fontSize: 17.0),
+          widget.form?.title ?? 'N/A',
+          style: const TextStyle(fontSize: 17.0),
         ),
         // subtitle: Text(
         //   _isExpanded ? '' : '${widget.form?.description ?? 'N/A'}',
@@ -43,7 +57,7 @@ class _FormExpansionTileState extends State<FormExpansionTile> {
         //   overflow: TextOverflow.fade,
         // ),
         subtitle: Text(
-          '${widget.form?.dateTime.toIso8601String()}',
+          '${widget.form?.dateTime.timeAgo()}',
           style: TextStyle(
             color: Colors.grey.shade700,
           ),
@@ -52,7 +66,7 @@ class _FormExpansionTileState extends State<FormExpansionTile> {
         ),
 
         children: <Widget>[
-          Divider(
+          const Divider(
             thickness: 1.0,
             height: 1.0,
           ),
@@ -73,29 +87,10 @@ class _FormExpansionTileState extends State<FormExpansionTile> {
             ),
           ),
           ButtonBar(
-            alignment: MainAxisAlignment.spaceAround,
+            alignment: MainAxisAlignment.spaceBetween,
             buttonHeight: 52.0,
             buttonMinWidth: 90.0,
-            children: <Widget>[
-              TextButton(
-                style: buttonStyle,
-                onPressed: () {
-                  widget.cardKey.currentState?.expand();
-                  setState(() {
-                    _isExpanded = !_isExpanded;
-                  });
-                  print('is Expanded $_isExpanded');
-                },
-                child: Column(
-                  children: <Widget>[
-                    Icon(Icons.arrow_downward),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2.0),
-                    ),
-                    Text('Open'),
-                  ],
-                ),
-              ),
+            children: [
               TextButton(
                 style: buttonStyle,
                 onPressed: () {
@@ -106,37 +101,89 @@ class _FormExpansionTileState extends State<FormExpansionTile> {
                   print('is Expanded $_isExpanded');
                 },
                 child: Column(
-                  children: <Widget>[
-                    Icon(Icons.arrow_upward),
+                  children: const <Widget>[
+                    Icon(
+                      Icons.arrow_upward,
+                      size: 20.0,
+                    ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2.0),
+                      padding: EdgeInsets.symmetric(vertical: 2.0),
                     ),
                     Text('Close'),
                   ],
                 ),
               ),
-              TextButton(
-                style: buttonStyle,
-                onPressed: () {
-                  widget.cardKey.currentState?.toggleExpansion();
-
-                  setState(() {
-                    _isExpanded = !_isExpanded;
-                  });
-                  print('is Expanded $_isExpanded');
-                },
-                child: Column(
-                  children: <Widget>[
-                    Icon(Icons.swap_vert),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2.0),
-                    ),
-                    Text('Toggle'),
-                  ],
-                ),
-              ),
+              ElevatedButton(
+                  onPressed: () => _launchUrl(url: widget.form?.link),
+                  child: const Text('Fill Form'))
             ],
           ),
+
+          // ButtonBar(
+          //   alignment: MainAxisAlignment.spaceAround,
+          //   buttonHeight: 52.0,
+          //   buttonMinWidth: 90.0,
+          //   children: <Widget>[
+          //     TextButton(
+          //       style: buttonStyle,
+          //       onPressed: () {
+          //         widget.cardKey.currentState?.expand();
+          //         setState(() {
+          //           _isExpanded = !_isExpanded;
+          //         });
+          //         print('is Expanded $_isExpanded');
+          //       },
+          //       child: Column(
+          //         children: <Widget>[
+          //           Icon(Icons.arrow_downward),
+          //           Padding(
+          //             padding: const EdgeInsets.symmetric(vertical: 2.0),
+          //           ),
+          //           Text('Open'),
+          //         ],
+          //       ),
+          //     ),
+          //     TextButton(
+          //       style: buttonStyle,
+          //       onPressed: () {
+          //         widget.cardKey.currentState?.collapse();
+          //         setState(() {
+          //           _isExpanded = !_isExpanded;
+          //         });
+          //         print('is Expanded $_isExpanded');
+          //       },
+          //       child: Column(
+          //         children: <Widget>[
+          //           Icon(Icons.arrow_upward),
+          //           Padding(
+          //             padding: const EdgeInsets.symmetric(vertical: 2.0),
+          //           ),
+          //           Text('Close'),
+          //         ],
+          //       ),
+          //     ),
+          //     TextButton(
+          //       style: buttonStyle,
+          //       onPressed: () {
+          //         widget.cardKey.currentState?.toggleExpansion();
+
+          //         setState(() {
+          //           _isExpanded = !_isExpanded;
+          //         });
+          //         print('is Expanded $_isExpanded');
+          //       },
+          //       child: Column(
+          //         children: <Widget>[
+          //           Icon(Icons.edit),
+          //           Padding(
+          //             padding: const EdgeInsets.symmetric(vertical: 2.0),
+          //           ),
+          //           Text('Fill Form'),
+          //         ],
+          //       ),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

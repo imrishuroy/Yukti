@@ -7,10 +7,12 @@ import 'package:yukti/screens/nav/nav_screen.dart';
 class AuthWrapper extends StatelessWidget {
   static const String routeName = '/authwrapper';
 
+  const AuthWrapper({Key? key}) : super(key: key);
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (_) => AuthWrapper(),
+      settings: const RouteSettings(name: routeName),
+      builder: (_) => const AuthWrapper(),
     );
   }
 
@@ -27,7 +29,7 @@ class AuthWrapper extends StatelessWidget {
           Navigator.of(context).pushNamed(NavScreen.routeName);
         }
       },
-      child: Scaffold(
+      child: const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
         ),

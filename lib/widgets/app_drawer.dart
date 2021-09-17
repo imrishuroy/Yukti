@@ -5,6 +5,8 @@ import 'package:yukti/constants/constants.dart';
 // import 'user_profile_image.dart';
 
 class AppDrawer extends StatefulWidget {
+  const AppDrawer({Key? key}) : super(key: key);
+
   @override
   _AppDrawerState createState() => _AppDrawerState();
 }
@@ -53,11 +55,11 @@ class _AppDrawerState extends State<AppDrawer> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          Container(
+          SizedBox(
             //  color: Color.fromRGBO(0, 141, 82, 1),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: const [
                 SizedBox(height: 55.0),
                 CircleAvatar(
                   radius: 53.3,
@@ -145,11 +147,11 @@ class _AppDrawerState extends State<AppDrawer> {
             child: ListTile(
               leading: Icon(
                 externalLink[index]['icon'],
-                color: Color.fromRGBO(0, 141, 82, 1),
+                color: const Color.fromRGBO(0, 141, 82, 1),
               ),
               title: Text(
                 '${externalLink[index]['title']}',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16.0,
                 ),
@@ -161,7 +163,7 @@ class _AppDrawerState extends State<AppDrawer> {
                           context, externalLink[index]['link'])
                       : _launchInBrowser('${externalLink[index]['link']}');
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.open_in_new_rounded,
                   color: Color.fromRGBO(0, 141, 82, 1),
                   //color: Color.fromRGBO(40, 200, 253, 1),

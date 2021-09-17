@@ -1,41 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:yukti/models/google_form.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
-
+import 'package:yukti/respositories/firebase/firebase_repositroy.dart';
 import 'form_expansion_tile.dart';
-
-List<GoogleForms> _submittedForm = [
-  GoogleForms(
-    title: 'Future Skills Registration',
-    link: '',
-    description: 'This is for those who logged in future skills',
-    dateTime: DateTime.now(),
-  ),
-  GoogleForms(
-    title: 'Future Skills Registration',
-    link: '',
-    description: 'This is for those who logged in future skills',
-    dateTime: DateTime.now(),
-  )
-];
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SubmittedForm extends StatelessWidget {
-  SubmittedForm({Key? key}) : super(key: key);
+  const SubmittedForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _firebaseRepo = context.read<FirebaseRepositroy>();
     return Column(
       children: [
         const SizedBox(height: 5.0),
         Expanded(
-          child: ListView.builder(
-            itemCount: _submittedForm.length,
-            itemBuilder: (context, index) {
-              final _cardKey = GlobalObjectKey<ExpansionTileCardState>(index);
+          child: FutureBuilder<List<GoogleForm>>(
+            future: _firebaseRepo.getGoogleForms(
+                branch: 'CSE', sem: '5th', section: 'B'),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
 
-              return FormExpansionTile(
-                cardKey: _cardKey,
-                form: _submittedForm[index],
+              return ListView.builder(
+                itemCount: snapshot.data?.length,
+                itemBuilder: (context, index) {
+                  final _cardKey =
+                      GlobalObjectKey<ExpansionTileCardState>(index);
+                  final form = snapshot.data?[index];
+                  return FormExpansionTile(
+                    cardKey: _cardKey,
+                    form: form,
+                  );
+                },
               );
             },
           ),
@@ -46,29 +46,6 @@ class SubmittedForm extends StatelessWidget {
 }
 
 
-//     return Column(
-//       children: [
-//         Expanded(
-//           child: ListView.builder(
-//             itemCount: _submittedForm.length,
-//             itemBuilder: (context, index) {
-//               final form = _submittedForm[index];
-//               // return ListTile(
-//               //   title: Text(
-//               //     '${form.title}',
-//               //     style: TextStyle(
-//               //       color: Colors.white,
-//               //     ),
-//               //   ),
-//               // );
-//               return
-//             },
-//           ),
-//         )
-//       ],
-//     );
-//   }
-// }
 
 
 
@@ -162,3 +139,4 @@ class SubmittedForm extends StatelessWidget {
 //             ],
 //           ),
 //         ),
+

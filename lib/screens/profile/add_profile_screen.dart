@@ -4,7 +4,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yukti/blocs/bloc/auth_bloc.dart';
@@ -15,6 +14,8 @@ enum Section { a, b }
 
 class AddProfileScreen extends StatefulWidget {
   static String routeName = '/add-profile';
+
+  const AddProfileScreen({Key? key}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -52,7 +53,7 @@ class _ProfileScreenState extends State<AddProfileScreen> {
     if (form.validate()) {
       if (_image == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text(
               'Select a image for upload',
               textAlign: TextAlign.center,
@@ -125,10 +126,10 @@ class _ProfileScreenState extends State<AddProfileScreen> {
       key: _scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Add Your Profile'),
-        backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+        title: const Text('Add Your Profile'),
+        backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(170.0),
+          preferredSize: const Size.fromHeight(170.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -138,7 +139,7 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                 backgroundImage: _image == null ? null : FileImage(_image!),
                 child: _image == null
                     ? IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.camera_alt,
                           size: 30.0,
                         ),
@@ -150,14 +151,14 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.edit,
                       size: 27.0,
                       color: Color.fromRGBO(255, 203, 0, 1),
                     ),
                     onPressed: _image != null ? () => _pickImage() : null,
                   ),
-                  SizedBox(width: 5.0)
+                  const SizedBox(width: 5.0)
                 ],
               ),
             ],
@@ -165,7 +166,7 @@ class _ProfileScreenState extends State<AddProfileScreen> {
         ),
       ),
       body: _isSubmiting
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
@@ -175,7 +176,7 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                   // crossAxisAlignment: CrossAxisAlignment.stretch,
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 15.0),
+                    const SizedBox(height: 15.0),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20.0,
@@ -187,19 +188,19 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
+                              SizedBox(
                                 //  alignment: Alignment.topCenter,
                                 child: DropdownButton<String>(
                                   value: branchValue,
                                   iconSize: 24,
                                   elevation: 16,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20.0,
                                     color: Color.fromRGBO(0, 141, 82, 1),
                                   ),
                                   underline: Container(
                                     height: 3,
-                                    color: Color.fromRGBO(255, 203, 0, 1),
+                                    color: const Color.fromRGBO(255, 203, 0, 1),
                                   ),
                                   onChanged: (String? newValue) {
                                     setState(() {
@@ -218,26 +219,28 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                                   ).toList(),
                                 ),
                               ),
-                              SizedBox(width: 20),
-                              Container(
+                              const SizedBox(width: 20),
+                              SizedBox(
                                 //   alignment: Alignment.topCenter,
                                 child: DropdownButton<String>(
                                   value: semValue,
                                   iconSize: 24,
                                   elevation: 16,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 19.0,
                                     color: Color.fromRGBO(0, 141, 82, 1),
                                   ),
                                   underline: Container(
                                     height: 3,
-                                    color: Color.fromRGBO(255, 203, 0, 1),
+                                    color: const Color.fromRGBO(255, 203, 0, 1),
                                   ),
                                   onChanged: (String? newValue) {
-                                    setState(() {
-                                      semValue = newValue!;
-                                      //  print(semValue);
-                                    });
+                                    setState(
+                                      () {
+                                        semValue = newValue!;
+                                        //  print(semValue);
+                                      },
+                                    );
                                   },
                                   items: <String>['2nd', '4th', '6th', '8th']
                                       .map<DropdownMenuItem<String>>(
@@ -267,7 +270,7 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                         children: [
                           Expanded(
                             child: ListTile(
-                              title: Text('A'),
+                              title: const Text('A'),
                               leading: Radio(
                                 value: Section.a,
                                 groupValue: _section,
@@ -281,7 +284,7 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                           ),
                           Expanded(
                             child: ListTile(
-                              title: Text('B'),
+                              title: const Text('B'),
                               leading: Radio(
                                 value: Section.b,
                                 groupValue: _section,
@@ -302,13 +305,13 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                         vertical: 15.0,
                       ),
                       child: TextFormField(
-                        key: ValueKey('name'),
+                        key: const ValueKey('name'),
                         onSaved: (value) => _name = value?.trim(),
                         keyboardType: TextInputType.name,
                         // controller: _emailController,
                         validator: (value) =>
                             !(value!.length >= 3) ? 'Invalid Input' : null,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           //icon: Icon(Icons.mail),
                           labelText: 'Your Name',
                           hintText: 'Enter your full name',
@@ -326,14 +329,14 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                         vertical: 15.0,
                       ),
                       child: TextFormField(
-                        key: ValueKey('enrollNo'),
+                        key: const ValueKey('enrollNo'),
                         onSaved: (value) =>
                             _enrollNo = value?.trim().toUpperCase(),
                         keyboardType: TextInputType.text,
                         // controller: _emailController,
                         validator: (value) =>
                             !(value!.length >= 3) ? 'Invalid Input' : null,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           //icon: Icon(Icons.mail),
                           labelText: 'Enrollment Number',
                           hintText: 'For eg- 0105CS191091',
@@ -351,13 +354,13 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                         vertical: 15.0,
                       ),
                       child: TextFormField(
-                        key: ValueKey('fathers-name'),
+                        key: const ValueKey('fathers-name'),
                         onSaved: (value) => _fatherName = value?.trim(),
                         keyboardType: TextInputType.name,
                         // controller: _emailController,
                         validator: (value) =>
                             !(value!.length >= 3) ? 'Invalid Input' : null,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           //icon: Icon(Icons.mail),
                           labelText: 'Father\'s Name',
                           hintText: 'Enter your father name.',
@@ -375,13 +378,13 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                         vertical: 15.0,
                       ),
                       child: TextFormField(
-                        key: ValueKey('mothers-name'),
+                        key: const ValueKey('mothers-name'),
                         onSaved: (value) => _motherName = value?.trim(),
                         keyboardType: TextInputType.name,
                         // controller: _emailController,
                         validator: (value) =>
                             !(value!.length >= 3) ? 'Invalid Input' : null,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           //icon: Icon(Icons.mail),
                           labelText: 'Mother\'s Name',
                           hintText: 'Enter your mother name.',
@@ -399,13 +402,13 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                         vertical: 15.0,
                       ),
                       child: TextFormField(
-                        key: ValueKey('phone-no'),
+                        key: const ValueKey('phone-no'),
                         onSaved: (value) => _mobileNo = value?.trim(),
                         keyboardType: TextInputType.name,
                         // controller: _emailController,
                         validator: (value) =>
                             !(value!.length >= 10) ? 'Invalid Input' : null,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           //icon: Icon(Icons.mail),
                           labelText: 'Moblie No.',
                           hintText: 'Enter your mobile number.',
@@ -428,7 +431,7 @@ class _ProfileScreenState extends State<AddProfileScreen> {
                         onPressed: () {
                           _submit(context);
                         },
-                        child: Text(
+                        child: const Text(
                           'Submit',
                           style: TextStyle(
                             color: Colors.white,

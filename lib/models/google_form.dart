@@ -2,13 +2,15 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class GoogleForms extends Equatable {
+class GoogleForm extends Equatable {
+  final String? formId;
   final String? title;
   final String? link;
-  final String description;
+  final String? description;
   final DateTime dateTime;
 
-  GoogleForms({
+  const GoogleForm({
+    required this.formId,
     required this.title,
     required this.link,
     required this.description,
@@ -16,15 +18,17 @@ class GoogleForms extends Equatable {
   });
 
   @override
-  List<Object?> get props => [title, link, description, dateTime];
+  List<Object?> get props => [formId, title, link, description, dateTime];
 
-  GoogleForms copyWith({
+  GoogleForm copyWith({
+    String? formId,
     String? title,
     String? link,
     String? description,
     DateTime? dateTime,
   }) {
-    return GoogleForms(
+    return GoogleForm(
+      formId: formId ?? this.formId,
       title: title ?? this.title,
       link: link ?? this.link,
       description: description ?? this.description,
@@ -41,8 +45,9 @@ class GoogleForms extends Equatable {
     };
   }
 
-  factory GoogleForms.fromMap(Map<String, dynamic> map) {
-    return GoogleForms(
+  factory GoogleForm.fromMap(Map<String, dynamic> map) {
+    return GoogleForm(
+      formId: map['formId'],
       title: map['title'],
       link: map['link'],
       description: map['description'],
@@ -52,8 +57,8 @@ class GoogleForms extends Equatable {
 
   String toJson() => json.encode(toMap());
 
-  factory GoogleForms.fromJson(String source) =>
-      GoogleForms.fromMap(json.decode(source));
+  factory GoogleForm.fromJson(String source) =>
+      GoogleForm.fromMap(json.decode(source));
 
   @override
   bool get stringify => true;

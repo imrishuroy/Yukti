@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 
 class GoogleSignInButton extends StatelessWidget {
   final VoidCallback? onPressed;
-  final String? title;
+  final String title;
 
   const GoogleSignInButton({
     Key? key,
     @required this.onPressed,
-    @required this.title,
+    required this.title,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
-      child: Container(
+      child: SizedBox(
         height: 43.0,
         child: Container(
           decoration: BoxDecoration(
@@ -30,15 +30,15 @@ class GoogleSignInButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Center(
-                child: Container(
+                child: SizedBox(
                   child: Image.asset('assets/google.png'),
                 ),
               ),
-              SizedBox(width: 10.0),
+              const SizedBox(width: 10.0),
               Center(
                 child: Text(
-                  title!,
-                  style: TextStyle(
+                  title,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     color: Colors.blue,
                     fontSize: 17.0,

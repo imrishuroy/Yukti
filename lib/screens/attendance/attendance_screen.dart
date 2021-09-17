@@ -23,12 +23,15 @@ const List<Color> color = [
 class AttendanceScreen extends StatelessWidget {
   static const String routeName = '/attendance';
 
+  const AttendanceScreen({Key? key}) : super(key: key);
+
   static Route route() {
     return PageRouteBuilder(
-        settings: RouteSettings(name: routeName),
-        pageBuilder: (context, _, __) {
-          return AttendanceScreen();
-        });
+      settings: const RouteSettings(name: routeName),
+      pageBuilder: (context, _, __) {
+        return const AttendanceScreen();
+      },
+    );
   }
 
   @override
@@ -41,12 +44,12 @@ class AttendanceScreen extends StatelessWidget {
         future: _userRepo.getUserById(userId: _userId),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return NothingHere(
+            return const NothingHere(
               appBarTitle: 'Attendance',
             );
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(
+            return const Scaffold(
               backgroundColor: Color.fromRGBO(29, 38, 40, 1),
               body: Center(
                 child: CircularProgressIndicator(),
@@ -73,7 +76,7 @@ class AttendanceScreen extends StatelessWidget {
             builder: (BuildContext context, attendanceSnapshot) {
               if (attendanceSnapshot.connectionState ==
                   ConnectionState.waiting) {
-                return Scaffold(
+                return const Scaffold(
                   backgroundColor: Color.fromRGBO(29, 38, 40, 1),
                   body:
                       // Center(
@@ -99,28 +102,28 @@ class AttendanceScreen extends StatelessWidget {
                   lenghtOfAttendance == 0 ||
                   totalAttendance == null ||
                   lastUpdated == '') {
-                return NothingHere(
+                return const NothingHere(
                   appBarTitle: 'Attendance',
                 );
               }
               return Scaffold(
-                backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+                backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
                 appBar: AppBar(
-                  backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+                  backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
                   centerTitle: true,
                   title: Text('Attendance - ${user?.name}'),
                   bottom: PreferredSize(
-                    preferredSize: Size.fromHeight(15.0),
+                    preferredSize: const Size.fromHeight(15.0),
                     child: Column(
                       children: [
                         Text(
                           '${user?.enrollNo}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18.0,
                           ),
                         ),
-                        SizedBox(height: 15.0)
+                        const SizedBox(height: 15.0)
                       ],
                     ),
                   ),
@@ -128,24 +131,24 @@ class AttendanceScreen extends StatelessWidget {
                 body: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(height: 15.0),
+                      const SizedBox(height: 15.0),
                       DisplayTotalAttendanceCard(
                         totalAttendance: data?['totalAttendance'],
                       ),
-                      SizedBox(height: 10.0),
+                      const SizedBox(height: 10.0),
                       Text(
                         'As on ${data?['lastUpdated']}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 120.0),
+                      const SizedBox(height: 120.0),
                       // PieChartSample1(),
                       //PieChartSample2(),
 
                       // AttendancePieChart(attendanceList: attendanceList),
                       AttendancePieChartOld(attendanceList: attendanceList),
-                      SizedBox(height: 150),
+                      const SizedBox(height: 150),
                       SizedBox(
                         height: 400,
                         child: ListView.builder(
@@ -162,7 +165,7 @@ class AttendanceScreen extends StatelessWidget {
                                       '${attendanceList?[index]['faculty']}',
                                   color: color[index],
                                 ),
-                                SizedBox(height: 10.0),
+                                const SizedBox(height: 10.0),
                               ],
                             );
                           },
@@ -170,8 +173,8 @@ class AttendanceScreen extends StatelessWidget {
                       ),
                       TextButton.icon(
                         onPressed: () {},
-                        icon: Icon(Icons.error, color: Colors.red),
-                        label: Text(
+                        icon: const Icon(Icons.error, color: Colors.red),
+                        label: const Text(
                           'Report Error',
                           style: TextStyle(
                             color: Colors.red,

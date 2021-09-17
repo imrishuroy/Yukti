@@ -2,6 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class PieChartSample2 extends StatefulWidget {
+  const PieChartSample2({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => PieChart2State();
 }

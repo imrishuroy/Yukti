@@ -73,7 +73,7 @@ class _AttendancePieChartOldState extends State<AttendancePieChartOld> {
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: Color(0xffffffff),
+              color: const Color(0xffffffff),
             ),
           );
           return MapEntry(index, value);

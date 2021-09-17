@@ -5,6 +5,8 @@ import 'indicator.dart';
 import 'package:yukti/extensions/extensions.dart';
 
 class PieChartSample1 extends StatefulWidget {
+  const PieChartSample1({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => PieChartSample1State();
 }
@@ -101,10 +103,10 @@ class PieChartSample1State extends State {
         final isTouched = i == touchedIndex;
         final opacity = isTouched ? 1.0 : 0.6;
 
-        final color0 = const Color(0xff0293ee);
-        final color1 = const Color(0xfff8b250);
-        final color2 = const Color(0xff845bef);
-        final color3 = const Color(0xff13d38e);
+        const color0 = Color(0xff0293ee);
+        const color1 = Color(0xfff8b250);
+        const color2 = Color(0xff845bef);
+        const color3 = Color(0xff13d38e);
 
         switch (i) {
           case 0:
@@ -113,10 +115,10 @@ class PieChartSample1State extends State {
               value: 25,
               title: '',
               radius: 80,
-              titleStyle: TextStyle(
+              titleStyle: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xff044d7c)),
+                  color: Color(0xff044d7c)),
               titlePositionPercentageOffset: 0.55,
               borderSide: isTouched
                   ? BorderSide(color: color0.darken(40), width: 6)
@@ -128,10 +130,10 @@ class PieChartSample1State extends State {
               value: 25,
               title: '',
               radius: 65,
-              titleStyle: TextStyle(
+              titleStyle: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xff90672d)),
+                  color: Color(0xff90672d)),
               titlePositionPercentageOffset: 0.55,
               borderSide: isTouched
                   ? BorderSide(color: color1.darken(40), width: 6)
@@ -143,10 +145,10 @@ class PieChartSample1State extends State {
               value: 25,
               title: '',
               radius: 60,
-              titleStyle: TextStyle(
+              titleStyle: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xff4c3788)),
+                  color: Color(0xff4c3788)),
               titlePositionPercentageOffset: 0.6,
               borderSide: isTouched
                   ? BorderSide(color: color2.darken(40), width: 6)
@@ -158,10 +160,10 @@ class PieChartSample1State extends State {
               value: 25,
               title: '',
               radius: 70,
-              titleStyle: TextStyle(
+              titleStyle: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xff0c7f55)),
+                  color: Color(0xff0c7f55)),
               titlePositionPercentageOffset: 0.55,
               borderSide: isTouched
                   ? BorderSide(color: color3.darken(40), width: 6)

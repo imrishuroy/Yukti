@@ -27,14 +27,15 @@ class AnnouncementTile extends StatelessWidget {
                   ),
                 );
               },
-              contentPadding: EdgeInsets.all(10.0),
+              contentPadding: const EdgeInsets.all(10.0),
               title: Text(
                 '${announcement?.title}',
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17.0),
+                style: const TextStyle(
+                    fontWeight: FontWeight.w600, fontSize: 17.0),
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Text('${announcement?.message?.substring(0, 74)}...'),
-              trailing: Icon(
+              trailing: const Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black,
                 size: 30.0,
@@ -47,7 +48,7 @@ class AnnouncementTile extends StatelessWidget {
           left: 12,
           top: 3,
           child: Container(
-            color: Color.fromRGBO(255, 203, 0, 1),
+            color: const Color.fromRGBO(255, 203, 0, 1),
             //color: Color.fromRGBO(29, 38, 40, 1),
 
             height: 21.0,
@@ -55,7 +56,7 @@ class AnnouncementTile extends StatelessWidget {
             child: Center(
               child: Text(
                 '${announcement?.date}',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
                 ),

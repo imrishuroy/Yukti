@@ -10,10 +10,10 @@ class NavScreen extends StatelessWidget {
 
   static Route route() {
     return PageRouteBuilder(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       pageBuilder: (context, _, __) => BlocProvider(
         create: (context) => NavBloc(),
-        child: NavScreen(),
+        child: const NavScreen(),
       ),
     );
   }

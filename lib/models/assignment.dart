@@ -9,7 +9,8 @@ class Assignment extends Equatable {
   final String? subCode;
   final String? subName;
   final String? assignmentId;
-  Assignment({
+
+  const Assignment({
     this.name,
     this.date,
     this.link,

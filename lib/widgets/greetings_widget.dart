@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-final Shader linearGradient = LinearGradient(
+final Shader linearGradient = const LinearGradient(
   colors: <Color>[
     Color.fromRGBO(40, 200, 253, 1),
     Colors.white,
   ],
-).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
 class GreetingsWidget extends StatelessWidget {
   final double height;
@@ -14,7 +14,7 @@ class GreetingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

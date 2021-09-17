@@ -5,11 +5,13 @@ import 'widgets/dash_board_cards.dart';
 import 'widgets/todays_lectures.dart';
 
 class DashBoard extends StatelessWidget {
+  const DashBoard({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //  drawer: Drawer(),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       backgroundColor: Colors.black45,
       //backgroundColor: Color.fromRGBO(25, 23, 37, 1),
       // backgroundColor: Colors.grey.shade900,
@@ -27,7 +29,7 @@ class DashBoard extends StatelessWidget {
         // ),
         leading: Builder(builder: (context) {
           return IconButton(
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.alignLeft,
               size: 27.0,
             ),
@@ -46,7 +48,7 @@ class DashBoard extends StatelessWidget {
         //   backgroundColor: Color.fromRGBO(0, 141, 82, 1),
         // backgroundColor: Color(0XFF00286E),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'DashBoard',
           style: TextStyle(
             letterSpacing: 1.2,
@@ -54,7 +56,7 @@ class DashBoard extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        actions: [
+        actions: const [
           CircleAvatar(
             radius: 22.3,
             backgroundColor: Colors.deepOrange,
@@ -80,11 +82,11 @@ class DashBoard extends StatelessWidget {
         ],
       ),
       body: Column(
-        children: [
+        children: const [
           DashBoardCards(),
           // SizedBox(height: 10.0),
           Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: 20.0,
             ),
             child: Text(
@@ -101,7 +103,7 @@ class DashBoard extends StatelessWidget {
           ),
 
           TodaysLectures(),
-          const SizedBox(height: 17.0)
+          SizedBox(height: 17.0)
         ],
       ),
     );

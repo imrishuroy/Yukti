@@ -15,11 +15,11 @@ class HappeningDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+      backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+        backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
         centerTitle: true,
-        title: Text('Details'),
+        title: const Text('Details'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -37,16 +37,16 @@ class HappeningDetailScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Padding(
-              padding: EdgeInsets.only(left: 20, top: 20, right: 10.0),
+              padding: const EdgeInsets.only(left: 20, top: 20, right: 10.0),
               // symmetric(
               //   horizontal: 20.0,
               //   vertical: 12.0,
               // ),
               child: Text(
                 '$title',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color.fromRGBO(255, 203, 0, 1),
                   fontSize: 19.0,
                   fontWeight: FontWeight.w600,
@@ -61,7 +61,7 @@ class HappeningDetailScreen extends StatelessWidget {
               ),
               child: Text(
                 '$description',
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'NotoSerif',
                   color: Colors.white,
                   fontSize: 18.0,

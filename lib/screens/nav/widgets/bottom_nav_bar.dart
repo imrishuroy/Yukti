@@ -9,7 +9,7 @@ class BottomNavBar extends StatelessWidget {
   final NavItem? navItem;
   final Function(NavItem)? onitemSelected;
 
-  BottomNavBar({
+  const BottomNavBar({
     Key? key,
     @required this.navItem,
     @required this.onitemSelected,
@@ -20,7 +20,7 @@ class BottomNavBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0, right: 12.0, left: 12.0),
       child: ClipRRect(
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20.0),
           topRight: Radius.circular(20.0),
           bottomLeft: Radius.circular(20.0),
@@ -40,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
           iconSize: 20,
           selectedFontSize: 12,
           unselectedFontSize: 13,
-          selectedItemColor: Color(0XFF00286E),
+          selectedItemColor: const Color(0XFF00286E),
           //selectedItemColor: Colors.green,
           unselectedItemColor: Colors.grey,
           currentIndex: NavItem.values.indexOf(navItem!),
@@ -61,19 +61,19 @@ class BottomNavBar extends StatelessWidget {
 
 Widget _itemIcon(NavItem item) {
   if (item == NavItem.dashboard) {
-    return Icon(Icons.dashboard);
+    return const Icon(Icons.dashboard);
   } else if (item == NavItem.gallery) {
-    return Icon(FontAwesomeIcons.images);
+    return const Icon(FontAwesomeIcons.images);
   } else if (item == NavItem.happenings) {
-    return Icon(FontAwesomeIcons.calendarAlt);
+    return const Icon(FontAwesomeIcons.calendarAlt);
   } else if (item == NavItem.forms) {
-    return Icon(
+    return const Icon(
       Icons.feed,
       size: 24.0,
     );
   }
 
-  return Icon(Icons.person);
+  return const Icon(Icons.person);
 }
 
 String _label(NavItem item) {

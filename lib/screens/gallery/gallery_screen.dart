@@ -11,6 +11,8 @@ import 'image_carousel.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GalleryScreen extends StatelessWidget {
+  const GalleryScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final _firebaseRepo = context.read<FirebaseRepositroy>();
@@ -23,13 +25,13 @@ class GalleryScreen extends StatelessWidget {
     // final AppDataBase database =
     //     Provider.of<AppDataBase>(context, listen: false);
     return Scaffold(
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       // backgroundColor: Color.fromRGBO(29, 38, 40, 1),
       //  backgroundColor: Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
         leading: Builder(builder: (context) {
           return IconButton(
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.alignLeft,
               size: 27.0,
             ),
@@ -41,7 +43,7 @@ class GalleryScreen extends StatelessWidget {
         // automaticallyImplyLeading: false,
         // backgroundColor: Color.fromRGBO(0, 141, 82, 1),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Gallery',
           style: TextStyle(
             fontSize: 21,
@@ -49,7 +51,7 @@ class GalleryScreen extends StatelessWidget {
             letterSpacing: 1.2,
           ),
         ),
-        actions: [
+        actions: const [
           CircleAvatar(
             radius: 22.3,
             backgroundColor: Colors.deepOrange,
@@ -76,9 +78,9 @@ class GalleryScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(height: 18.0),
-          ImageCarousel(),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 18.0),
+          const ImageCarousel(),
+          const SizedBox(height: 20.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
@@ -86,7 +88,7 @@ class GalleryScreen extends StatelessWidget {
               children: [
                 Text(
                   '${quote['quote']}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 17.0,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
@@ -100,7 +102,7 @@ class GalleryScreen extends StatelessWidget {
                   ),
                   child: Text(
                     '${quote['author']}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color.fromRGBO(255, 203, 0, 1),
                       fontWeight: FontWeight.w600,
                       fontSize: 16.0,
@@ -117,14 +119,14 @@ class GalleryScreen extends StatelessWidget {
               future: _firebaseRepo.getGalleryImages(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
                 return GridView.builder(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   itemCount: snapshot.data?.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                   ),
                   itemBuilder: (context, index) {

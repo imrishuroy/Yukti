@@ -11,6 +11,8 @@ import 'package:yukti/respositories/lectures/lectures_repository.dart';
 import 'package:yukti/respositories/user/user_repository.dart';
 
 class TodaysLectures extends StatefulWidget {
+  const TodaysLectures({Key? key}) : super(key: key);
+
   @override
   _TodaysLecturesState createState() => _TodaysLecturesState();
 }
@@ -58,10 +60,10 @@ class _TodaysLecturesState extends State<TodaysLectures> {
 
     return Expanded(
       child: _isLoading == true
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Column(
               children: [
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 Expanded(
                   child: FutureBuilder<List<Lecture?>>(
                     future: _lectureRepo.getWeekDayLecture(
@@ -72,12 +74,12 @@ class _TodaysLecturesState extends State<TodaysLectures> {
                     ),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
 
                       print('Lecture ${snapshot.data}');
-                      if (snapshot.data?.length == 0) {
-                        return Center(
+                      if (snapshot.data!.isEmpty) {
+                        return const Center(
                           child: Text(
                             'Nothing Here :)',
                             style: TextStyle(fontSize: 20.0),
@@ -112,7 +114,7 @@ class _TodaysLecturesState extends State<TodaysLectures> {
                                               children: [
                                                 Text(
                                                   '${lecture?.subName} - ${lecture?.subCode}',
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 17.0,
                                                     letterSpacing: 1.2,
@@ -165,7 +167,7 @@ class _TodaysLecturesState extends State<TodaysLectures> {
                                             //   ),
                                             // ),
 
-                                            Chip(
+                                            const Chip(
                                               backgroundColor: Color.fromRGBO(
                                                   40, 200, 253, 1),
                                               label: Text(

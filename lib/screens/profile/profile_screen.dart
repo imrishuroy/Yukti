@@ -8,10 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProfileScreen extends StatefulWidget {
   static const String routeName = '/profile-screen';
 
+  const ProfileScreen({Key? key}) : super(key: key);
+
   static Route route() {
     return PageRouteBuilder(
-        settings: RouteSettings(name: routeName),
-        pageBuilder: (context, _, __) => ProfileScreen());
+        settings: const RouteSettings(name: routeName),
+        pageBuilder: (context, _, __) => const ProfileScreen());
   }
 
   @override
@@ -32,11 +34,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
-          IconButton(onPressed: _logout, icon: Icon(Icons.logout_rounded)),
-          SizedBox(width: 10.0),
+          IconButton(
+              onPressed: _logout, icon: const Icon(Icons.logout_rounded)),
+          const SizedBox(width: 10.0),
         ],
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Your Profile',
           style: TextStyle(color: Colors.black),
         ),
@@ -44,18 +47,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
         //   backgroundColor: Color.fromRGBO(40, 200, 253, 1),
         //  backgroundColor: Color.fromRGBO(0, 141, 82, 1),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(150.0),
+          preferredSize: const Size.fromHeight(150.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             // mainAxisSize: MainAxisSize.max,
-            children: [
+            children: const [
               UserProfileImage(),
               SizedBox(height: 25.0),
             ],
           ),
         ),
       ),
-      body: UserProfile(),
+      body: const UserProfile(),
     );
   }
 }

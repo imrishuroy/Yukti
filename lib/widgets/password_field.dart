@@ -4,7 +4,7 @@ class PasswordField extends StatefulWidget {
   // final String? password;
   final TextEditingController? textController;
 
-  PasswordField({
+  const PasswordField({
     Key? key,
     // this.password,
     this.textController,
@@ -19,20 +19,21 @@ class _PasswordFieldState extends State<PasswordField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: TextStyle(color: Colors.white, fontSize: 16.0),
+      style: const TextStyle(color: Colors.white, fontSize: 16.0),
       key: widget.key,
       obscureText: _hidePassword,
       controller: widget.textController,
       validator: (value) => value!.length < 6 ? 'Password too short' : null,
       decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.green,
             width: 2.0,
           ),
         ),
-        labelStyle: TextStyle(color: Colors.green, fontFamily: 'Montserrat'),
-        prefixIcon: Icon(Icons.lock, color: Colors.green),
+        labelStyle:
+            const TextStyle(color: Colors.green, fontFamily: 'Montserrat'),
+        prefixIcon: const Icon(Icons.lock, color: Colors.green),
         suffixIcon: IconButton(
           color: Colors.green,
           icon: Icon(
@@ -44,10 +45,10 @@ class _PasswordFieldState extends State<PasswordField> {
             });
           },
         ),
-        hintStyle: TextStyle(color: Colors.white),
+        hintStyle: const TextStyle(color: Colors.white),
         labelText: 'PASSWORD',
         hintText: 'Enter Your Password',
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
       ),
     );
   }

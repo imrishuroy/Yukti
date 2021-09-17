@@ -25,7 +25,7 @@ class AssignmentTile extends StatelessWidget {
     } catch (error) {
       // print(error);
       ScaffoldMessenger.of(context!).showSnackBar(
-        SnackBar(
+        const SnackBar(
           backgroundColor: Colors.red,
           content: Text(
             'No file available',
@@ -51,15 +51,15 @@ class AssignmentTile extends StatelessWidget {
       ),
       child: Card(
         child: ListTile(
-          contentPadding: EdgeInsets.all(0),
+          contentPadding: const EdgeInsets.all(0),
           leading: Container(
-            color: Color.fromRGBO(255, 203, 0, 1),
+            color: const Color.fromRGBO(255, 203, 0, 1),
             height: 60.0,
             width: 60.0,
             child: Center(
               child: Text(
                 '${assignment?.subCode?.toUpperCase()}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -67,7 +67,7 @@ class AssignmentTile extends StatelessWidget {
           ),
           title: Text(
             '${assignment?.subName}',
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
               color: Colors.black,
             ),
@@ -76,13 +76,13 @@ class AssignmentTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('${assignment?.name}'),
-              SizedBox(height: 0.8),
+              const SizedBox(height: 0.8),
               Row(
                 children: [
-                  Text('Last Date : '),
+                  const Text('Last Date : '),
                   Text(
                     '${assignment?.date}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.redAccent,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 1.1,
@@ -90,7 +90,7 @@ class AssignmentTile extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10.0)
+              const SizedBox(height: 10.0)
             ],
           ),
           trailing: Padding(
@@ -98,7 +98,7 @@ class AssignmentTile extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () =>
                   _launchInBrowser(url: assignment?.link, context: context),
-              child: Text(
+              child: const Text(
                 'Download',
                 style: TextStyle(
                   fontSize: 12.5,

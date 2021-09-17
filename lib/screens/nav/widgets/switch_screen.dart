@@ -16,20 +16,20 @@ class SwitchScreen extends StatelessWidget {
     switch (navItem) {
       case NavItem.dashboard:
         // return Center(child: Text('DashBoard'));
-        return DashBoard();
+        return const DashBoard();
 
       case NavItem.gallery:
-        return GalleryScreen();
+        return const GalleryScreen();
 
       case NavItem.happenings:
-        return HappeningsScreen();
+        return const HappeningsScreen();
 
       case NavItem.forms:
         // return ProfileScreen();
-        return FormScreen();
+        return const FormScreen();
 
       default:
-        return Center(
+        return const Center(
           child: Text('Wrong'),
         );
     }

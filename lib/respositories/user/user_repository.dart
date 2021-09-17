@@ -10,6 +10,7 @@ class UserRepository extends BaseUserRepository {
   UserRepository({FirebaseFirestore? firebaseFirestore})
       : _firestore = firebaseFirestore ?? FirebaseFirestore.instance;
 
+  @override
   Future<AppUser?> getUserById({required String? userId}) async {
     try {
       final snap = await _firestore
@@ -22,7 +23,7 @@ class UserRepository extends BaseUserRepository {
       return snap.data();
     } catch (error) {
       print('Error getting current user');
-      throw Failure(message: 'Error getting current user');
+      throw const Failure(message: 'Error getting current user');
     }
   }
 
@@ -34,7 +35,7 @@ class UserRepository extends BaseUserRepository {
           .update(user.toMap());
     } catch (error) {
       print('Error adding user profile ${error.toString()}');
-      throw error;
+      rethrow;
     }
   }
 }

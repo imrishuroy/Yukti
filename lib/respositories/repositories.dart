@@ -14,23 +14,23 @@ class AnnouncementDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+      backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color.fromRGBO(0, 141, 82, 1),
-        title: Text('Details'),
+        backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
+        title: const Text('Details'),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: Text(
                 '$title',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 22.0,
                   letterSpacing: 1.1,
                   fontWeight: FontWeight.w600,
@@ -44,7 +44,7 @@ class AnnouncementDetailScreen extends StatelessWidget {
                   const EdgeInsets.only(top: 10.0, left: 20.0, right: 14.0),
               child: Text(
                 message!,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'NotoSerif',
                   color: Colors.white,
                   fontSize: 18.0,
@@ -52,7 +52,7 @@ class AnnouncementDetailScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 30.0),
+            const SizedBox(height: 30.0),
           ],
         ),
       ),

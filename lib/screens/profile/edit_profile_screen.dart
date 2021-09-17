@@ -10,16 +10,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yukti/respositories/user/user_repository.dart';
 
 class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({Key? key}) : super(key: key);
+
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final usersRef = FirebaseFirestore.instance.collection('users');
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _fatherNameController = TextEditingController();
-  TextEditingController _motherNameController = TextEditingController();
-  TextEditingController _mobileNoController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _fatherNameController = TextEditingController();
+  final TextEditingController _motherNameController = TextEditingController();
+  final TextEditingController _mobileNoController = TextEditingController();
   bool _isLoading = false;
   AppUser? user;
   bool _nameValid = true;
@@ -129,7 +131,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       setState(() {
         _updatingProfile = false;
       });
-      SnackBar snackbar = SnackBar(
+      SnackBar snackbar = const SnackBar(
         backgroundColor: Colors.green,
         content: Text(
           'Succussfully updated your profle',
@@ -146,16 +148,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     // print(widget.database.id);
     return Scaffold(
-      backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+      backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+        backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
         centerTitle: true,
-        title: Text('Edit Profile'),
+        title: const Text('Edit Profile'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text(
+            child: const Text(
               'Done',
               style: TextStyle(
                 color: Colors.white,
@@ -164,21 +166,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             ),
           ),
-          SizedBox(width: 5.0),
+          const SizedBox(width: 5.0),
         ],
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView(
               children: [
-                Container(
+                SizedBox(
                   child: Column(
                     children: [
-                      SizedBox(height: 30.0),
+                      const SizedBox(height: 30.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(width: 53.0),
+                          const SizedBox(width: 53.0),
                           CircleAvatar(
                             backgroundColor: Colors.grey,
                             radius: 60.0,
@@ -186,9 +188,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ? NetworkImage(imageUrl!)
                                 : FileImage(_image!)) as ImageProvider<Object>?,
                           ),
-                          SizedBox(width: 20.0),
+                          const SizedBox(width: 20.0),
                           IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.insert_photo,
                               color: Colors.green,
                               size: 30.0,
@@ -197,13 +199,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 60.0),
+                      const SizedBox(height: 60.0),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 40.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Name',
                               style: TextStyle(
                                 color: Colors.orange,
@@ -213,14 +215,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                             ),
                             TextField(
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 19.0,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white,
                               ),
                               controller: _nameController,
                               decoration: InputDecoration(
-                                enabledBorder: UnderlineInputBorder(
+                                enabledBorder: const UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white70,
                                     width: 1.7,
@@ -231,9 +233,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     _nameValid ? null : 'Name is too short',
                               ),
                             ),
-                            SizedBox(height: 25.0),
-                            Text(
-                              "Father Name",
+                            const SizedBox(height: 25.0),
+                            const Text(
+                              'Father\'s Name',
                               style: TextStyle(
                                 color: Colors.orange,
                                 letterSpacing: 1.2,
@@ -242,14 +244,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                             ),
                             TextField(
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 19.0,
                                 fontWeight: FontWeight.w500,
                               ),
                               controller: _fatherNameController,
                               decoration: InputDecoration(
-                                enabledBorder: UnderlineInputBorder(
+                                enabledBorder: const UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white70,
                                     width: 1.7,
@@ -261,9 +263,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     : 'Father name is too short',
                               ),
                             ),
-                            SizedBox(height: 25.0),
-                            Text(
-                              "Mother Name",
+                            const SizedBox(height: 25.0),
+                            const Text(
+                              'Mother Name',
                               style: TextStyle(
                                 color: Colors.orange,
                                 fontWeight: FontWeight.w600,
@@ -272,14 +274,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                             ),
                             TextField(
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 19.0,
                                 fontWeight: FontWeight.w500,
                               ),
                               controller: _motherNameController,
                               decoration: InputDecoration(
-                                enabledBorder: UnderlineInputBorder(
+                                enabledBorder: const UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white70,
                                     width: 1.7,
@@ -290,8 +292,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     _nameValid ? null : 'Name is too short',
                               ),
                             ),
-                            SizedBox(height: 25.0),
-                            Text(
+                            const SizedBox(height: 25.0),
+                            const Text(
                               'Mobile Number',
                               style: TextStyle(
                                 color: Colors.orange,
@@ -301,14 +303,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                             ),
                             TextField(
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 19.0,
                                 fontWeight: FontWeight.w500,
                               ),
                               controller: _mobileNoController,
                               decoration: InputDecoration(
-                                enabledBorder: UnderlineInputBorder(
+                                enabledBorder: const UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white70,
                                     width: 1.7,
@@ -319,18 +321,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     _nameValid ? null : 'Name is too short',
                               ),
                             ),
-                            SizedBox(height: 30.0),
+                            const SizedBox(height: 30.0),
                             if (_updatingProfile)
-                              Center(
+                              const Center(
                                 child: CircularProgressIndicator(),
                               ),
                             if (!_updatingProfile)
                               Center(
                                 child: ElevatedButton(
                                   onPressed: updateProfileData,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15.0),
+                                  child: const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 15.0),
                                     child: Text(
                                       'Update',
                                       style: TextStyle(

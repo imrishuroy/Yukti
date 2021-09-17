@@ -27,6 +27,8 @@ const List happenings = [
 ];
 
 class HappeningsScreen extends StatelessWidget {
+  const HappeningsScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,10 +37,10 @@ class HappeningsScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         // backgroundColor: Color.fromRGBO(0, 141, 82, 1),
         centerTitle: true,
-        title: Text('Happenings'),
+        title: const Text('Happenings'),
         leading: Builder(builder: (context) {
           return IconButton(
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.alignLeft,
               size: 27.0,
             ),
@@ -47,7 +49,7 @@ class HappeningsScreen extends StatelessWidget {
             },
           );
         }),
-        actions: [
+        actions: const [
           CircleAvatar(
             radius: 14.0,
             backgroundColor: Colors.white,
@@ -106,8 +108,8 @@ class OneHappeningCard extends StatelessWidget {
           elevation: 8.0,
           child: ListTile(
             contentPadding:
-                EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-            leading: Container(
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+            leading: SizedBox(
               height: 100.0,
               width: 100.0,
               child: Image.network(

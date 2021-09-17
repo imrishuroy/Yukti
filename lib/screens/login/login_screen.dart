@@ -17,9 +17,11 @@ import 'forget_password.dart';
 class LoginScreen extends StatelessWidget {
   static const String routeName = '/login';
 
+  LoginScreen({Key? key}) : super(key: key);
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       builder: (context) => BlocProvider<LoginCubit>(
         create: (_) =>
             LoginCubit(authRepository: context.read<AuthRepository>()),
@@ -41,7 +43,7 @@ class LoginScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
 
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
+      const SystemUiOverlayStyle(
         statusBarColor: Colors.black54,
         //statusBarColor: Color.fromRGBO(25, 23, 37, 1),
         // statusBarColor: Color(0XFF00286E),
@@ -69,8 +71,8 @@ class LoginScreen extends StatelessWidget {
               backgroundColor: Colors.black54,
               //   backgroundColor: Color.fromRGBO(29, 38, 40, 1),
               body: state.status == LoginStatus.submitting
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
+                  ? const Padding(
+                      padding: EdgeInsets.only(top: 20.0),
                       child: Center(
                         child: CircularProgressIndicator(),
                       ),
@@ -82,13 +84,13 @@ class LoginScreen extends StatelessWidget {
                           GreetingsWidget(height: height),
                           SizedBox(height: height < 750 ? 15.0 : 12.0),
                           Container(
-                            padding: EdgeInsets.only(
+                            padding: const EdgeInsets.only(
                                 top: 22.0, left: 20.0, right: 20.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
                                 TextFormField(
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white, fontSize: 16.0),
                                   keyboardType: TextInputType.emailAddress,
                                   onChanged: (value) => context
@@ -98,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                                       !(value!.contains('@gmail.com'))
                                           ? 'Invalid Email'
                                           : null,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.white,
@@ -119,9 +121,9 @@ class LoginScreen extends StatelessWidget {
                                     border: OutlineInputBorder(),
                                   ),
                                 ),
-                                SizedBox(height: 25.0),
+                                const SizedBox(height: 25.0),
                                 TextFormField(
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white, fontSize: 16.0),
                                   obscureText: !state.showPassword,
                                   onChanged: (value) => context
@@ -131,17 +133,17 @@ class LoginScreen extends StatelessWidget {
                                       ? 'Password too short'
                                       : null,
                                   decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
+                                    enabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                         width: 2.0,
                                       ),
                                     ),
-                                    labelStyle: TextStyle(
+                                    labelStyle: const TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'Montserrat'),
-                                    prefixIcon:
-                                        Icon(Icons.lock, color: Colors.white),
+                                    prefixIcon: const Icon(Icons.lock,
+                                        color: Colors.white),
                                     suffixIcon: IconButton(
                                       color: Colors.white,
                                       icon: Icon(
@@ -155,21 +157,22 @@ class LoginScreen extends StatelessWidget {
                                             .showPassword(state.showPassword);
                                       },
                                     ),
-                                    hintStyle: TextStyle(color: Colors.white),
+                                    hintStyle:
+                                        const TextStyle(color: Colors.white),
                                     labelText: 'PASSWORD',
                                     hintText: 'Enter Your Password',
-                                    border: OutlineInputBorder(),
+                                    border: const OutlineInputBorder(),
                                   ),
                                 ),
-                                SizedBox(height: 5.0),
+                                const SizedBox(height: 5.0),
                                 Container(
-                                  alignment: Alignment(1.0, 0.0),
-                                  padding:
-                                      EdgeInsets.only(top: 15.0, left: 20.0),
+                                  alignment: const Alignment(1.0, 0.0),
+                                  padding: const EdgeInsets.only(
+                                      top: 15.0, left: 20.0),
                                   child: InkWell(
                                     onTap: () => Navigator.pushNamed(
                                         context, ForgotPaswordScreen.routeName),
-                                    child: Text(
+                                    child: const Text(
                                       'Forgot Password',
                                       style: TextStyle(
                                         color: Color.fromRGBO(40, 200, 253, 1),
@@ -181,15 +184,16 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 40.0),
+                                const SizedBox(height: 40.0),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: Color.fromRGBO(40, 200, 253, 1),
+                                    primary:
+                                        const Color.fromRGBO(40, 200, 253, 1),
                                   ),
                                   onPressed: () => _submitForm(context,
                                       state.status == LoginStatus.submitting),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(11.5),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(11.5),
                                     child: Text(
                                       'Sign In',
                                       style: TextStyle(
@@ -202,15 +206,15 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 20.0),
-                                Text(
+                                const SizedBox(height: 20.0),
+                                const Text(
                                   'OR',
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
-                                SizedBox(height: 20.0),
+                                const SizedBox(height: 20.0),
                                 //if (UniversalPlatform.isIOS)
                                 SizedBox(
                                   width: 250.0,
@@ -221,7 +225,7 @@ class LoginScreen extends StatelessWidget {
                                     style: SignInWithAppleButtonStyle.white,
                                   ),
                                 ),
-                                SizedBox(height: 20.0),
+                                const SizedBox(height: 20.0),
                                 GoogleSignInButton(
                                   onPressed: () =>
                                       context.read<LoginCubit>().googleSignIn(),
@@ -230,11 +234,11 @@ class LoginScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(height: 25.0),
+                          const SizedBox(height: 25.0),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Text(
+                              const Text(
                                 'Need an account?',
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
@@ -242,13 +246,13 @@ class LoginScreen extends StatelessWidget {
                                   fontSize: 15.0,
                                 ),
                               ),
-                              SizedBox(width: 5.0),
+                              const SizedBox(width: 5.0),
                               InkWell(
                                 onTap: () {
                                   Navigator.pushNamed(
                                       context, SignupScreen.routeName);
                                 },
-                                child: Text(
+                                child: const Text(
                                   'Register',
                                   style: TextStyle(
                                     color: Color.fromRGBO(40, 200, 253, 1),

@@ -8,6 +8,8 @@ import 'add_profile_screen.dart';
 import 'edit_profile_screen.dart';
 
 class UserProfile extends StatelessWidget {
+  const UserProfile({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final _userId = context.read<AuthBloc>().state.user?.uid;
@@ -17,27 +19,27 @@ class UserProfile extends StatelessWidget {
       future: _userRepo.getUserById(userId: _userId),
       builder: (BuildContext context, snapshot) {
         if (snapshot.hasError) {
-          return Text('Some thing went wrong');
+          return const Text('Some thing went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.data == null) {
           return Center(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Color.fromRGBO(0, 141, 82, 1), // background
+                primary: const Color.fromRGBO(0, 141, 82, 1), // background
                 // onPrimary: Colors.white, // foreground
               ),
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddProfileScreen(),
+                    builder: (context) => const AddProfileScreen(),
                   ),
                 );
               },
-              child: Text(
+              child: const Text(
                 'Add Your Profile',
                 style: TextStyle(fontSize: 17.0),
               ),
@@ -56,7 +58,7 @@ class UserProfile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 Row(
                   children: [
                     _profileDomainCard(value: user?.branch),
@@ -64,72 +66,73 @@ class UserProfile extends StatelessWidget {
                     _profileDomainCard(value: user?.section),
                   ],
                 ),
-                SizedBox(height: 25.0),
+                const SizedBox(height: 25.0),
                 _profileLabelText(label: 'Name'),
-                SizedBox(height: 3.0),
+                const SizedBox(height: 3.0),
                 Text(
-                  '${user?.name ?? 'N/A'}',
-                  style: TextStyle(
+                  user?.name ?? 'N/A',
+                  style: const TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 22.0),
+                const SizedBox(height: 22.0),
                 _profileLabelText(label: 'Enrollment No'),
-                SizedBox(height: 3.0),
+                const SizedBox(height: 3.0),
                 Text(
-                  '${user?.enrollNo ?? 'N/A'}',
-                  style: TextStyle(
+                  user?.enrollNo ?? 'N/A',
+                  style: const TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 22.0),
-                _profileLabelText(label: "Father's Name"),
-                SizedBox(height: 3.0),
+                const SizedBox(height: 22.0),
+                _profileLabelText(label: 'Father\'s Name'),
+                const SizedBox(height: 3.0),
                 Text(
-                  '${user?.fatherName ?? 'N/A'}',
-                  style: TextStyle(
+                  user?.fatherName ?? 'N/A',
+                  style: const TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 22.0),
+                const SizedBox(height: 22.0),
                 _profileLabelText(label: 'Mother\'s Name'),
-                SizedBox(height: 3.0),
+                const SizedBox(height: 3.0),
                 Text(
-                  '${user?.motherName ?? 'N/A'}',
-                  style: TextStyle(
+                  user?.motherName ?? 'N/A',
+                  style: const TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 22.0),
+                const SizedBox(height: 22.0),
                 _profileLabelText(label: 'Mobile Number'),
-                SizedBox(height: 3.0),
+                const SizedBox(height: 3.0),
                 Text(
-                  '${user?.mobileNo ?? 'N/A'}',
-                  style: TextStyle(
+                  user?.mobileNo ?? 'N/A',
+                  style: const TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 30.0),
+                const SizedBox(height: 30.0),
                 Center(
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Color(0XFF00286E)),
+                    style: ElevatedButton.styleFrom(
+                        primary: const Color(0XFF00286E)),
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EditProfileScreen(),
+                        builder: (context) => const EditProfileScreen(),
                       ),
                     ),
-                    child: Text('Edit Your Profile'),
+                    child: const Text('Edit Your Profile'),
                   ),
                 )
               ],
@@ -147,7 +150,7 @@ class UserProfile extends StatelessWidget {
       children: [
         Text(
           '$label',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16.0,
             // color: Color.fromRGBO(255, 203, 0, 1),
             color: Color.fromRGBO(255, 203, 0, 1),
@@ -155,7 +158,7 @@ class UserProfile extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 6.5),
+        const SizedBox(height: 6.5),
       ],
     );
   }
@@ -170,8 +173,8 @@ class UserProfile extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Center(
             child: Text(
-              '${value ?? 'N/A'}',
-              style: TextStyle(
+              value ?? 'N/A',
+              style: const TextStyle(
                 //color: Color.fromRGBO(255, 203, 0, 1),
                 color: Color.fromRGBO(0, 141, 82, 1),
                 fontSize: 25.0,

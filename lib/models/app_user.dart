@@ -15,7 +15,7 @@ class AppUser extends Equatable {
   final String? sem;
   final int? attendance;
   final String? section;
-  AppUser({
+  const AppUser({
     required this.uid,
     this.photUrl,
     this.name,

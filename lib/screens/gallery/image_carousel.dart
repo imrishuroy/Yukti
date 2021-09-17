@@ -10,16 +10,16 @@ final List<String> imgList = [
 
 final List<Widget> imageSliders = imgList
     .map(
-      (item) => Container(
+      (item) => SizedBox(
         // height: 400,
         width: 500,
         child: Container(
           // height: 400,
           width: 1600,
           //  margin: EdgeInsets.all(5.0),
-          margin: EdgeInsets.all(2.0),
+          margin: const EdgeInsets.all(2.0),
           child: ClipRRect(
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               // Radius.circular(20.0),
               Radius.circular(10.0),
             ),
@@ -31,6 +31,8 @@ final List<Widget> imageSliders = imgList
     .toList();
 
 class ImageCarousel extends StatefulWidget {
+  const ImageCarousel({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _ImageCarouselState();
@@ -54,7 +56,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                   autoPlay: true,
                   enlargeCenterPage: true,
                   aspectRatio: 3.0,
-                  scrollPhysics: ScrollPhysics(),
+                  scrollPhysics: const ScrollPhysics(),
                   onPageChanged: (index, reason) {
                     setState(() {
                       _current = index;
@@ -69,13 +71,14 @@ class _ImageCarouselState extends State<ImageCarousel> {
                 return Container(
                   width: 8.0,
                   height: 8.0,
-                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 2.0),
                   // margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: _current == index
-                        ? Color.fromRGBO(0, 0, 0, 0.9)
-                        : Color.fromRGBO(0, 0, 0, 0.4),
+                        ? const Color.fromRGBO(0, 0, 0, 0.9)
+                        : const Color.fromRGBO(0, 0, 0, 0.4),
                   ),
                 );
               }).toList(),

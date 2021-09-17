@@ -8,9 +8,11 @@ import '/widgets/greetings_widget.dart';
 class SignupScreen extends StatelessWidget {
   static const String routeName = '/signup';
 
+  SignupScreen({Key? key}) : super(key: key);
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       builder: (context) => BlocProvider<SignupCubit>(
         create: (context) => SignupCubit(
           authRepository: context.read<AuthRepository>(),
@@ -32,7 +34,7 @@ class SignupScreen extends StatelessWidget {
   void showSnackBar({BuildContext? context, String? title}) {
     ScaffoldMessenger.of(context!).showSnackBar(
       SnackBar(
-          duration: Duration(seconds: 3),
+          duration: const Duration(seconds: 3),
           content: Text(
             '$title',
             textAlign: TextAlign.center,
@@ -45,7 +47,7 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+      backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
       body: BlocConsumer<SignupCubit, SignupState>(
         listener: (context, state) {
           print('Current state ${state.status}');
@@ -60,20 +62,20 @@ class SignupScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return state.status == SignupStatus.submitting
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : Form(
                   key: _formKey,
                   child: ListView(
                     children: <Widget>[
                       GreetingsWidget(height: height),
                       Container(
-                        padding:
-                            EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                        padding: const EdgeInsets.only(
+                            top: 35.0, left: 20.0, right: 20.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             TextFormField(
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.white, fontSize: 16.0),
                               onChanged: (value) => context
                                   .read<SignupCubit>()
@@ -86,7 +88,7 @@ class SignupScreen extends StatelessWidget {
                                   !(value!.contains('@gmail.com'))
                                       ? 'Invalid Email'
                                       : null,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.green,
@@ -110,12 +112,12 @@ class SignupScreen extends StatelessWidget {
                             // EmailField(
                             //   textController: _emailController,
                             // ),
-                            SizedBox(height: 25.0),
+                            const SizedBox(height: 25.0),
                             // PasswordField(
                             //   textController: _passwordController,
                             // ),
                             TextFormField(
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.white, fontSize: 16.0),
                               key: key,
                               onChanged: (value) => context
@@ -127,17 +129,17 @@ class SignupScreen extends StatelessWidget {
                                   ? 'Password too short'
                                   : null,
                               decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
+                                enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.green,
                                     width: 2.0,
                                   ),
                                 ),
-                                labelStyle: TextStyle(
+                                labelStyle: const TextStyle(
                                     color: Colors.green,
                                     fontFamily: 'Montserrat'),
                                 prefixIcon:
-                                    Icon(Icons.lock, color: Colors.green),
+                                    const Icon(Icons.lock, color: Colors.green),
                                 suffixIcon: IconButton(
                                   color: Colors.green,
                                   icon: Icon(
@@ -151,20 +153,20 @@ class SignupScreen extends StatelessWidget {
                                         .showPassword(state.showPassword);
                                   },
                                 ),
-                                hintStyle: TextStyle(color: Colors.white),
+                                hintStyle: const TextStyle(color: Colors.white),
                                 labelText: 'PASSWORD',
                                 hintText: 'Enter Your Password',
-                                border: OutlineInputBorder(),
+                                border: const OutlineInputBorder(),
                               ),
                             ),
-                            SizedBox(height: 35.0),
+                            const SizedBox(height: 35.0),
                             ElevatedButton(
                               onPressed: () => _submitForm(
                                 context,
                                 state.status == SignupStatus.submitting,
                               ), //onPressed: () => _registerUser(context),
-                              child: Padding(
-                                padding: const EdgeInsets.all(11.5),
+                              child: const Padding(
+                                padding: EdgeInsets.all(11.5),
                                 child: Text(
                                   'Register',
                                   style: TextStyle(
@@ -179,7 +181,7 @@ class SignupScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       // Text(
                       //   'OR',
                       //   style: TextStyle(
@@ -197,21 +199,21 @@ class SignupScreen extends StatelessWidget {
                       //     title: 'Register with Google',
                       //   ),
                       // ),
-                      SizedBox(height: 25.0),
+                      const SizedBox(height: 25.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             'Have an Account?',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 15.0,
                             ),
                           ),
-                          SizedBox(width: 5.0),
+                          const SizedBox(width: 5.0),
                           GestureDetector(
                             onTap: () => Navigator.of(context).pop(),
-                            child: Text(
+                            child: const Text(
                               'Login',
                               style: TextStyle(
                                 color: Colors.green,

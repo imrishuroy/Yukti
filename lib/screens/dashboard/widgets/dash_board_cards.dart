@@ -7,6 +7,8 @@ import '/screens/lectures/lectures_selection.dart';
 import '/screens/announcements/announcements_screen.dart';
 
 class DashBoardCards extends StatelessWidget {
+  const DashBoardCards({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     List<Widget> _dashBoardCards = [
@@ -46,7 +48,7 @@ class DashBoardCards extends StatelessWidget {
         child: AnimationLimiter(
             child: GridView.builder(
           itemCount: _dashBoardCards.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 1.3,
           ),
@@ -103,7 +105,7 @@ class OneCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(17.0),
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
@@ -128,7 +130,7 @@ class OneCard extends StatelessWidget {
                   Text(
                     '$title',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 1.2,

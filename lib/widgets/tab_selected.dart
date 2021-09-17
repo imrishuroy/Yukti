@@ -8,7 +8,7 @@ class TabSelector extends StatelessWidget {
   final AppTab? activeTab;
   final Function(AppTab)? onTabSelected;
 
-  TabSelector({
+  const TabSelector({
     Key? key,
     @required this.activeTab,
     @required this.onTabSelected,
@@ -38,16 +38,16 @@ class TabSelector extends StatelessWidget {
 
 Widget _tabIcon(AppTab tab) {
   if (tab == AppTab.home) {
-    return Icon(Icons.dashboard);
+    return const Icon(Icons.dashboard);
   } else if (tab == AppTab.galley) {
-    return Icon(FontAwesomeIcons.images);
+    return const Icon(FontAwesomeIcons.images);
   } else if (tab == AppTab.happenings) {
-    return Icon(FontAwesomeIcons.calendarAlt);
+    return const Icon(FontAwesomeIcons.calendarAlt);
   } else if (tab == AppTab.profile) {
-    return Icon(Icons.person);
+    return const Icon(Icons.person);
   }
 
-  return Icon(Icons.person);
+  return const Icon(Icons.person);
 }
 
 String _label(AppTab tab) {

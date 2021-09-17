@@ -39,7 +39,7 @@ class ErrorDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text('OK'),
+          child: const Text('OK'),
         ),
       ],
     );

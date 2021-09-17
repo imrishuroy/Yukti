@@ -20,10 +20,11 @@ class SubjectAttendanceTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 17.0, vertical: 2.0),
       child: Card(
         child: ListTile(
-          contentPadding: EdgeInsets.fromLTRB(10.0, 7.0, 20.0, 7.0),
+          contentPadding: const EdgeInsets.fromLTRB(10.0, 7.0, 20.0, 7.0),
           title: Text(
             '$subCode',
-            style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 1.1),
+            style: const TextStyle(
+                fontWeight: FontWeight.w600, letterSpacing: 1.1),
           ),
           // subtitle: Column(
           //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,18 +65,18 @@ class SubjectIndicator extends StatelessWidget {
         children: [
           Text(
             '* $subCode ($subName)',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(width: 15.0),
+          const SizedBox(width: 15.0),
           Container(
             height: 30.0,
             width: 30.0,
             color: color,
           ),
-          SizedBox(width: 10.0),
+          const SizedBox(width: 10.0),
         ],
       ),
     );
@@ -97,7 +98,7 @@ class DisplayTotalAttendanceCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Total Attendance',
                 style: TextStyle(
                   fontSize: 18.0,
@@ -111,7 +112,7 @@ class DisplayTotalAttendanceCard extends StatelessWidget {
                 width: 63.0,
                 child: Text(
                   '$totalAttendance %',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.5,
                     //  color: Colors.white,
                     color: Colors.black87,

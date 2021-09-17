@@ -7,10 +7,12 @@ enum Section { a, b }
 class LectureSelection extends StatefulWidget {
   static const String routeName = '/lecture-selction';
 
+  const LectureSelection({Key? key}) : super(key: key);
+
   static Route route() {
     return PageRouteBuilder(
-      settings: RouteSettings(name: routeName),
-      pageBuilder: (context, _, __) => LectureSelection(),
+      settings: const RouteSettings(name: routeName),
+      pageBuilder: (context, _, __) => const LectureSelection(),
     );
   }
 
@@ -26,11 +28,11 @@ class _LectureSelectionState extends State<LectureSelection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+      backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+        backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
         centerTitle: true,
-        title: Text('Lectures'),
+        title: const Text('Lectures'),
       ),
       body: Column(
         children: [
@@ -38,27 +40,27 @@ class _LectureSelectionState extends State<LectureSelection> {
             padding: const EdgeInsets.all(10.0),
             child: Card(
               elevation: 3.0,
-              child: Container(
+              child: SizedBox(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: 20.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    const SizedBox(height: 20.0),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
                       child: Text(
                         'Please Select Your Domain',
                         style: TextStyle(fontSize: 20.0),
                       ),
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     Container(
                       alignment: Alignment.topCenter,
                       child: DropdownButton<String>(
                         value: branchValue,
                         iconSize: 24,
                         elevation: 16,
-                        style:
-                            TextStyle(fontSize: 20.0, color: Colors.deepPurple),
+                        style: const TextStyle(
+                            fontSize: 20.0, color: Colors.deepPurple),
                         underline: Container(
                           height: 3,
                           color: Colors.deepPurpleAccent,
@@ -86,15 +88,15 @@ class _LectureSelectionState extends State<LectureSelection> {
                         ).toList(),
                       ),
                     ),
-                    SizedBox(height: 10.0),
+                    const SizedBox(height: 10.0),
                     Container(
                       alignment: Alignment.topCenter,
                       child: DropdownButton<String>(
                         value: semValue,
                         iconSize: 24,
                         elevation: 16,
-                        style:
-                            TextStyle(fontSize: 18.0, color: Colors.deepPurple),
+                        style: const TextStyle(
+                            fontSize: 18.0, color: Colors.deepPurple),
                         underline: Container(
                           height: 3,
                           color: Colors.deepPurpleAccent,
@@ -122,9 +124,9 @@ class _LectureSelectionState extends State<LectureSelection> {
                         ).toList(),
                       ),
                     ),
-                    SizedBox(height: 10.0),
+                    const SizedBox(height: 10.0),
                     ListTile(
-                      title: Text('Section-A'),
+                      title: const Text('Section-A'),
                       leading: Radio(
                         value: Section.a,
                         groupValue: _section,
@@ -136,7 +138,7 @@ class _LectureSelectionState extends State<LectureSelection> {
                       ),
                     ),
                     ListTile(
-                      title: Text('Section-B'),
+                      title: const Text('Section-B'),
                       leading: Radio(
                         value: Section.b,
                         groupValue: _section,
@@ -147,13 +149,13 @@ class _LectureSelectionState extends State<LectureSelection> {
                         },
                       ),
                     ),
-                    SizedBox(height: 15.0),
+                    const SizedBox(height: 15.0),
                   ],
                 ),
               ),
             ),
           ),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(
@@ -166,9 +168,8 @@ class _LectureSelectionState extends State<LectureSelection> {
                 ),
               );
             },
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: Text(
                 'Check',
                 style: TextStyle(

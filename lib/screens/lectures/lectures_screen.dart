@@ -21,7 +21,7 @@ class LectureScreen extends StatelessWidget {
   final String? sem;
   final String? section;
 
-  LectureScreen({
+  const LectureScreen({
     Key? key,
     this.branch,
     this.sem,
@@ -33,9 +33,9 @@ class LectureScreen extends StatelessWidget {
     final _lecturesRepo = context.read<LecturesRepository>();
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+      backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+        backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
         centerTitle: true,
         title: Text('$branch - $sem Sem ($section)'),
       ),
@@ -45,101 +45,115 @@ class LectureScreen extends StatelessWidget {
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
-            return Text('Something went wrong');
+            return const Text('Something went wrong');
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else {
             final data = snapshot.data?.data() as Map?;
-            if (data?.length == 0) {
-              return Center(
-                child: Text(
-                  'Nothing Here :)',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
+
+            if (data != null) {
+              if (data.isEmpty) {
+                return const Center(
+                  child: Text(
+                    'Nothing Here :)',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
+                );
+              }
+
+              final List? monday = data['Monday'];
+              final List? tuesday = data['Tuesday'];
+              final List? wednesday = data['Wednesday'];
+              final List? thursday = data['Thursday'];
+              final List? friday = data['Friday'];
+              final List? saturday = data['Saturday'];
+
+              //  Text('${data?['Thursday']}'),
+              return ListView(
+                children: [
+                  const SizedBox(height: 20.0),
+                  monday == null
+                      ? const LectureCard(
+                          lectureList: defaultList,
+                          day: 'Monday',
+                        )
+                      : LectureCard(
+                          lectureList: monday.isNotEmpty ? monday : defaultList,
+                          day: 'Monday',
+                        ),
+                  const SizedBox(height: 20.0),
+                  tuesday == null
+                      ? const LectureCard(
+                          lectureList: defaultList,
+                          day: 'Tuesday',
+                        )
+                      : LectureCard(
+                          lectureList:
+                              tuesday.isNotEmpty ? tuesday : defaultList,
+                          day: 'Tuesday',
+                        ),
+                  const SizedBox(height: 20.0),
+                  wednesday == null
+                      ? const LectureCard(
+                          lectureList: defaultList,
+                          day: 'Wednesday',
+                        )
+                      : LectureCard(
+                          lectureList:
+                              wednesday.isNotEmpty ? wednesday : defaultList,
+                          day: 'Wednesday',
+                        ),
+                  const SizedBox(height: 20.0),
+                  thursday == null
+                      ? const LectureCard(
+                          lectureList: defaultList,
+                          day: 'Thursday',
+                        )
+                      : LectureCard(
+                          lectureList:
+                              thursday.isNotEmpty ? thursday : defaultList,
+                          day: 'Thursday',
+                        ),
+                  const SizedBox(height: 20.0),
+                  friday == null
+                      ? const LectureCard(
+                          lectureList: defaultList,
+                          day: 'Friday',
+                        )
+                      : LectureCard(
+                          lectureList: friday.isNotEmpty ? friday : defaultList,
+                          day: 'Friday',
+                        ),
+                  const SizedBox(height: 20.0),
+                  saturday == null
+                      ? const LectureCard(
+                          lectureList: defaultList,
+                          day: 'Saturday',
+                        )
+                      : LectureCard(
+                          lectureList:
+                              saturday.isNotEmpty ? saturday : defaultList,
+                          day: 'Saturday',
+                        ),
+                ],
               );
             }
-            final List? monday = data?['Monday'];
-            final List? tuesday = data?['Tuesday'];
-            final List? wednesday = data?['Wednesday'];
-            final List? thursday = data?['Thursday'];
-            final List? friday = data?['Friday'];
-            final List? saturday = data?['Saturday'];
 
-            //  Text('${data?['Thursday']}'),
-            return ListView(
-              children: [
-                SizedBox(height: 20.0),
-                monday == null
-                    ? LectureCard(
-                        lectureList: defaultList,
-                        day: 'Monday',
-                      )
-                    : LectureCard(
-                        lectureList: monday.length != 0 ? monday : defaultList,
-                        day: 'Monday',
-                      ),
-                SizedBox(height: 20.0),
-                tuesday == null
-                    ? LectureCard(
-                        lectureList: defaultList,
-                        day: 'Tuesday',
-                      )
-                    : LectureCard(
-                        lectureList:
-                            tuesday.length != 0 ? tuesday : defaultList,
-                        day: 'Tuesday',
-                      ),
-                SizedBox(height: 20.0),
-                wednesday == null
-                    ? LectureCard(
-                        lectureList: defaultList,
-                        day: 'Wednesday',
-                      )
-                    : LectureCard(
-                        lectureList:
-                            wednesday.length != 0 ? wednesday : defaultList,
-                        day: 'Wednesday',
-                      ),
-                SizedBox(height: 20.0),
-                thursday == null
-                    ? LectureCard(
-                        lectureList: defaultList,
-                        day: 'Thursday',
-                      )
-                    : LectureCard(
-                        lectureList:
-                            thursday.length != 0 ? thursday : defaultList,
-                        day: 'Thursday',
-                      ),
-                SizedBox(height: 20.0),
-                friday == null
-                    ? LectureCard(
-                        lectureList: defaultList,
-                        day: 'Friday',
-                      )
-                    : LectureCard(
-                        lectureList: friday.length != 0 ? friday : defaultList,
-                        day: 'Friday',
-                      ),
-                SizedBox(height: 20.0),
-                saturday == null
-                    ? LectureCard(
-                        lectureList: defaultList,
-                        day: 'Saturday',
-                      )
-                    : LectureCard(
-                        lectureList:
-                            saturday.length != 0 ? saturday : defaultList,
-                        day: 'Saturday',
-                      ),
-              ],
+            return const Center(
+              child: Text(
+                'Nothing Here :)',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.white,
+                ),
+              ),
             );
           }
         },

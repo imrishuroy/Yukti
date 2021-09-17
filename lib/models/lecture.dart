@@ -7,7 +7,8 @@ class Lecture extends Equatable {
   final String? subCode;
   final String? subName;
   final String? time;
-  Lecture({
+
+  const Lecture({
     this.profName,
     this.subCode,
     this.subName,

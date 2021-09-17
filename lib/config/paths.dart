@@ -11,6 +11,8 @@ class Paths {
 
   static const String attendance = 'attendance';
 
+  static const String forms = 'forms';
+
   // sub collection
 
 }

@@ -10,7 +10,7 @@ class NothingHere extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: const Center(
         child: Text(
           'Nothing Here :(',
           style: TextStyle(
@@ -19,9 +19,9 @@ class NothingHere extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+      backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
-        actions: [
+        actions: const [
           CircleAvatar(
             radius: 14.0,
             backgroundColor: Colors.white,
@@ -35,7 +35,7 @@ class NothingHere extends StatelessWidget {
           SizedBox(width: 20.0),
         ],
         centerTitle: true,
-        backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+        backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
         title: Text(
           '$appBarTitle',
         ),

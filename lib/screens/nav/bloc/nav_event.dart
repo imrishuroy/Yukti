@@ -10,7 +10,7 @@ abstract class NavEvent extends Equatable {
 class UpdateNavItem extends NavEvent {
   final NavItem item;
 
-  UpdateNavItem({required this.item});
+  const UpdateNavItem({required this.item});
 
   @override
   List<Object> get props => [item];

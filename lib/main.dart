@@ -18,7 +18,7 @@ void main() async {
   await Firebase.initializeApp();
   EquatableConfig.stringify = kDebugMode;
   Bloc.observer = SimpleBlocObserver();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
             //   primarySwatch: Colors.green,
             // primaryColor: Color.fromRGBO(25, 23, 37, 1),
             //scaffoldBackgroundColor: Color.fromRGBO(25, 23, 37, 1),
-            appBarTheme: AppBarTheme(
+            appBarTheme: const AppBarTheme(
               elevation: 0.0,
               titleTextStyle: TextStyle(
                 fontSize: 20.0,

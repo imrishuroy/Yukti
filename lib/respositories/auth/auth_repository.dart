@@ -80,12 +80,12 @@ class AuthRepository extends BaseAuthRepository {
       throw Failure(code: error.code, message: error.message!);
     } catch (error) {
       print('Error ${error.toString()}');
-      throw Failure(message: 'Something went wrong.Try again');
+      throw const Failure(message: 'Something went wrong.Try again');
     }
   }
 
   String generateNonce([int length = 32]) {
-    final charset =
+    const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
     return List.generate(length, (_) => charset[random.nextInt(charset.length)])
@@ -118,7 +118,7 @@ class AuthRepository extends BaseAuthRepository {
       );
 
       // Create an `OAuthCredential` from the credential returned by Apple.
-      final oauthCredential = OAuthProvider("apple.com").credential(
+      final oauthCredential = OAuthProvider('apple.com').credential(
         idToken: appleCredential.identityToken,
         rawNonce: rawNonce,
       );
@@ -137,7 +137,7 @@ class AuthRepository extends BaseAuthRepository {
       print(error.toString());
       throw Failure(code: error.code, message: error.message!);
     } catch (error) {
-      throw Failure(message: 'Something went wrong.Try again');
+      throw const Failure(message: 'Something went wrong.Try again');
     }
   }
 
@@ -158,7 +158,7 @@ class AuthRepository extends BaseAuthRepository {
       print(error.toString());
       throw Failure(code: error.code, message: error.message!);
     } catch (error) {
-      throw Failure(message: 'Something went wrong.Try again');
+      throw const Failure(message: 'Something went wrong.Try again');
     }
   }
 
@@ -177,7 +177,7 @@ class AuthRepository extends BaseAuthRepository {
       print(error.toString());
       throw Failure(code: error.code, message: error.message!);
     } catch (error) {
-      throw Failure(message: 'Something went wrong.Try again');
+      throw const Failure(message: 'Something went wrong.Try again');
     }
   }
 

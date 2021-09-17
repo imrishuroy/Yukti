@@ -5,6 +5,8 @@ import 'package:yukti/respositories/user/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserProfileImage extends StatelessWidget {
+  const UserProfileImage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final _userRepo = context.read<UserRepository>();
@@ -13,7 +15,7 @@ class UserProfileImage extends StatelessWidget {
       future: _userRepo.getUserById(userId: _userId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         final user = snapshot.data;
@@ -40,7 +42,7 @@ class UserProfileImage extends StatelessWidget {
           child: CircleAvatar(
             radius: 55.0,
             backgroundColor: Colors.white70,
-            child: const Icon(
+            child: Icon(
               Icons.image,
               color: Colors.green,
             ),

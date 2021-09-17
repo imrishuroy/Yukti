@@ -15,13 +15,13 @@ class AuthState extends Equatable {
     this.status = AuthStatus.unknown,
   });
 
-  factory AuthState.unknown() => AuthState();
+  factory AuthState.unknown() => const AuthState();
 
   factory AuthState.authenticated({@required AppUser? user}) =>
       AuthState(user: user, status: AuthStatus.authenticated);
 
   factory AuthState.unAuthenticated() =>
-      AuthState(status: AuthStatus.unauthenticated);
+      const AuthState(status: AuthStatus.unauthenticated);
 
   @override
   List<Object?> get props => [user, status];
