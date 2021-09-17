@@ -1,5 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:admin_yukti/widgets/show_mesage.dart';
+
+import '/models/assignment.dart';
+import '/repositories/firestore/firestore_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart';
 
 class AddAssignmentScreen extends StatefulWidget {
   static String routeName = '/add-assignment';
@@ -21,8 +27,6 @@ class AddAssignmentScreen extends StatefulWidget {
 }
 
 class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
-  CollectionReference lectures =
-      FirebaseFirestore.instance.collection('lecture');
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? _subCode;
   String? _subName;
@@ -39,91 +43,100 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
   final _assignmentNameController = TextEditingController();
   final _downloadLinkNameController = TextEditingController();
 
+  // DateTime? _assignmentDate;
+  String? _assignmentDate;
+
   void resetForm() async {
     _subNameController.clear();
     _subCodeController.clear();
     _assignmentNameController.clear();
     _downloadLinkNameController.clear();
+    _assignmentDate = null;
   }
 
-  // void _submit(BuildContext context) async {
+  Future<void> _selectAssignmentDate() async {
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2021, 1, 1),
+      lastDate: DateTime(2021, 12, 31),
+    );
 
-  //   final form = _formKey.currentState!;
+    if (pickedDate != null) {
+      print('Date Picked ${DateFormat.yMMMMEEEEd().format(pickedDate)}');
 
-  //   FocusScope.of(context).unfocus();
-  //   if (form.validate()) {
-  //     form.save();
+      setState(() {
+        // _assignmentDate = pickedDate;
+        _assignmentDate = DateFormat.yMMMMEEEEd().format(pickedDate);
+      });
+    }
+  }
 
-  //     setState(() {
-  //       _isSubmiting = true;
-  //     });
+  void _submit(BuildContext context) async {
+    final _firestoreRepo = context.read<FirestoreRepository>();
 
-  //     DocumentSnapshot doc = await database.assignmentsDocument(
-  //       branch: widget.branch,
-  //       sem: widget.sem,
-  //       section: widget.section,
-  //     );
-  //     Map<String, dynamic>? data = doc.data();
-  //     //  print(data);
+    final form = _formKey.currentState!;
 
-  //     if (doc.exists) {
-  //       List alreadyAddedAssignments = data?['assignments'];
-  //       //   print(assignments);
+    FocusScope.of(context).unfocus();
+    if (form.validate()) {
+      form.save();
 
-  //       assignmentsList = alreadyAddedAssignments;
+      setState(() {
+        _isSubmiting = true;
+      });
 
-  //       // print(lectureDay);
-  //       assignmentsList.add(
-  //         {
-  //           'assignmentName': _assignmentName,
-  //           'subName': _subName,
-  //           'subCode': _subCode,
-  //           'link': _downloadLink,
-  //         },
-  //       );
-  //       // print('Selected Lecture Day $selectedLecture');
-  //     } else {
-  //       selectedLecture.add(
-  //         {
-  //           'assignmentName': _assignmentName,
-  //           'subName': _subName,
-  //           'subCode': _subCode,
-  //           'link': _downloadLink,
-  //         },
-  //       );
-  //     }
+      if (_assignmentDate == null) {
+        ShowMessage.showErrorMessage(context,
+            message: 'Please pick assignment date ');
+      } else {
+        if (widget.branch != null &&
+            widget.sem != null &&
+            widget.section != null &&
+            _assignmentDate != null) {
+          final id = const Uuid().v4();
+          final assignment = Assignment(
+            assignmentId: id,
+            date: _assignmentDate,
+            name: _assignmentName,
+            subCode: _subCode,
+            subName: _subName,
+            link: _downloadLink,
+          );
 
-  //     // using database class by the help of provider class
-  //     await database.updateAssignemtData(
-  //       branch: widget.branch,
-  //       sem: widget.sem,
-  //       section: widget.section,
-  //       subCode: _subCode,
-  //       subName: _subName,
-  //       assignments: assignmentsList,
-  //     );
-  //     resetForm();
+          await _firestoreRepo.addAssignments(
+            branch: widget.branch!,
+            sem: widget.sem!,
+            section: widget.section!,
+            assignment: assignment,
+          );
 
-  //     setState(() {
-  //       _isSubmiting = false;
-  //     });
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         backgroundColor: Colors.green,
-  //         content: Text(
-  //           'Assignment Added',
-  //           textAlign: TextAlign.center,
-  //         ),
-  //       ),
-  //     );
-  //   }
-  // }
+          resetForm();
+        } else {
+          ShowMessage.showErrorMessage(context,
+              message: 'Please fill all the details to continue ');
+        }
+      }
+
+      setState(() {
+        _isSubmiting = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.green,
+          content: Text(
+            'Assignment Added',
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // print(widget.branch);
-    // print(widget.section);
-    // print(widget.sem);
+    print(widget.branch);
+    print(widget.section);
+    print(widget.sem);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
@@ -137,6 +150,23 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
             // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 20.0),
+              TextButton.icon(
+                style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 19.0)),
+                onPressed: _selectAssignmentDate,
+                icon: const Icon(
+                  Icons.calendar_today,
+                  size: 19.0,
+                ),
+                label: const Text('Pick Date'),
+              ),
+              const SizedBox(height: 5.0),
+              if (_assignmentDate != null)
+                Text(
+                  'Assignment Date - $_assignmentDate',
+                  style: const TextStyle(fontSize: 17.0),
+                ),
+              const SizedBox(height: 10.0),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 25.0,
@@ -195,7 +225,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
                 ),
                 child: TextFormField(
                   controller: _assignmentNameController,
-                  key: ValueKey('assignmentName'),
+                  key: const ValueKey('assignmentName'),
                   onSaved: (value) => _assignmentName = value?.trim(),
                   keyboardType: TextInputType.name,
                   // controller: _emailController,
@@ -241,8 +271,9 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
               if (_isSubmiting) const CircularProgressIndicator(),
               if (!_isSubmiting)
                 ElevatedButton(
-                  // onPressed: () => _submit(context),
-                  onPressed: () {},
+                  onPressed: () => _submit(context),
+
+                  // onPressed: () {},
                   // onPressed: () {},
                   child: const Padding(
                     padding: EdgeInsets.symmetric(

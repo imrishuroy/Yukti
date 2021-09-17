@@ -1,5 +1,6 @@
 import 'package:admin_yukti/screens/assignments/assignment_selection.dart';
 import 'package:admin_yukti/screens/attendance/attendance_selection.dart';
+import 'package:admin_yukti/screens/google-forms/form_selection.dart';
 import 'package:admin_yukti/screens/lectures/lectures_selection.dart';
 import 'package:admin_yukti/screens/widgets/option_card.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +67,12 @@ class HomeScreen extends StatelessWidget {
                   icon: FontAwesomeIcons.book,
                   onTap: () => Navigator.of(context)
                       .pushNamed(LectureSelection.routeName),
+                ),
+                OptionCard(
+                  title: 'Google Forms',
+                  icon: Icons.feed,
+                  onTap: () =>
+                      Navigator.of(context).pushNamed(FormSelection.routeName),
                 ),
               ],
             ),

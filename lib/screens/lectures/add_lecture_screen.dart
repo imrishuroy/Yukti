@@ -28,6 +28,7 @@ class _AddLectureScreenState extends State<AddLectureScreen> {
   String? _subCode;
   String? _subName;
   String? _profName;
+  String? _link;
 
   bool _isSubmiting = false;
 
@@ -37,6 +38,7 @@ class _AddLectureScreenState extends State<AddLectureScreen> {
   final _subCodeController = TextEditingController();
   final _subNameController = TextEditingController();
   final _profNameController = TextEditingController();
+  final _linkController = TextEditingController();
 
   Future<void> _selectStartingTime(BuildContext context) async {
     final TimeOfDay? pickedTime = await showTimePicker(
@@ -66,6 +68,7 @@ class _AddLectureScreenState extends State<AddLectureScreen> {
     _subNameController.clear();
     _subCodeController.clear();
     _profNameController.clear();
+    _linkController.clear();
     _startingTime = TimeOfDay.now();
     _endingTime = TimeOfDay.now();
   }
@@ -74,6 +77,7 @@ class _AddLectureScreenState extends State<AddLectureScreen> {
     try {
       FocusScope.of(context).unfocus();
       final form = _formKey.currentState!;
+      final id = const Uuid().v4();
       if (form.validate()) {
         form.save();
         final lectureRepo = context.read<LectureRepository>();
@@ -82,10 +86,11 @@ class _AddLectureScreenState extends State<AddLectureScreen> {
         });
 
         final lecture = Lecture(
-          lectureId: const Uuid().v4(),
+          lectureId: id,
           profName: _profName,
           subCode: _subCode,
           subName: _subName,
+          link: _link,
           time:
               '${_startingTime?.format(context)}-${_endingTime?.format(context)}',
         );
@@ -99,9 +104,10 @@ class _AddLectureScreenState extends State<AddLectureScreen> {
         );
 
         _formKey.currentState?.reset();
-        _subCodeController.clear();
-        _subNameController.clear();
-        _subNameController.clear();
+        // _subCodeController.clear();
+        // _subNameController.clear();
+
+        resetForm();
       }
       setState(() {
         _isSubmiting = false;
@@ -119,123 +125,9 @@ class _AddLectureScreenState extends State<AddLectureScreen> {
     _subCodeController.dispose();
     _subNameController.dispose();
     _subNameController.dispose();
+    _linkController.dispose();
     super.dispose();
   }
-
-  // void _submit(BuildContext context) async {
-  //   final DataBase database = Provider.of<DataBase>(context, listen: false);
-  //   final form = _formKey.currentState!;
-  //   // final database = Provider.of<DataBase>(context, listen: false);
-  //   FocusScope.of(context).unfocus();
-  //   if (form.validate()) {
-  //     form.save();
-
-  //     setState(() {
-  //       _isSubmiting = true;
-  //     });
-
-  //     DocumentSnapshot doc = await database.lecturesDocument(
-  //       branch: widget.branch,
-  //       sem: widget.sem,
-  //       section: widget.section,
-  //     );
-  //     Map<String, dynamic>? data = doc.data();
-  //     // print(data);
-
-  //     // already available data
-  //     // print(data);
-  //     //  print(doc.exists);
-  //     // List lectureDay = data?['${widget.day}'];
-  //     // print(lectureDay);
-
-  //     if (doc.exists) {
-  //       List lectureDay = data?['${widget.day}'];
-
-  //       selectedLecture = lectureDay;
-  //       //  print(lectureDay);
-  //       selectedLecture.add(
-  //         {
-  //           //  'day': '${widget.day}',
-  //           //   'date': '${widget.date}',
-  //           'subName': _subName,
-  //           'profName': _profName,
-  //           'subCode': _subCode,
-  //           'time':
-  //               '${_startingTime?.format(context)}-${_endingTime?.format(context)}',
-  //         },
-  //       );
-  //       // print('Selected Lecture Day $selectedLecture');
-  //     } else {
-  //       selectedLecture.add(
-  //         {
-  //           //'day': '${widget.day}',
-  //           // 'date': '${widget.date}',
-  //           'subName': _subName,
-  //           'profName': _profName,
-  //           'subCode': _subCode,
-  //           'time':
-  //               '${_startingTime?.format(context)}-${_endingTime?.format(context)}',
-  //         },
-  //       );
-  //     }
-
-  //     // if (doc.exists) {
-  //     //   List allLectures = await doc['${widget.day}'];
-  //     //   print('All Lectres $allLectures');
-  //     //   selectedLecture = allLectures;
-  //     //   // selectedLecture = await allLectures['${widget.day}'];
-  //     //   selectedLecture.add(
-  //     //     {
-  //     //       'day': '${widget.day}',
-  //     //       'date': '${widget.date}',
-  //     //       'subName': _subName,
-  //     //       'profName': _profName,
-  //     //       'subCode': _subCode,
-  //     //       'time':
-  //     //           '${_startingTime?.format(context)}-${_endingTime?.format(context)}',
-  //     //     },
-  //     //   );
-  //     // } else {
-  //     //   selectedLecture.add(
-  //     //     {
-  //     //       'day': '${widget.day}',
-  //     //       'date': '${widget.date}',
-  //     //       'subName': _subName,
-  //     //       'profName': _profName,
-  //     //       'subCode': _subCode,
-  //     //       'time':
-  //     //           '${_startingTime?.format(context)}-${_endingTime?.format(context)}',
-  //     //     },
-  //     //   );
-  //     // }
-  //     // using database class by the help of provider class
-  //     await database.updateLecturesData(
-  //       branch: widget.branch,
-  //       sem: widget.sem,
-  //       section: widget.section,
-  //       day: widget.day,
-  //       //  date: widget.date,
-  //       subCode: _subCode,
-  //       subName: _subName,
-  //       profName: _profName,
-  //       lecture: selectedLecture,
-  //     );
-  //     resetForm();
-
-  //     setState(() {
-  //       _isSubmiting = false;
-  //     });
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         backgroundColor: Colors.green,
-  //         content: Text(
-  //           'Lecture Added',
-  //           textAlign: TextAlign.center,
-  //         ),
-  //       ),
-  //     );
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -397,6 +289,32 @@ class _AddLectureScreenState extends State<AddLectureScreen> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 25.0,
+                  vertical: 15.0,
+                ),
+                child: TextFormField(
+                  controller: _linkController,
+                  key: const ValueKey('link'),
+                  onSaved: (value) => _link = value?.trim(),
+                  keyboardType: TextInputType.name,
+                  // controller: _emailController,
+                  validator: (value) =>
+                      !(value!.length >= 3) ? 'Invalid Input' : null,
+                  decoration: const InputDecoration(
+                    //icon: Icon(Icons.mail),
+                    labelText: 'Joining Link',
+                    hintText: 'Enter joining link',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.green,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10.0),
               if (_isSubmiting) const CircularProgressIndicator(),
               if (!_isSubmiting)
                 ElevatedButton(

@@ -16,7 +16,7 @@ class AddAttendaneScreen extends StatefulWidget {
 
 class _AddAttendaneScreenState extends State<AddAttendaneScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String? _subCode;
+
   String? _subName;
   String? _updateOnDate;
   String? dowloadLink;

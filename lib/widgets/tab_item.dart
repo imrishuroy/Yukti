@@ -19,7 +19,7 @@ class TabItem extends StatelessWidget {
         const SizedBox(width: 10.0),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 17.0,
             fontWeight: FontWeight.w600,
           ),

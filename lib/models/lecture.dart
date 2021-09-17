@@ -8,6 +8,7 @@ class Lecture extends Equatable {
   final String? subCode;
   final String? subName;
   final String? time;
+  final String? link;
 
   const Lecture({
     required this.lectureId,
@@ -15,6 +16,7 @@ class Lecture extends Equatable {
     this.subCode,
     this.subName,
     this.time,
+    this.link,
   });
 
   Lecture copyWith({
@@ -23,6 +25,7 @@ class Lecture extends Equatable {
     String? subCode,
     String? subName,
     String? time,
+    String? link,
   }) {
     return Lecture(
       lectureId: lectureId ?? this.lectureId,
@@ -30,6 +33,7 @@ class Lecture extends Equatable {
       subCode: subCode ?? this.subCode,
       subName: subName ?? this.subName,
       time: time ?? this.time,
+      link: link ?? this.link,
     );
   }
 
@@ -40,6 +44,7 @@ class Lecture extends Equatable {
       'subCode': subCode,
       'subName': subName,
       'time': time,
+      'link': link,
     };
   }
 
@@ -50,6 +55,7 @@ class Lecture extends Equatable {
       subCode: map['subCode'],
       subName: map['subName'],
       time: map['time'],
+      link: map['link'],
     );
   }
 
@@ -69,6 +75,7 @@ class Lecture extends Equatable {
       subCode,
       subName,
       time,
+      link,
     ];
   }
 }

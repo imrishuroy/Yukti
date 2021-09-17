@@ -15,11 +15,11 @@ class TableEntryText extends StatelessWidget {
     return Padding(
       // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 7),
-      child: Container(
+      child: SizedBox(
         // width: 250.0,
         child: Text(
           '$value',
-          style: TextStyle(fontSize: 16.0),
+          style: const TextStyle(fontSize: 16.0),
           textAlign: textAlign,
         ),
       ),

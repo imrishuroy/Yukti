@@ -1,5 +1,6 @@
 import 'package:admin_yukti/screens/assignments/assignment_selection.dart';
 import 'package:admin_yukti/screens/attendance/attendance_selection.dart';
+import 'package:admin_yukti/screens/google-forms/form_selection.dart';
 import 'package:admin_yukti/screens/lectures/lectures_selection.dart';
 
 import '/screens/home/home_screen.dart';
@@ -35,6 +36,9 @@ class CustomRouter {
 
       case AssignmentSelection.routeName:
         return AssignmentSelection.route();
+
+      case FormSelection.routeName:
+        return FormSelection.route();
 
       default:
         return ErrorRoute.route();

@@ -27,16 +27,16 @@ class _AttendanceSelectionState extends State<AttendanceSelection> {
   String? _enrollNo;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void _submit(BuildContext context) {
-    final form = _formKey.currentState!;
+  // void _submit(BuildContext context) {
+  //   final form = _formKey.currentState!;
 
-    FocusScope.of(context).unfocus();
-    if (form.validate()) {
-      form.save();
-      print(_enrollNoController.text);
-      print(_enrollNo);
-    }
-  }
+  //   FocusScope.of(context).unfocus();
+  //   if (form.validate()) {
+  //     form.save();
+  //     print(_enrollNoController.text);
+  //     print(_enrollNo);
+  //   }
+  // }
 
   void clear() {
     _enrollNoController.clear();
@@ -144,7 +144,7 @@ class _AttendanceSelectionState extends State<AttendanceSelection> {
                           ).toList(),
                         ),
                       ),
-                      SizedBox(height: 25.0),
+                      const SizedBox(height: 25.0),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 25.0,
@@ -153,7 +153,7 @@ class _AttendanceSelectionState extends State<AttendanceSelection> {
                         child: TextFormField(
                           onChanged: (value) => _enrollNo = value,
                           controller: _enrollNoController,
-                          key: ValueKey('enrollNo'),
+                          key: const ValueKey('enrollNo'),
                           onSaved: (value) =>
                               _enrollNo = value?.trim().toUpperCase(),
                           keyboardType: TextInputType.name,

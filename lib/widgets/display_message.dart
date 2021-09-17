@@ -11,7 +11,7 @@ class ShowMessage {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: Colors.red,
-        duration: Duration(seconds: 6),
+        duration: const Duration(seconds: 6),
         content: Text(
           message,
           style: _textStyle,
@@ -35,7 +35,7 @@ class ShowMessage {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: Colors.green,
-        duration: Duration(seconds: 6),
+        duration: const Duration(seconds: 6),
         content: Text(
           message,
           style: _textStyle,

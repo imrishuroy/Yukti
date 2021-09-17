@@ -21,10 +21,10 @@ class ErrorDialog extends StatelessWidget {
 
   CupertinoAlertDialog _showIOSDialog(BuildContext context) {
     return CupertinoAlertDialog(
-      title: Text('${title ?? ''}'),
+      title: Text(title ?? ''),
       content: Text(
-        '${content ?? ''}',
-        style: TextStyle(color: Colors.black),
+        content ?? '',
+        style: const TextStyle(color: Colors.black),
       ),
       actions: [
         CupertinoDialogAction(
@@ -37,12 +37,12 @@ class ErrorDialog extends StatelessWidget {
 
   AlertDialog _showAndroidDialog(BuildContext context) {
     return AlertDialog(
-      title: Text('${title ?? ''}'),
+      title: Text(title ?? ''),
       content: Text(content ?? ''),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text('OK'),
+          child: const Text('OK'),
         ),
       ],
     );

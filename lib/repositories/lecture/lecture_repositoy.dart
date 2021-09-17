@@ -1,5 +1,5 @@
 import 'package:admin_yukti/config/paths.dart';
-import 'package:admin_yukti/models/failure.dart';
+
 import 'package:admin_yukti/models/lecture.dart';
 import 'package:admin_yukti/repositories/lecture/base_lecture_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

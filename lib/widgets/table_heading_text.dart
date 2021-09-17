@@ -15,7 +15,7 @@ class TableHeadingText extends StatelessWidget {
       // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       child: Text(
         '$label',
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w600,
           letterSpacing: 1.2,
         ),

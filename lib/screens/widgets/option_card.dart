@@ -16,7 +16,7 @@ class OptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return GestureDetector(
+    return InkWell(
       onTap: onTap as void Function()?,
       child: Card(
         // color: Color.fromRGBO(255, 255, 250, 1),
