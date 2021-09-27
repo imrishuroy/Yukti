@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yukti/screens/announcements/announcements_screen.dart';
-import 'package:yukti/screens/assignments/assignments_screen.dart';
-import 'package:yukti/screens/attendance/attendance_screen.dart';
-import 'package:yukti/screens/lectures/lectures_selection.dart';
-import 'package:yukti/screens/login/forget_password.dart';
-import 'package:yukti/screens/profile/profile_screen.dart';
+import '/screens/announcements/announcements_screen.dart';
+import '/screens/assignments/assignments_screen.dart';
+import '/screens/attendance/attendance_screen.dart';
+import '/screens/lectures/lectures_selection.dart';
+import '/screens/login/forget_password.dart';
+import '../screens/profile/widgets/profile_screen.dart';
 
 import '/screens/login/login_screen.dart';
 import '/screens/nav/nav_screen.dart';

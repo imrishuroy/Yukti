@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:yukti/config/paths.dart';
-import 'package:yukti/models/app_user.dart';
-import 'package:yukti/models/failure.dart';
-import 'package:yukti/respositories/user/base_user_repo.dart';
+import '/config/paths.dart';
+import '/models/app_user.dart';
+import '/models/failure.dart';
+import '/respositories/user/base_user_repo.dart';
 
 class UserRepository extends BaseUserRepository {
   final FirebaseFirestore _firestore;

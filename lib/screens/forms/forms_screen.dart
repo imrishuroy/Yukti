@@ -2,7 +2,8 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yukti/widgets/app_drawer.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '/widgets/app_drawer.dart';
 import '/models/google_form.dart';
 import '/respositories/firebase/firebase_repositroy.dart';
 
@@ -14,44 +15,85 @@ class FormScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _firebaseRepo = context.read<FirebaseRepositroy>();
-    return Scaffold(
-      drawer: const AppDrawer(),
-      appBar: AppBar(
-        backgroundColor: Colors.grey.shade900,
-        title: const Text('Forms'),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          const SizedBox(height: 5.0),
-          Expanded(
-            child: FutureBuilder<List<GoogleForm>>(
-              future: _firebaseRepo.getGoogleForms(
-                  branch: 'CSE', sem: '5th', section: 'B'),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+    return FutureBuilder<List<GoogleForm>>(
+      future:
+          _firebaseRepo.getGoogleForms(branch: 'CSE', sem: '5th', section: 'B'),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
 
-                return ListView.builder(
-                  itemCount: snapshot.data?.length,
-                  itemBuilder: (context, index) {
-                    final _cardKey =
-                        GlobalObjectKey<ExpansionTileCardState>(index);
-                    final form = snapshot.data?[index];
-                    return FormExpansionTile(
-                      cardKey: _cardKey,
-                      form: form,
+        final forms = snapshot.data;
+
+        return Scaffold(
+          drawer: const AppDrawer(),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            // backgroundColor: Color.fromRGBO(0, 141, 82, 1),
+            centerTitle: true,
+            title: const Text('Forms'),
+            leading: Builder(builder: (context) {
+              return IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.alignLeft,
+                  size: 26.0,
+                ),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
+            }),
+            actions: [
+              CircleAvatar(
+                radius: 14.0,
+                backgroundColor: Colors.white,
+                child: Text(
+                  '${forms?.length ?? '0'}',
+                  // '${snapshot.data.length ?? '0'}',
+
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 20.0),
+            ],
+          ),
+          body: Column(
+            children: [
+              const SizedBox(height: 5.0),
+              Expanded(
+                child: FutureBuilder<List<GoogleForm>>(
+                  future: _firebaseRepo.getGoogleForms(
+                      branch: 'CSE', sem: '5th', section: 'B'),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    return ListView.builder(
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (context, index) {
+                        final _cardKey =
+                            GlobalObjectKey<ExpansionTileCardState>(index);
+                        final form = snapshot.data?[index];
+                        return FormExpansionTile(
+                          cardKey: _cardKey,
+                          form: form,
+                        );
+                      },
                     );
                   },
-                );
-              },
-            ),
-          )
-        ],
-      ),
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

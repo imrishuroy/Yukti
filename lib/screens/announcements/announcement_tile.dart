@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yukti/models/announcement.dart';
-import 'package:yukti/respositories/repositories.dart';
+import '/models/announcement.dart';
+import '/respositories/repositories.dart';
 
 class AnnouncementTile extends StatelessWidget {
   final Announcement? announcement;

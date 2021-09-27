@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yukti/blocs/bloc/auth_bloc.dart';
-import 'package:yukti/screens/login/login_screen.dart';
-import 'package:yukti/screens/nav/nav_screen.dart';
+import '/blocs/auth/auth_bloc.dart';
+
+import '/screens/login/login_screen.dart';
+import '/screens/nav/nav_screen.dart';
 
 class AuthWrapper extends StatelessWidget {
   static const String routeName = '/authwrapper';

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:yukti/blocs/bloc/auth_bloc.dart';
+import 'package:yukti/blocs/auth/auth_bloc.dart';
+
 import 'package:yukti/models/app_user.dart';
 import 'package:yukti/respositories/firebase/firebase_repositroy.dart';
 import 'package:yukti/respositories/user/user_repository.dart';

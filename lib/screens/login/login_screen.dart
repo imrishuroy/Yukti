@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-import 'package:yukti/respositories/auth/auth_repository.dart';
+import '/respositories/auth/auth_repository.dart';
 
-import 'package:yukti/screens/login/cubit/login_cubit.dart';
-import 'package:yukti/screens/signup/signup_screen.dart';
+import '/screens/login/cubit/login_cubit.dart';
+import '/screens/signup/signup_screen.dart';
 
-import 'package:yukti/widgets/error_dialog.dart';
-import 'package:yukti/widgets/google_button.dart';
-import 'package:yukti/widgets/greetings_widget.dart';
+import '/widgets/error_dialog.dart';
+import '/widgets/google_button.dart';
+import '/widgets/greetings_widget.dart';
 
 import 'forget_password.dart';
 

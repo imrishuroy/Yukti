@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yukti/blocs/bloc/auth_bloc.dart';
-import 'package:yukti/models/app_user.dart';
-import 'package:yukti/respositories/user/user_repository.dart';
+import 'package:yukti/widgets/display_image.dart';
+import '/blocs/auth/auth_bloc.dart';
+
+import '/models/app_user.dart';
+import '/respositories/user/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserProfileImage extends StatelessWidget {
@@ -27,10 +29,15 @@ class UserProfileImage extends StatelessWidget {
               return CircleAvatar(
                 radius: 60.0,
                 backgroundColor: Colors.white70,
-                child: CircleAvatar(
-                  radius: 55.0,
-                  backgroundColor: Colors.white,
-                  backgroundImage: NetworkImage(user.photUrl!),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(60.0),
+                  child: CircleAvatar(
+                    child: DisplayImage(imageUrl: user.photUrl),
+                    radius: 55.0,
+                    backgroundColor: Colors.white,
+                    // backgroundImage: DisplayImage(imageUrl: user.photUrl)
+                    // NetworkImage(user.photUrl!),
+                  ),
                 ),
               );
             }

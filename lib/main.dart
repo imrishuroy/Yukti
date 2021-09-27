@@ -3,14 +3,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yukti/blocs/bloc/auth_bloc.dart';
 import 'package:yukti/blocs/tab/tab_bloc.dart';
 import 'package:yukti/config/auth_wrapper.dart';
 import 'package:yukti/config/custom_router.dart';
+import 'package:yukti/constants/constants.dart';
 import 'package:yukti/respositories/auth/auth_repository.dart';
 import 'package:yukti/respositories/firebase/firebase_repositroy.dart';
 import 'package:yukti/respositories/lectures/lectures_repository.dart';
 import 'package:yukti/respositories/user/user_repository.dart';
+import 'blocs/auth/auth_bloc.dart';
 import 'blocs/simple_bloc_consumer.dart';
 
 void main() async {
@@ -53,10 +54,13 @@ class MyApp extends StatelessWidget {
           )
         ],
         child: MaterialApp(
-          title: 'Yukti',
+          //  title: 'Yukti',
           theme: ThemeData(
             scaffoldBackgroundColor: Colors.black54,
+            primaryColor: primaryColor,
 
+            elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(primary: primaryColor)),
             // primaryColor: ,
             //   primarySwatch: Colors.green,
             // primaryColor: Color.fromRGBO(25, 23, 37, 1),

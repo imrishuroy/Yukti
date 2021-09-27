@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:yukti/blocs/bloc/auth_bloc.dart';
+import 'package:yukti/blocs/auth/auth_bloc.dart';
+import 'package:yukti/constants/constants.dart';
+
 import 'package:yukti/models/app_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yukti/respositories/user/user_repository.dart';
@@ -151,7 +153,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
+        backgroundColor: Colors.transparent,
+        // backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
         centerTitle: true,
         title: const Text('Edit Profile'),
         actions: [
@@ -185,7 +188,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             backgroundColor: Colors.grey,
                             radius: 60.0,
                             backgroundImage: (_image == null
-                                ? NetworkImage(imageUrl!)
+                                ? NetworkImage(imageUrl ?? errorImage)
                                 : FileImage(_image!)) as ImageProvider<Object>?,
                           ),
                           const SizedBox(width: 20.0),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yukti/blocs/bloc/auth_bloc.dart';
+import 'package:yukti/blocs/auth/auth_bloc.dart';
+
 import 'package:yukti/models/app_user.dart';
 import 'package:yukti/models/assignment.dart';
 import 'package:yukti/respositories/firebase/firebase_repositroy.dart';

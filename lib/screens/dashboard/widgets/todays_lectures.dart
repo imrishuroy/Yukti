@@ -4,11 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import 'package:provider/provider.dart';
-import 'package:yukti/blocs/bloc/auth_bloc.dart';
-import 'package:yukti/models/app_user.dart';
-import 'package:yukti/models/lecture.dart';
-import 'package:yukti/respositories/lectures/lectures_repository.dart';
-import 'package:yukti/respositories/user/user_repository.dart';
+import '/blocs/auth/auth_bloc.dart';
+
+import '/models/app_user.dart';
+import '/models/lecture.dart';
+import '/respositories/lectures/lectures_repository.dart';
+import '/respositories/user/user_repository.dart';
 
 class TodaysLectures extends StatefulWidget {
   const TodaysLectures({Key? key}) : super(key: key);
@@ -78,14 +79,34 @@ class _TodaysLecturesState extends State<TodaysLectures> {
                       }
 
                       print('Lecture ${snapshot.data}');
-                      if (snapshot.data!.isEmpty) {
+
+                      if (snapshot.data == null) {
                         return const Center(
                           child: Text(
                             'Nothing Here :)',
-                            style: TextStyle(fontSize: 20.0),
+                            style:
+                                TextStyle(fontSize: 20.0, color: Colors.white),
+                          ),
+                        );
+                      } else if (snapshot.data!.isEmpty) {
+                        const Center(
+                          child: Text(
+                            'Nothing Here :)',
+                            style:
+                                TextStyle(fontSize: 20.0, color: Colors.white),
                           ),
                         );
                       }
+
+                      // if (snapshot.data!.isEmpty) {
+                      //   return const Center(
+                      //     child: Text(
+                      //       'Nothing Here :)',
+                      //       style:
+                      //           TextStyle(fontSize: 20.0, color: Colors.white),
+                      //     ),
+                      //   );
+                      // }
                       return AnimationLimiter(
                         child: ListView.builder(
                           itemCount: snapshot.data?.length,
@@ -323,11 +344,11 @@ class _TodaysLecturesState extends State<TodaysLectures> {
 // import 'package:flutter_bloc/flutter_bloc.dart';
 
 // import 'package:provider/provider.dart';
-// import 'package:yukti/blocs/bloc/auth_bloc.dart';
-// import 'package:yukti/models/app_user.dart';
-// import 'package:yukti/models/lecture.dart';
-// import 'package:yukti/respositories/lectures/lectures_repository.dart';
-// import 'package:yukti/respositories/user/user_repository.dart';
+// import '/blocs/bloc/auth_bloc.dart';
+// import '/models/app_user.dart';
+// import '/models/lecture.dart';
+// import '/respositories/lectures/lectures_repository.dart';
+// import '/respositories/user/user_repository.dart';
 
 // class TodaysLectures extends StatefulWidget {
 //   @override

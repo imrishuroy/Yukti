@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yukti/models/announcement.dart';
-import 'package:yukti/respositories/firebase/firebase_repositroy.dart';
-import 'package:yukti/widgets/nothing_here.dart';
+import '/models/announcement.dart';
+import '/respositories/firebase/firebase_repositroy.dart';
+import '/widgets/nothing_here.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'announcement_tile.dart';

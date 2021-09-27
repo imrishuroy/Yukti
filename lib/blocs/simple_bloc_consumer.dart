@@ -14,6 +14,7 @@ class SimpleBlocObserver extends BlocObserver {
   }
 
   @override
+  // ignore: avoid_renaming_method_parameters
   Future<void> onError(cubit, Object error, StackTrace stackTrace) async {
     print(error);
     super.onError(cubit, error, stackTrace);

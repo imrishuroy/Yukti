@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:yukti/screens/profile/widgets/profile_screen.dart';
 import 'package:yukti/widgets/app_drawer.dart';
 import 'widgets/dash_board_cards.dart';
 import 'widgets/todays_lectures.dart';
@@ -9,6 +10,7 @@ class DashBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //FirebaseAuth.instance.signOut();
     return Scaffold(
       //  drawer: Drawer(),
       drawer: const AppDrawer(),
@@ -56,15 +58,20 @@ class DashBoard extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        actions: const [
-          CircleAvatar(
-            radius: 22.3,
-            backgroundColor: Colors.deepOrange,
-            child: CircleAvatar(
-              radius: 19.5,
-              backgroundColor: Colors.white,
-              backgroundImage: NetworkImage(
-                  'https://raw.githubusercontent.com/imrishuroy/Rishu-Portfolio/master/assets/avtar.png'),
+        actions: [
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pushNamed(ProfileScreen.routeName);
+            },
+            child: const CircleAvatar(
+              radius: 22.3,
+              backgroundColor: Colors.deepOrange,
+              child: CircleAvatar(
+                radius: 19.5,
+                backgroundColor: Colors.white,
+                backgroundImage: NetworkImage(
+                    'https://raw.githubusercontent.com/imrishuroy/Rishu-Portfolio/master/assets/avtar.png'),
+              ),
             ),
           ),
           // IconButton(
@@ -78,7 +85,7 @@ class DashBoard extends StatelessWidget {
           //     // );
           //   },
           // ),
-          SizedBox(width: 17.0),
+          const SizedBox(width: 17.0),
         ],
       ),
       body: Column(

@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '/widgets/display_image.dart';
 
 import 'happenings_details.dart';
 
 const List happenings = [
   {
-    'imageUrl': 'https://i.ndtvimg.com/i/2018-01/holi_650x400_51516870691.jpg',
-    'title': 'Wish you a happy and safe Holi !',
+    'imageUrl':
+        'https://firebasestorage.googleapis.com/v0/b/yukti-ac0c0.appspot.com/o/1.jpeg?alt=media&token=93e8899e-4e95-467f-9708-9f490d1f452a',
+    'title':
+        'Student Webinar - Cisco Ideathon 2021 | Monday Sep 20th | 4:45 pm',
     'description':
-        'May God gift you all the colours of life, colours of joy, colours of happiness, colours of friendship, colours of love and all other colours you want to paint your life in.\n\nHappy Holi.',
+        '''Dear Students, Below is the Open Webinar link for Students to join on Monday, September 20th at 4:45 pm. No prior registration needed.
+
+It’s an important Webinar, hear Cisco’s leaders and experts on “How to Ace the Cisco Ideathon process”..''',
   },
   {
     'imageUrl':
-        'https://developers.google.com/community/images/dsc-solution-challange/dsc_2021_header.png',
+        'https://developers.google.com/community/images/gdsc-solution-challenge/gdsc_2021_header_720.png',
     'title': 'Solution Challenge DSC OIST',
     'description':
         'The 2021 Solution Challenge mission is to solve for one or more of the United Nations 17 Sustainable Development Goals using Google technology.\nCreated by the United Nations in 2015 to be achieved by 2030, the 17 Sustainable Development Goals (SDGs) agreed upon by all 193 United Nations Member States aim to end poverty, ensure prosperity, and protect the planet.',
   },
   {
     'imageUrl':
-        'https://medicaldialogues.in/h-upload/2020/05/18/128964-online-classes.webp',
-    'title': 'Online classes till 31 March',
+        'https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2020/08/PTI02-08-2020_000039B.jpg',
+    'title': 'Offline mode from tomorrow.',
     'description':
-        'As the corona cases are increasing offline classes are terminated we are organizing online classes till 31 march.\nThe new timetable will you provided on your respective WhatsApp group. Make sure to contact your TG for any queries. Please be at home and take care.',
+        'Dear students Your classes are starting in offline mode from tomorrow. Kindly ensure you come with hard copy of Covid vaccine certificate and Consent form.',
   },
 ];
 
@@ -112,10 +117,7 @@ class OneHappeningCard extends StatelessWidget {
             leading: SizedBox(
               height: 100.0,
               width: 100.0,
-              child: Image.network(
-                imageUrl!,
-                fit: BoxFit.fill,
-              ),
+              child: DisplayImage(imageUrl: imageUrl),
             ),
             title: Text(
               '$tilte',

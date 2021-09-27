@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:yukti/config/paths.dart';
+import '/config/paths.dart';
 
-import 'package:yukti/models/failure.dart';
-import 'package:yukti/respositories/auth/auth_repository.dart';
+import '/models/failure.dart';
+import '/respositories/auth/auth_repository.dart';
 
 part 'login_state.dart';
 

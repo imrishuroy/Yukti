@@ -21,12 +21,6 @@ class _AppDrawerState extends State<AppDrawer> {
     } catch (error) {
       print('Error laucnching url ${error.toString()}');
     }
-
-    // if (await canLaunch(url)) {
-
-    // } else {
-    //   throw 'Could not launch $url';
-    // }
   }
 
   @override

@@ -1,8 +1,8 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:yukti/models/google_form.dart';
-import 'package:yukti/extensions/extensions.dart';
+import '/models/google_form.dart';
+import '/extensions/extensions.dart';
 
 class FormExpansionTile extends StatefulWidget {
   final GlobalObjectKey<ExpansionTileCardState> cardKey;
@@ -114,6 +114,8 @@ class _FormExpansionTileState extends State<FormExpansionTile> {
                 ),
               ),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: const Color.fromRGBO(40, 200, 253, 1)),
                   onPressed: () => _launchUrl(url: widget.form?.link),
                   child: const Text('Fill Form'))
             ],
