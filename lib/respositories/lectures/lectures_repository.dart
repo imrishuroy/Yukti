@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:yukti/config/paths.dart';
-import 'package:yukti/models/failure.dart';
-import 'package:yukti/models/lecture.dart';
+import '/config/paths.dart';
+import '/models/failure.dart';
+import '/models/lecture.dart';
 
 class LecturesRepository {
   final FirebaseFirestore _firestore;
@@ -39,16 +39,62 @@ class LecturesRepository {
     }
   }
 
-  Future<DocumentSnapshot> getLectures({
+  Future<List<Lecture?>> getLecturesList({
     required String? branch,
     required String? sem,
     required String? section,
+    required String? day,
   }) async {
     try {
+      List<Lecture?> lectures = [];
+      if (branch == null || section == null || sem == null) {
+        return lectures;
+      }
+
+      String path = '$sem-$section-$day';
+      // print('Path $path');
+
+      final data = await _firestore
+          .collection(Paths.lectures)
+          .doc(branch)
+          .collection(path)
+          .get();
+
+      for (var element in data.docs) {
+        print('Element ${element.data()}');
+        lectures.add(Lecture.fromMap(element.data()));
+      }
+
+      return lectures;
+    } catch (error) {
+      print('Error in getting lectures list ${error.toString()}');
+      rethrow;
+    }
+  }
+
+  Future<DocumentSnapshot> getLectures({
+    required String? branch,
+    required String sem,
+    required String? section,
+  }) async {
+    try {
+      final data = _firestore
+          .collection(Paths.lectures)
+          .doc('CSE')
+          .collection('5th-B-Monday')
+          .snapshots();
+      data.forEach((n) {
+        print('N ${n.docs.first.data()}');
+      });
+
+      // .get();
+
+      print('Data $data');
+
       return await _firestore
           .collection(Paths.lectures)
           .doc(branch)
-          .collection(sem!)
+          .collection('5th-B-Monday')
           .doc(section)
           .get();
     } catch (error) {

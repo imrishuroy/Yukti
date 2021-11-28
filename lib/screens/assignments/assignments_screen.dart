@@ -17,12 +17,16 @@ class AssignmentsScreen extends StatefulWidget {
   const AssignmentsScreen({Key? key}) : super(key: key);
 
   static Route route() {
-    return PageRouteBuilder(
-      settings: const RouteSettings(name: routeName),
-      pageBuilder: (context, _, __) {
-        return const AssignmentsScreen();
-      },
-    );
+    return MaterialPageRoute(
+        settings: const RouteSettings(name: routeName),
+        builder: (_) => const AssignmentsScreen());
+
+    // PageRouteBuilder(
+    //   settings: const RouteSettings(name: routeName),
+    //   pageBuilder: (context, _, __) {
+    //     return const AssignmentsScreen();
+    //   },
+    // );
   }
 
   @override

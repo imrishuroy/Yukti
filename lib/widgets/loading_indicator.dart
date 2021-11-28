@@ -10,7 +10,8 @@ class LoadingIndicator extends StatelessWidget {
       child: SizedBox(
         height: 50.0,
         width: 50.0,
-        child: SpinKitChasingDots(
+        child: SpinKitFadingCircle(
+          //child: SpinKitChasingDots(
           color: Colors.white,
         ),
       ),

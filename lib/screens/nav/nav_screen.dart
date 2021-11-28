@@ -9,13 +9,20 @@ class NavScreen extends StatelessWidget {
   static const String routeName = '/nav';
 
   static Route route() {
-    return PageRouteBuilder(
-      settings: const RouteSettings(name: routeName),
-      pageBuilder: (context, _, __) => BlocProvider(
+    return MaterialPageRoute(
+      builder: (_) => BlocProvider<NavBloc>(
         create: (context) => NavBloc(),
         child: const NavScreen(),
       ),
     );
+
+    // return PageRouteBuilder(
+    //   settings: const RouteSettings(name: routeName),
+    //   pageBuilder: (context, _, __) => BlocProvider(
+    //     create: (context) => NavBloc(),
+    //     child: const NavScreen(),
+    //   ),
+    // );
   }
 
   const NavScreen({Key? key}) : super(key: key);

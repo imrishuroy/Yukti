@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
 
-import 'package:yukti/constants/constants.dart';
-import 'package:yukti/models/gallery.dart';
-import 'package:yukti/respositories/firebase/firebase_repositroy.dart';
-import 'package:yukti/widgets/app_drawer.dart';
+import '/constants/constants.dart';
+import '/models/gallery.dart';
+import '/respositories/firebase/firebase_repositroy.dart';
+import '/widgets/app_drawer.dart';
 
 import 'image_carousel.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -123,7 +124,7 @@ class GalleryScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
-                    child: CircularProgressIndicator(),
+                    child: SpinKitChasingDots(color: Colors.white),
                   );
                 }
                 return GridView.builder(

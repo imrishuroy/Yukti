@@ -1,75 +1,126 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '/models/lecture.dart';
+import '/respositories/lectures/lectures_repository.dart';
+
+const List<Lecture> errorLectures = [
+  Lecture(
+      profName: '---------',
+
+      //date: '(**)',
+      time: '():--??-??:--()',
+      subCode: '----',
+      subName: 'Not Available :('),
+  Lecture(
+      profName: '---------',
+      time: '():--??-??:--()',
+      subCode: '----',
+      subName: 'Not Available :(')
+];
 
 class LectureCard extends StatelessWidget {
-  // final String? day;
-  // final String? lectureDate;
-  final List? lectureList;
-  final String? day;
+  final String day;
+  final String? sem;
+
+  final String? branch;
+  final String? section;
 
   const LectureCard({
     Key? key,
-    // this.day,
-    // this.lectureDate,
-    this.lectureList,
-    this.day,
+    required this.day,
+    required this.sem,
+    required this.branch,
+    required this.section,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    // final String? day = '${lectureList?[0]['day']}' ?? null;
-    // final String? date = '${lectureList?[0]['date']}' ?? null;
-    // final String? day = lectureList?[0]['day'] ?? null;
+    final _lectureRepo = context.read<LecturesRepository>();
+    return FutureBuilder<List<Lecture?>>(
+        future: _lectureRepo.getLecturesList(
+            branch: branch, sem: sem, section: section, day: day),
+        builder: (context, snapshot) {
+          List<Lecture?> lectures = [];
 
-    // final String? date = lectureList?[0]['date'] ?? null;
-    return Column(
-      children: [
-        Container(
-          alignment: Alignment.topLeft,
-          padding: const EdgeInsets.symmetric(horizontal: 14.0),
-          child: Row(
+          if (snapshot.hasError) {
+            lectures = errorLectures;
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // return SizedBox(
+            //   width: 50.0,
+            //   height: 50.0,
+            //   child: Shimmer.fromColors(
+            //     // baseColor: Colors.red,
+            //     // highlightColor: Colors.yellow,
+            //     baseColor: Colors.grey.shade300,
+            //     highlightColor: Colors.grey.shade100,
+            //     direction: ShimmerDirection.ltr,
+            //     child: Container(
+            //       width: 48.0,
+            //       height: 48.0,
+            //       color: Colors.white,
+            //     ),
+            //   ),
+            // );
+            // Center(
+            //   child: Column(
+            //     mainAxisSize: MainAxisSize.min,
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: const [
+            //       SpinKitCircle(
+            //         color: Colors.white,
+            //       )
+            //     ],
+            //   ),
+            // );
+          }
+
+          lectures = snapshot.data ?? [];
+          if (lectures.isEmpty) {
+            lectures = errorLectures;
+          }
+
+          return Column(
             children: [
-              day != null
-                  ? Text(
-                      '$day',
+              Container(
+                alignment: Alignment.topLeft,
+                padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                child: Row(
+                  children: [
+                    Text(
+                      day,
                       style: const TextStyle(
                         fontSize: 25.0,
                         color: Colors.white,
                         // color: Color.fromRGBO(255, 203, 0, 1),
                       ),
                       textAlign: TextAlign.start,
-                    )
-                  : const Text('-'),
-              const SizedBox(width: 4.0),
-              // date != null
-              //     ? Text(
-              //         '$date',
-              //         style: TextStyle(
-              //           color: Colors.white,
-              //           fontWeight: FontWeight.w600,
-              //         ),
-              //       )
-              //     : Text('-'),
+                    ),
+                    const SizedBox(width: 4.0),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10.0),
+              SizedBox(
+                height: 130,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: lectures.length,
+                  itemBuilder: (context, index) {
+                    final lecture = lectures[index];
+                    return OneLeactureCard(
+                      time: lecture?.time ?? '-',
+                      profName: lecture?.profName ?? '-',
+                      subCode: lecture?.subCode ?? '-',
+                      subName: lecture?.subName ?? '-',
+                    );
+                  },
+                ),
+              ),
             ],
-          ),
-        ),
-        const SizedBox(height: 10.0),
-        SizedBox(
-          height: 130,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: lectureList?.length,
-            itemBuilder: (context, index) {
-              return OneLeactureCard(
-                time: lectureList?[index]['time'] ?? '-',
-                profName: lectureList?[index]['profName'] ?? '-',
-                subCode: lectureList?[index]['subCode'] ?? '-',
-                subName: lectureList?[index]['subName'] ?? '-',
-              );
-            },
-          ),
-        ),
-      ],
-      // ),
-    );
+          );
+        });
   }
 }
 
@@ -142,116 +193,3 @@ class OneLeactureCard extends StatelessWidget {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-
-// class BuildOneLeactureDay extends StatelessWidget {
-//   final String? day;
-//   final String? lectureDate;
-//   final List? lectureList;
-
-//   const BuildOneLeactureDay({
-//     Key? key,
-//     this.day,
-//     this.lectureDate,
-//     this.lectureList,
-//   }) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         Container(
-//           alignment: Alignment.topLeft,
-//           padding: const EdgeInsets.symmetric(horizontal: 23.0),
-//           child: Row(
-//             children: [
-//               Text(
-//                 '$day',
-//                 style: TextStyle(fontSize: 25.0),
-//                 textAlign: TextAlign.start,
-//               ),
-//               SizedBox(width: 4.0),
-//               Text(
-//                 '08/12',
-//                 style: TextStyle(
-//                   fontWeight: FontWeight.w600,
-//                 ),
-//               )
-//             ],
-//           ),
-//         ),
-//         SizedBox(height: 10.0),
-//         SizedBox(
-//           height: 120,
-//           child: ListView.builder(
-//             scrollDirection: Axis.horizontal,
-//             itemCount: lectureList?.length,
-//             itemBuilder: (context, index) {
-//               return OneLeactureCard(
-//                 time: '${lectureList?[index]['time']}',
-//                 profName: lectureList?[index]['profName'],
-//                 subCode: lectureList?[index]['subCode'],
-//                 subName: lectureList?[index]['subName'],
-//               );
-//             },
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-// class OneLeactureCard extends StatelessWidget {
-//   final String? time;
-//   final String? subCode;
-//   final String? profName;
-//   final String? subName;
-
-//   const OneLeactureCard({
-//     Key? key,
-//     this.time,
-//     this.subCode,
-//     this.profName,
-//     this.subName,
-//   }) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     return Card(
-//       child: Padding(
-//         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10.0),
-//         child: Column(
-//           children: [
-//             Container(
-//               padding: EdgeInsets.symmetric(
-//                 horizontal: 8.0,
-//                 vertical: 4.0,
-//               ),
-//               color: Color.fromRGBO(0, 141, 82, 1),
-//               child: Text(
-//                 time!,
-//                 style: TextStyle(
-//                   color: Colors.white,
-//                 ),
-//               ),
-//             ),
-//             SizedBox(height: 8.0),
-//             Text('$subCode', style: TextStyle(fontSize: 16.0)),
-//             Text(
-//               subName!,
-//               style: TextStyle(fontWeight: FontWeight.bold),
-//             ),
-//             SizedBox(height: 4.0),
-//             Text(
-//               '$profName',
-//               style: TextStyle(
-//                 color: Colors.orange,
-//                 fontWeight: FontWeight.w600,
-//                 letterSpacing: 1.1,
-//               ),
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:yukti/widgets/loading_indicator.dart';
+import '/widgets/loading_indicator.dart';
 import '/blocs/auth/auth_bloc.dart';
 import '/constants/constants.dart';
 

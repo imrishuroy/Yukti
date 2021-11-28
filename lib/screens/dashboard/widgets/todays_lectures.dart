@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
-
-import 'package:provider/provider.dart';
-import 'package:yukti/models/app_user.dart';
+import '/models/app_user.dart';
 import '/models/lecture.dart';
 import '/respositories/lectures/lectures_repository.dart';
 
@@ -37,7 +36,9 @@ class TodaysLectures extends StatelessWidget {
         ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: SpinKitChasingDots(color: Colors.white),
+            );
           }
 
           print('Lecture------- ${snapshot.data}');
