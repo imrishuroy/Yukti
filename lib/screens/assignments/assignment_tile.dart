@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:yukti/models/assignment.dart';
+import '/models/assignment.dart';
 
 class AssignmentTile extends StatelessWidget {
   final Assignment? assignment;

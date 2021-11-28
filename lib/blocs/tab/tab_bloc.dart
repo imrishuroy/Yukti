@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:yukti/enums/app_tab.dart';
+import '/enums/app_tab.dart';
 
 import 'package:equatable/equatable.dart';
 

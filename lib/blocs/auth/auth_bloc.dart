@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:yukti/models/app_user.dart';
+import '/models/app_user.dart';
 
 import 'package:equatable/equatable.dart';
 
 import 'package:flutter/material.dart';
-import 'package:yukti/respositories/auth/auth_repository.dart';
+import '/respositories/auth/auth_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

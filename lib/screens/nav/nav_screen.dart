@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yukti/enums/nav_item.dart';
-import 'package:yukti/screens/nav/bloc/nav_bloc.dart';
-import 'package:yukti/screens/nav/widgets/bottom_nav_bar.dart';
-import 'package:yukti/screens/nav/widgets/switch_screen.dart';
+import '/enums/nav_item.dart';
+import '/screens/nav/bloc/nav_bloc.dart';
+import '/screens/nav/widgets/bottom_nav_bar.dart';
+import '/screens/nav/widgets/switch_screen.dart';
 
 class NavScreen extends StatelessWidget {
   static const String routeName = '/nav';

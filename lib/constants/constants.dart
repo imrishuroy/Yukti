@@ -1,6 +1,7 @@
 export 'external_links.dart';
 export 'quotes.dart';
 import 'package:flutter/widgets.dart';
+export 'urls.dart';
 
 const primaryColor = Color(0XFF28c8fd);
 

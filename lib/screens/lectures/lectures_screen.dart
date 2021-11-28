@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:yukti/respositories/lectures/lectures_repository.dart';
+import 'package:yukti/widgets/loading_indicator.dart';
+import '/respositories/lectures/lectures_repository.dart';
 
 import 'lecture_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,9 +34,9 @@ class LectureScreen extends StatelessWidget {
     final _lecturesRepo = context.read<LecturesRepository>();
 
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
+      //backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
+        //  backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
         centerTitle: true,
         title: Text('$branch - $sem Sem ($section)'),
       ),
@@ -49,9 +50,7 @@ class LectureScreen extends StatelessWidget {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const LoadingIndicator();
           } else {
             final data = snapshot.data?.data() as Map?;
 

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:yukti/enums/nav_item.dart';
+import '/enums/nav_item.dart';
 
 part 'nav_event.dart';
 

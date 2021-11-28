@@ -10,10 +10,13 @@ class LectureSelection extends StatefulWidget {
   const LectureSelection({Key? key}) : super(key: key);
 
   static Route route() {
-    return PageRouteBuilder(
-      settings: const RouteSettings(name: routeName),
-      pageBuilder: (context, _, __) => const LectureSelection(),
-    );
+    return MaterialPageRoute(
+        settings: const RouteSettings(name: routeName),
+        builder: (_) => const LectureSelection());
+    // return PageRouteBuilder(
+    //   settings: const RouteSettings(name: routeName),
+    //   pageBuilder: (context, _, __) => const LectureSelection(),
+    // );
   }
 
   @override
@@ -22,15 +25,15 @@ class LectureSelection extends StatefulWidget {
 
 class _LectureSelectionState extends State<LectureSelection> {
   String branchValue = 'CSE';
-  String semValue = '2nd';
+  String semValue = '1st';
   Section? _section = Section.a;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
+      // backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
+        //  backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
         centerTitle: true,
         title: const Text('Lectures'),
       ),
@@ -107,8 +110,12 @@ class _LectureSelectionState extends State<LectureSelection> {
                             //  print(semValue);
                           });
                         },
-                        items: <String>['2nd', '4th', '6th', '8th']
-                            .map<DropdownMenuItem<String>>(
+                        items: <String>[
+                          '1st',
+                          '3nd',
+                          '5th',
+                          '7th',
+                        ].map<DropdownMenuItem<String>>(
                           (String value) {
                             return DropdownMenuItem<String>(
                               value: value,

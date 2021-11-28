@@ -25,7 +25,10 @@ class GalleryScreen extends StatelessWidget {
     // final AppDataBase database =
     //     Provider.of<AppDataBase>(context, listen: false);
     return Scaffold(
-      drawer: const AppDrawer(),
+      drawer: const AppDrawer(
+        photoUrl:
+            'https://firebasestorage.googleapis.com/v0/b/yukti-ac0c0.appspot.com/o/user_image%2FpIPZ1bjCsZYA4dFBzIa2iw8WNwo1.jpg?alt=media&token=a4708c11-09a5-41c8-9290-887cbfc38514',
+      ),
       // backgroundColor: Color.fromRGBO(29, 38, 40, 1),
       //  backgroundColor: Color.fromRGBO(29, 38, 40, 1),
       appBar: AppBar(

@@ -28,7 +28,10 @@ class FormScreen extends StatelessWidget {
         final forms = snapshot.data;
 
         return Scaffold(
-          drawer: const AppDrawer(),
+          drawer: const AppDrawer(
+            photoUrl:
+                'https://firebasestorage.googleapis.com/v0/b/yukti-ac0c0.appspot.com/o/user_image%2FpIPZ1bjCsZYA4dFBzIa2iw8WNwo1.jpg?alt=media&token=a4708c11-09a5-41c8-9290-887cbfc38514',
+          ),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             // backgroundColor: Color.fromRGBO(0, 141, 82, 1),

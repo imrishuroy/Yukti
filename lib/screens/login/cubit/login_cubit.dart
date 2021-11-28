@@ -63,6 +63,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   void appleLogin() async {
     if (state.status == LoginStatus.submitting) return;
+
     emit(state.copyWith(status: LoginStatus.submitting));
     try {
       final user = await _authRepository.signInWithApple();

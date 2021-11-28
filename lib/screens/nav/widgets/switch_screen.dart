@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yukti/screens/forms/forms_screen.dart';
+import '/screens/forms/forms_screen.dart';
 
 import '/enums/nav_item.dart';
 import '/screens/dashboard/dash_board.dart';

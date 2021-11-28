@@ -3,15 +3,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yukti/blocs/tab/tab_bloc.dart';
-import 'package:yukti/config/auth_wrapper.dart';
-import 'package:yukti/config/custom_router.dart';
-import 'package:yukti/constants/constants.dart';
-import 'package:yukti/respositories/auth/auth_repository.dart';
-import 'package:yukti/respositories/firebase/firebase_repositroy.dart';
-import 'package:yukti/respositories/lectures/lectures_repository.dart';
-import 'package:yukti/respositories/user/user_repository.dart';
+import '/blocs/tab/tab_bloc.dart';
+import '/config/auth_wrapper.dart';
+import '/config/custom_router.dart';
+import '/constants/constants.dart';
+import '/respositories/auth/auth_repository.dart';
+import '/respositories/firebase/firebase_repositroy.dart';
+import '/respositories/lectures/lectures_repository.dart';
+import '/respositories/user/user_repository.dart';
+
 import 'blocs/auth/auth_bloc.dart';
+import 'blocs/profile/profile_bloc.dart';
 import 'blocs/simple_bloc_consumer.dart';
 
 void main() async {
@@ -19,6 +21,7 @@ void main() async {
   await Firebase.initializeApp();
   EquatableConfig.stringify = kDebugMode;
   Bloc.observer = SimpleBlocObserver();
+  //BlocOverrides.runZoned(() {}, blocObserver: SimpleBlocObserver());
   runApp(const MyApp());
 }
 
@@ -51,7 +54,14 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<TabBloc>(
             create: (context) => TabBloc(),
-          )
+          ),
+          BlocProvider<ProfileBloc>(
+            create: (context) => ProfileBloc(
+              userRepository: context.read<UserRepository>(),
+              authBloc: context.read<AuthBloc>(),
+              //)..add(RefreshProfileUser()),
+            ),
+          ),
         ],
         child: MaterialApp(
           //  title: 'Yukti',

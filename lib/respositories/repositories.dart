@@ -14,10 +14,13 @@ class AnnouncementDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
+      //backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
+      //   title: const Text('Details'),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
         title: const Text('Details'),
       ),
       body: SingleChildScrollView(

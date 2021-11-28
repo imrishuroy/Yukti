@@ -27,6 +27,24 @@ class UserRepository extends BaseUserRepository {
     }
   }
 
+  @override
+  Stream<AppUser?> streamUserById({required String? userId}) {
+    try {
+      return _firestore
+          .collection(Paths.users)
+          .doc(userId)
+          .withConverter<AppUser>(
+              fromFirestore: (snapshot, _) => AppUser.fromMap(snapshot.data()!),
+              toFirestore: (user, _) => user.toMap())
+          .snapshots()
+          .map((snap) => snap.data());
+    } catch (error) {
+      print('Error getting user profile ${error.toString()}');
+      throw const Failure(message: 'Error getting current user');
+    }
+  }
+
+  @override
   Future<void> addUserProfile({required AppUser user}) async {
     try {
       await _firestore

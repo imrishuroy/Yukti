@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:yukti/blocs/auth/auth_bloc.dart';
-import 'package:yukti/constants/constants.dart';
-import 'package:yukti/models/app_user.dart';
-import 'package:yukti/respositories/auth/auth_repository.dart';
-import 'package:yukti/respositories/user/user_repository.dart';
-import 'package:yukti/screens/profile/widgets/add_profile_screen.dart';
-import 'package:yukti/widgets/display_image.dart';
+import '/blocs/auth/auth_bloc.dart';
+import '/constants/constants.dart';
+import '/models/app_user.dart';
+import '/respositories/auth/auth_repository.dart';
+import '/respositories/user/user_repository.dart';
+import '/screens/profile/widgets/add_profile_screen.dart';
+import '/widgets/display_image.dart';
 
 import 'edit_profile_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:yukti/blocs/auth/auth_bloc.dart';
-import 'package:yukti/constants/constants.dart';
+import '/blocs/auth/auth_bloc.dart';
+import '/constants/constants.dart';
 
-import 'package:yukti/models/app_user.dart';
+import '/models/app_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yukti/respositories/user/user_repository.dart';
+import '/respositories/user/user_repository.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -123,13 +123,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       setState(() {
         _updatingProfile = true;
       });
-      usersRef.doc(userId).update({
-        'name': _nameController.text,
-        'father_name': _fatherNameController.text,
-        'mother_name': _motherNameController.text,
-        'mobile_no': _mobileNoController.text,
-        'image_url': imageUrl,
-      });
+      // AppUser user = AppUser(
+      //   uid: userId,
+      //   name: _nameController.text,
+      //   fatherName: _fatherNameController.text,
+      //   mobileNo: _mobileNoController.text,
+      //   photUrl: imageUrl,
+      //   motherName: _motherNameController.text,
+      // );
+      usersRef.doc(userId).update(
+          //user.toMap()
+          {
+            'name': _nameController.text,
+            'fatherName': _fatherNameController.text,
+            'motherName': _motherNameController.text,
+            'mobile_no': _mobileNoController.text,
+            'photUrl': imageUrl,
+          });
       setState(() {
         _updatingProfile = false;
       });
@@ -195,7 +205,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           IconButton(
                             icon: const Icon(
                               Icons.insert_photo,
-                              color: Colors.green,
+                              color: primaryColor,
                               size: 30.0,
                             ),
                             onPressed: getImage,

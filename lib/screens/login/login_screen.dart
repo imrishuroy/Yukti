@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:universal_platform/universal_platform.dart';
+import '/constants/constants.dart';
+import '/widgets/loading_indicator.dart';
 
 import '/respositories/auth/auth_repository.dart';
 
@@ -73,9 +76,7 @@ class LoginScreen extends StatelessWidget {
               body: state.status == LoginStatus.submitting
                   ? const Padding(
                       padding: EdgeInsets.only(top: 20.0),
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
+                      child: LoadingIndicator(),
                     )
                   : Form(
                       key: _formKey,
@@ -83,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                         children: <Widget>[
                           GreetingsWidget(height: height),
                           SizedBox(height: height < 750 ? 15.0 : 12.0),
-                          Container(
+                          Padding(
                             padding: const EdgeInsets.only(
                                 top: 22.0, left: 20.0, right: 20.0),
                             child: Column(
@@ -187,8 +188,7 @@ class LoginScreen extends StatelessWidget {
                                 const SizedBox(height: 40.0),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary:
-                                        const Color.fromRGBO(40, 200, 253, 1),
+                                    primary: primaryColor,
                                   ),
                                   onPressed: () => _submitForm(context,
                                       state.status == LoginStatus.submitting),
@@ -220,7 +220,16 @@ class LoginScreen extends StatelessWidget {
                                   width: 250.0,
                                   child: SignInWithAppleButton(
                                     onPressed: () {
-                                      context.read<LoginCubit>().appleLogin();
+                                      if (!UniversalPlatform.isIOS) {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => const ErrorDialog(
+                                              content:
+                                                  'Apple login is currently available only on iOS devices!'),
+                                        );
+                                      } else {
+                                        context.read<LoginCubit>().appleLogin();
+                                      }
                                     },
                                     style: SignInWithAppleButtonStyle.white,
                                   ),

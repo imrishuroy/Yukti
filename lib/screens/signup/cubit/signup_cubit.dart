@@ -47,7 +47,7 @@ class SignupCubit extends Cubit<SignupState> {
         }
       }
 
-      emit(state.copyWith(status: SignupStatus.success));
+      emit(state.copyWith(status: SignupStatus.succuss));
     } on Failure catch (err) {
       emit(state.copyWith(failure: err, status: SignupStatus.error));
     }
@@ -64,10 +64,32 @@ class SignupCubit extends Cubit<SignupState> {
           _usersRef.doc(user.uid).set(user.toMap());
         }
       }
-      emit(state.copyWith(status: SignupStatus.success));
+      emit(state.copyWith(status: SignupStatus.succuss));
     } on Failure catch (error) {
       print('Error sign up google');
       emit(state.copyWith(failure: error, status: SignupStatus.error));
+    }
+  }
+
+  void appleLogin() async {
+    if (state.status == SignupStatus.submitting) return;
+    emit(state.copyWith(status: SignupStatus.submitting));
+    try {
+      final user = await _authRepository.signInWithApple();
+      if (user != null) {
+        final doc = await _usersRef.doc(user.uid).get();
+        if (!doc.exists) {
+          _usersRef.doc(user.uid).set(user.toMap());
+        }
+      }
+      emit(state.copyWith(status: SignupStatus.succuss));
+    } on Failure catch (error) {
+      emit(
+        state.copyWith(
+          status: SignupStatus.error,
+          failure: Failure(message: error.message),
+        ),
+      );
     }
   }
 }

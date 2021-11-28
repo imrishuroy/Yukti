@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yukti/respositories/auth/auth_repository.dart';
-import 'package:yukti/screens/signup/cubit/signup_cubit.dart';
-import 'package:yukti/widgets/error_dialog.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import '/constants/constants.dart';
+import '/respositories/auth/auth_repository.dart';
+import '/screens/signup/cubit/signup_cubit.dart';
+import '/widgets/error_dialog.dart';
+import '/widgets/google_button.dart';
 import '/widgets/greetings_widget.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -47,7 +50,7 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
+      //  backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
       body: BlocConsumer<SignupCubit, SignupState>(
         listener: (context, state) {
           print('Current state ${state.status}');
@@ -68,9 +71,9 @@ class SignupScreen extends StatelessWidget {
                   child: ListView(
                     children: <Widget>[
                       GreetingsWidget(height: height),
-                      Container(
+                      Padding(
                         padding: const EdgeInsets.only(
-                            top: 35.0, left: 20.0, right: 20.0),
+                            top: 22.0, left: 20.0, right: 20.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -91,17 +94,17 @@ class SignupScreen extends StatelessWidget {
                               decoration: const InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Colors.green,
+                                    color: Colors.white,
                                     width: 2.0,
                                   ),
                                 ),
                                 prefixIcon: Icon(
                                   Icons.mail,
-                                  color: Colors.green,
+                                  color: Colors.white,
                                 ),
                                 labelText: 'EMAIL',
                                 labelStyle: TextStyle(
-                                  color: Colors.green,
+                                  color: Colors.white,
                                   fontFamily: 'Montserrat',
                                 ),
                                 hintText: 'Enter Your Email',
@@ -120,6 +123,7 @@ class SignupScreen extends StatelessWidget {
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 16.0),
                               key: key,
+                              obscureText: !state.showPassword,
                               onChanged: (value) => context
                                   .read<SignupCubit>()
                                   .passwordChanged(value),
@@ -128,20 +132,21 @@ class SignupScreen extends StatelessWidget {
                               validator: (value) => value!.length < 6
                                   ? 'Password too short'
                                   : null,
+
                               decoration: InputDecoration(
                                 enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Colors.green,
+                                    color: Colors.white,
                                     width: 2.0,
                                   ),
                                 ),
                                 labelStyle: const TextStyle(
-                                    color: Colors.green,
+                                    color: Colors.white,
                                     fontFamily: 'Montserrat'),
                                 prefixIcon:
-                                    const Icon(Icons.lock, color: Colors.green),
+                                    const Icon(Icons.lock, color: Colors.white),
                                 suffixIcon: IconButton(
-                                  color: Colors.green,
+                                  color: Colors.white,
                                   icon: Icon(
                                     state.showPassword
                                         ? Icons.visibility_off
@@ -159,8 +164,11 @@ class SignupScreen extends StatelessWidget {
                                 border: const OutlineInputBorder(),
                               ),
                             ),
-                            const SizedBox(height: 35.0),
+                            const SizedBox(height: 55.0),
                             ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: primaryColor,
+                              ),
                               onPressed: () => _submitForm(
                                 context,
                                 state.status == SignupStatus.submitting,
@@ -182,24 +190,37 @@ class SignupScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20.0),
-                      // Text(
-                      //   'OR',
-                      //   style: TextStyle(
-                      //     color: Colors.white,
-                      //   ),
-                      //   textAlign: TextAlign.center,
-                      // ),
-                      // SizedBox(height: 20.0),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      //   child: GoogleSignInButton(
-                      //     onPressed: () =>
-                      //         context.read<SignupCubit>().singupWithGoogle(),
-                      //     //  onPressed: () => googleSignIn(context),
-                      //     title: 'Register with Google',
-                      //   ),
-                      // ),
-                      const SizedBox(height: 25.0),
+                      const Text(
+                        'OR',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 20.0),
+                      //if (UniversalPlatform.isIOS)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: SizedBox(
+                          width: 250.0,
+                          child: SignInWithAppleButton(
+                            onPressed: () =>
+                                context.read<SignupCubit>().appleLogin(),
+                            style: SignInWithAppleButtonStyle.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: GoogleSignInButton(
+                          onPressed: () =>
+                              context.read<SignupCubit>().singupWithGoogle(),
+                          //  onPressed: () => googleSignIn(context),
+                          title: 'Register with Google',
+                        ),
+                      ),
+                      const SizedBox(height: 35.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -216,7 +237,7 @@ class SignupScreen extends StatelessWidget {
                             child: const Text(
                               'Login',
                               style: TextStyle(
-                                color: Colors.green,
+                                color: primaryColor,
                                 fontSize: 16.0,
                                 letterSpacing: 1.0,
                                 fontWeight: FontWeight.w600,

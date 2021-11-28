@@ -20,22 +20,20 @@ class LecturesRepository {
     print('Sem $sem');
     print('Section $section');
     print('Day $day');
-    List<Lecture?> lectures = [];
+
     try {
       final snap = await _firestore
           .collection(Paths.lectures)
           .doc(branch)
-          .collection('5th')
-          .doc(section)
+          .collection('$sem-$section-$day')
+          .orderBy('time')
+          .withConverter<Lecture>(
+              fromFirestore: (snapshot, _) => Lecture.fromMap(snapshot.data()!),
+              toFirestore: (lecture, _) => lecture.toMap())
           .get();
+      print('All lectures ${snap.docs.map((snap) => snap.data()).toList()}');
 
-      print('Snap $snap');
-      final List data = snap.data()?['$day'];
-      print('Data $data');
-      for (var element in data) {
-        lectures.add(Lecture.fromMap(element));
-      }
-      return lectures;
+      return snap.docs.map((snap) => snap.data()).toList();
     } catch (error) {
       throw const Failure(message: 'Error getting today lecture');
     }

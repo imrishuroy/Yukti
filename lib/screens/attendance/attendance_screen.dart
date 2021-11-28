@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:yukti/blocs/auth/auth_bloc.dart';
+import 'package:yukti/widgets/loading_indicator.dart';
+import '/blocs/auth/auth_bloc.dart';
+import '/constants/constants.dart';
 
-import 'package:yukti/models/app_user.dart';
-import 'package:yukti/respositories/firebase/firebase_repositroy.dart';
-import 'package:yukti/respositories/user/user_repository.dart';
+import '/models/app_user.dart';
+import '/respositories/firebase/firebase_repositroy.dart';
+import '/respositories/user/user_repository.dart';
 
-import 'package:yukti/screens/attendance/sub_attendance_tile.dart';
-import 'package:yukti/widgets/nothing_here.dart';
+import '/screens/attendance/sub_attendance_tile.dart';
+import '/widgets/nothing_here.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'attendance_pie_chart.dart';
@@ -27,12 +29,16 @@ class AttendanceScreen extends StatelessWidget {
   const AttendanceScreen({Key? key}) : super(key: key);
 
   static Route route() {
-    return PageRouteBuilder(
+    return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      pageBuilder: (context, _, __) {
-        return const AttendanceScreen();
-      },
+      builder: (_) => const AttendanceScreen(),
     );
+    // return PageRouteBuilder(
+    //   settings: const RouteSettings(name: routeName),
+    //   pageBuilder: (context, _, __) {
+    //     return const AttendanceScreen();
+    //   },
+    // );
   }
 
   @override
@@ -51,10 +57,8 @@ class AttendanceScreen extends StatelessWidget {
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Scaffold(
-              backgroundColor: Color.fromRGBO(29, 38, 40, 1),
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
+              // backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+              body: LoadingIndicator(),
               // body: Image.asset('assets/loader.gif'),
             );
           }
@@ -78,18 +82,17 @@ class AttendanceScreen extends StatelessWidget {
               if (attendanceSnapshot.connectionState ==
                   ConnectionState.waiting) {
                 return const Scaffold(
-                  backgroundColor: Color.fromRGBO(29, 38, 40, 1),
-                  body:
-                      // Center(
-                      //   child: Container(
-                      //     height: 80.0,
-                      //     width: 70.0,
-                      //     child: Image.asset('assets/loader.gif'),
-                      //   ),
-                      // ),
-                      Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  // backgroundColor: Color.fromRGBO(29, 38, 40, 1),
+                  body: LoadingIndicator(),
+                  // Center(
+                  //   child: Container(
+                  //     height: 80.0,
+                  //     width: 70.0,
+                  //     child: Image.asset('assets/loader.gif'),
+                  //   ),
+                  // ),
+                  //   Center(
+                  // child: CircularProgressIndicator(),
                 );
               }
               final data = attendanceSnapshot.data?.data() as Map?;
@@ -108,9 +111,9 @@ class AttendanceScreen extends StatelessWidget {
                 );
               }
               return Scaffold(
-                backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
+                //backgroundColor: const Color.fromRGBO(29, 38, 40, 1),
                 appBar: AppBar(
-                  backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
+                  backgroundColor: primaryColor,
                   centerTitle: true,
                   title: Text('Attendance - ${user?.name}'),
                   bottom: PreferredSize(

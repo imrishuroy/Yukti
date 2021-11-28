@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import 'package:yukti/constants/constants.dart';
+
+import 'display_image.dart';
 
 // import 'user_profile_image.dart';
 
-class AppDrawer extends StatefulWidget {
-  const AppDrawer({Key? key}) : super(key: key);
+class AppDrawer extends StatelessWidget {
+  final String? photoUrl;
 
-  @override
-  _AppDrawerState createState() => _AppDrawerState();
-}
+  const AppDrawer({Key? key, required this.photoUrl}) : super(key: key);
 
-class _AppDrawerState extends State<AppDrawer> {
   Future<void> _launchInBrowser(String url) async {
     try {
       await launch(url,
@@ -25,24 +25,6 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    // final database = Provider.of<DataBase>(context, listen: false);
-    // return StreamBuilder<QuerySnapshot>(
-    //   stream: database.profileDataSnapshot,
-    //   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-    //     if (snapshot.hasError) {
-    //       return Text('Something went wrong');
-    //     }
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return Center(
-    //         child: CircularProgressIndicator(),
-    //       );
-    //     }
-
-    //     if (snapshot.data?.size == 0) {
-    //       return
-
-    //     }
-
     return Drawer(
         child: Container(
       color: Colors.black,
@@ -50,22 +32,28 @@ class _AppDrawerState extends State<AppDrawer> {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(
-            //  color: Color.fromRGBO(0, 141, 82, 1),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: const [
-                SizedBox(height: 55.0),
+              children: [
+                const SizedBox(height: 55.0),
                 CircleAvatar(
                   radius: 53.3,
                   backgroundColor: Colors.deepOrange,
                   child: CircleAvatar(
-                    radius: 50.5,
                     backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(
-                        'https://raw.githubusercontent.com/imrishuroy/Rishu-Portfolio/master/assets/avtar.png'),
+                    radius: 50.5,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(60.0),
+                      child: DisplayImage(imageUrl: photoUrl),
+                    ),
                   ),
+                  // backgroundColor: Colors.white,
+                  //     backgroundColor: Colors.white,
+                  //     backgroundImage: NetworkImage(
+                  //         'https://raw.githubusercontent.com/imrishuroy/Rishu-Portfolio/master/assets/avtar.png'),
+                  //   ),
                 ),
-                SizedBox(height: 17.0),
+                const SizedBox(height: 17.0),
                 // SizedBox(height: 20.0),
               ],
             ),

@@ -6,10 +6,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yukti/blocs/auth/auth_bloc.dart';
+import '/blocs/auth/auth_bloc.dart';
 
-import 'package:yukti/models/app_user.dart';
-import 'package:yukti/respositories/user/user_repository.dart';
+import '/models/app_user.dart';
+import '/respositories/user/user_repository.dart';
 
 enum Section { a, b }
 

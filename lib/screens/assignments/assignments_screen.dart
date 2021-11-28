@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:yukti/blocs/auth/auth_bloc.dart';
+import 'package:yukti/widgets/loading_indicator.dart';
+import '/blocs/auth/auth_bloc.dart';
 
-import 'package:yukti/models/app_user.dart';
-import 'package:yukti/models/assignment.dart';
-import 'package:yukti/respositories/firebase/firebase_repositroy.dart';
-import 'package:yukti/respositories/user/user_repository.dart';
-import 'package:yukti/widgets/nothing_here.dart';
+import '/models/app_user.dart';
+import '/models/assignment.dart';
+import '/respositories/firebase/firebase_repositroy.dart';
+import '/respositories/user/user_repository.dart';
+import '/widgets/nothing_here.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'assignment_tile.dart';
@@ -66,8 +67,7 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
                 return const NothingHere(appBarTitle: 'Assignments');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Scaffold(
-                    body: Center(child: CircularProgressIndicator()));
+                return const Scaffold(body: LoadingIndicator());
               }
 
               final assignments = snapshot.data;
@@ -88,7 +88,7 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
                     const SizedBox(width: 20.0),
                   ],
                   centerTitle: true,
-                  backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
+                  // backgroundColor: const Color.fromRGBO(0, 141, 82, 1),
                   title: const Text('Assignments'),
                 ),
                 body: Column(
